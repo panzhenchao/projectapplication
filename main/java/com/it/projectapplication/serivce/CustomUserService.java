@@ -22,9 +22,9 @@ public class CustomUserService implements UserDetailsService {
     @Autowired
     PermissionDao permissionDao;
     public UserDetails loadUserByUsername(String username){
-        User user=userDao.findAllByUsername(username);
+        User user=userDao.findUserByUsername(username);
         if(user!=null){
-            List<Permission> permissions=permissionDao.findByUserName(username);
+            List<Permission> permissions=permissionDao.findAllByName(username);
             List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
             for(Permission permission:permissions){
                 if(permission!=null&&permission.getName()!=null){

@@ -16,7 +16,10 @@ public class User {
     private String username;
     @Column(name = "user_password")
     private String password;
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role_rel",
+            joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private Set<Role> roles=new HashSet<Role>(0);
 
     public Long getId() {

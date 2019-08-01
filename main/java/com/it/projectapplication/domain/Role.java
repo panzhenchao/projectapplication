@@ -13,12 +13,13 @@ public class Role {
     private Long id;
     @Column(name = "role_name")
     private String name;
-    @ManyToMany
-    @JoinTable(name = "user_role_rel",
-    joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
-    inverseJoinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")})
+
+    @ManyToMany(mappedBy="roles")
     private Set<User>users=new HashSet<User>(0);
-    @ManyToMany(mappedBy = "roles")
+
+    @ManyToMany(targetEntity = Permission.class)
+    @JoinTable(name = "role_permission_rel",joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
+            inverseJoinColumns = {@JoinColumn(name = "permission_id",referencedColumnName = "permission_id")})
     private Set<Permission> permissions =new HashSet<Permission>(0);
 
     public Long getId() {

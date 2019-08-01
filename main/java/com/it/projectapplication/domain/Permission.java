@@ -19,9 +19,7 @@ public class Permission {
     private String url;
     @Column(name = "permission_pid")
     private String pid;
-    @ManyToMany
-    @JoinTable(name = "role_permission_rel",joinColumns = {@JoinColumn(name = "permission_id",referencedColumnName = "permission_id")},
-    inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
+    @ManyToMany(mappedBy = "permissions")
     private Set<Role> roles=new HashSet<Role>(0);
 
     public Long getId() {
