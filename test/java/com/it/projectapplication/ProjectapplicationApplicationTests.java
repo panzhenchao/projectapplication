@@ -12,8 +12,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Set;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 
@@ -47,13 +45,8 @@ public class ProjectapplicationApplicationTests {
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
     public void castTest(){
-        User user=userDao.findUserById(15L);
-        Set<Role> roles=user.getRoles();
-        for (Role role:roles){
-            System.out.println(role.getName());
-        }
-
-
+        User user=userDao.findUserByUsername("admin");
+        System.out.println(user);
     }
 
 }

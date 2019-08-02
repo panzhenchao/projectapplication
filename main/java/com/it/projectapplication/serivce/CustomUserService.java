@@ -24,7 +24,7 @@ public class CustomUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username){
         User user=userDao.findUserByUsername(username);
         if(user!=null){
-            List<Permission> permissions=permissionDao.findAllByName(username);
+            List<Permission> permissions=permissionDao.findAllByDescritpion(username);
             List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
             for(Permission permission:permissions){
                 if(permission!=null&&permission.getName()!=null){

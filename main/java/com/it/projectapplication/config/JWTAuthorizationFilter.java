@@ -3,6 +3,7 @@ package com.it.projectapplication.config;
 import com.it.projectapplication.utils.JwtTokenUtils;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -11,7 +12,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     public JWTAuthorizationFilter(AuthenticationManager authenticationManager){
@@ -30,8 +32,11 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader){
         String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX,"");
         String username = JwtTokenUtils.getUsername(token);
+
+
+        List<String> list=JwtTokenUtils.getUserPermission(token);
         if(username !=null){
-            return new UsernamePasswordAuthenticationToken(username,null,new ArrayList<>());
+            return new UsernamePasswordAuthenticationToken(username,null, list.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
         }
         return null;
     }

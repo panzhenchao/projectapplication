@@ -13,4 +13,5 @@ public interface PermissionDao extends CrudRepository<Permission,Long> {
     @Query("SELECT 0 FROM Permission WHERE ID=1")
     public List<Permission>findByUserName(String username);
     public List<Permission>findAllByName(String name);
+    public List<Permission>findAllByDescritpion(String descritpion);
 }

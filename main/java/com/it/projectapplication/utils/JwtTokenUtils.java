@@ -6,6 +6,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 public class JwtTokenUtils {
     public static final String TOKEN_HEADER= "Authorization";
@@ -13,13 +15,18 @@ public class JwtTokenUtils {
     private static final String SECRET= "jwtsecretdom";
     private static final String ISS= "echisan";
     //过期时间3600秒
-    private static final long EXPIRATION = 3600L;
+    private static final long EXPIRATION = 3600000L;
     //记住密码 过期时间 7天
-    private static final long EXPIRATION_REMEMBER = 604800L;
-    public static String createrToken(String username,boolean isRememberMe){
+    private static final long EXPIRATION_REMEMBER = 604800000L;
+    private static final String ROLE_CLAIMS= "permission";
+    public static String createrToken(String username, List permissionList, boolean isRememberMe){
         long expiration =isRememberMe? EXPIRATION_REMEMBER:EXPIRATION;
+        HashMap<String,Object> map=new HashMap<>();
+        map.put(ROLE_CLAIMS,permissionList);
+
         return Jwts.builder()
-                .signWith(SignatureAlgorithm.ES512,SECRET)
+                .signWith(SignatureAlgorithm.HS512,SECRET)
+                .setClaims(map)
                 .setIssuer(ISS)
                 .setSubject(username)
                 .setIssuedAt(new Date())
@@ -29,6 +36,7 @@ public class JwtTokenUtils {
     public static String getUsername(String token){
         return getTokenBoby(token).getSubject();
     }
+    public static List getUserPermission(String token){return (List) getTokenBoby(token).get(ROLE_CLAIMS);}
     public static boolean isExPoration(String token){
         return getTokenBoby(token).getExpiration().before(new Date());
     }public static Claims getTokenBoby(String token){
