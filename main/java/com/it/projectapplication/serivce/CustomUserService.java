@@ -4,6 +4,7 @@ import com.it.projectapplication.dao.PermissionDao;
 import com.it.projectapplication.dao.UserDao;
 import com.it.projectapplication.domain.JwtUser;
 import com.it.projectapplication.domain.Permission;
+import com.it.projectapplication.domain.Role;
 import com.it.projectapplication.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 @Service
 public class CustomUserService implements UserDetailsService {
     @Autowired
@@ -23,15 +26,20 @@ public class CustomUserService implements UserDetailsService {
     PermissionDao permissionDao;
     public UserDetails loadUserByUsername(String username){
         User user=userDao.findUserByUsername(username);
+        List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
         if(user!=null){
-            List<Permission> permissions=permissionDao.findAllByDescritpion(username);
-            List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
-            for(Permission permission:permissions){
-                if(permission!=null&&permission.getName()!=null){
-                    GrantedAuthority grantedAuthority=new SimpleGrantedAuthority(permission.getName());
-                    grantedAuthorities.add(grantedAuthority);
+            Set<Role>roleSet=user.getRoles();
+            for(Role role :roleSet){
+                Set<Permission> permissionSet=role.getPermissions();
+                for(Permission permission:permissionSet){
+                    if(permission!=null&&permission.getName()!=null){
+                        GrantedAuthority grantedAuthority=new SimpleGrantedAuthority(permission.getName());
+                        grantedAuthorities.add(grantedAuthority);
+                    }
                 }
             }
+
+
             return new JwtUser(user,grantedAuthorities);
 
         }else{
