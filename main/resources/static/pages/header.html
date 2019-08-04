@@ -1,6 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<header class="main-header" th:fragment="header">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<header class="main-header">
     <!-- Logo -->
     <a href="all-admin-index.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>数据</b></span> <!-- logo for regular state and mobile devices -->
@@ -20,7 +21,7 @@
                                                        class="dropdown-toggle" data-toggle="dropdown"> <img
                         src="../static/img/user2-160x160.jpg"
                         class="user-image" alt="User Image"> <span class="hidden-xs">
-
+							
 					</span>
 
                 </a>

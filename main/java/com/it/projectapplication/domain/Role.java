@@ -17,7 +17,7 @@ public class Role {
     @ManyToMany(mappedBy="roles")
     private Set<User>users=new HashSet<User>(0);
 
-    @ManyToMany(targetEntity = Permission.class)
+    @ManyToMany(targetEntity = Permission.class,fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "role_permission_rel",joinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")},
             inverseJoinColumns = {@JoinColumn(name = "permission_id",referencedColumnName = "permission_id")})
     private Set<Permission> permissions =new HashSet<Permission>(0);

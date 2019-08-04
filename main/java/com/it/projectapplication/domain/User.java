@@ -16,7 +16,7 @@ public class User {
     private String username;
     @Column(name = "user_password")
     private String password;
-    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity = Role.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "user_role_rel",
             joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})

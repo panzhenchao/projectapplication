@@ -35,16 +35,14 @@ public class ProjectapplicationApplicationTests {
 
     public void contextLoads() {
 
-         User user=new User();
-         user.setUsername("2");
-         user.setPassword("2");
+         User user=userDao.findUserByUsername("admin");
          Role role=new Role();
-         role.setName("22222");
-        Permission permission=new Permission();
-        permission.setName("ceshi");
-        permission.setDescritpion("ceshi");
+         role.setName("ROLE_ADMIN");
+         Permission permission=new Permission();
+         permission.setName("ROLE_ADMIN");
+         permission.setDescritpion("ROLE_ADMIN");
          user.getRoles().add(role);
-         role.getUsers().add(user);
+
          role.getPermissions().add(permission);
 
          userDao.save(user);
@@ -59,7 +57,7 @@ public class ProjectapplicationApplicationTests {
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
     public void castTest(){
-        User user=userDao.findUserById(25L);
+        User user=userDao.findUserByUsername("admin");
         Set<Role> roles=user.getRoles();
         List<String> permissionList=new ArrayList<>();
         for(Role role:roles){
