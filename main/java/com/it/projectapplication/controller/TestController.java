@@ -8,13 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class TestController {
     @RequestMapping("/")
     public ModelAndView index() {
-        ModelAndView modelAndView = new ModelAndView("/test2");
-        modelAndView.addObject("name", "老王");
-        return modelAndView;
-    }
-    @RequestMapping("/2/")
-    public String index2(){
-        return "/test";
-    }
+        ModelAndView model= new ModelAndView("/admin-administrative-region-manage.html");
 
+        return model;
+    }
 }

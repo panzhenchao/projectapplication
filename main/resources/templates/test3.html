@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <title>王磊的博客</title>
+    <link rel="stylesheet" type="text/css"
+          href="../static/plugins/bootstrap/css/bootstrap.min.css" th:href="@{/plugins/bootstrap/css/bootstrap.min.css}"/>
 </head>
+<div th:replace="test3 :: bolck"></div>
 <body>
 
 <div th:fragment="copyright">
@@ -18,6 +21,12 @@
 <div th:fragment="links">
     CCTV
 </div>
-
+<th:block th:fragment="bolck">
+    <script type="text/javascript"
+            src="../static/plugins/jQuery/jquery-2.2.3.min.js" th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+</th:block>
+<script type="text/javascript"
+        src="../static/plugins/jQuery/jquery-2.2.3.min.js" th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+<div th:replace="test3 :: bolck"></div>
 </body>
 </html>
