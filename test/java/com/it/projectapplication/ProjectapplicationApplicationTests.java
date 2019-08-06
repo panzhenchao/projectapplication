@@ -14,9 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -57,17 +55,9 @@ public class ProjectapplicationApplicationTests {
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
     public void castTest(){
-        User user=userDao.findUserByUsername("admin");
-        Set<Role> roles=user.getRoles();
-        List<String> permissionList=new ArrayList<>();
-        for(Role role:roles){
-            Set<Permission> permissions=role.getPermissions();
-            for(Permission permission:permissions){
-                permissionList.add(permission.getName());
-            }
-        }
+        List<Permission> list=permissionDao.findAll();
 
-        System.out.println(permissionList);
+        System.out.println(list);
     }
 
 }

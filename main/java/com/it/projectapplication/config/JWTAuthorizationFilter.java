@@ -32,8 +32,6 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     private UsernamePasswordAuthenticationToken getAuthentication(String tokenHeader){
         String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX,"");
         String username = JwtTokenUtils.getUsername(token);
-
-
         List<String> list=JwtTokenUtils.getUserPermission(token);
         if(username !=null){
             return new UsernamePasswordAuthenticationToken(username,null, list.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));

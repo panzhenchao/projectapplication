@@ -26,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
+
     protected  void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(customUserService).passwordEncoder(bCryptPasswordEncoder());//user Details Service 验证
     }
@@ -39,10 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+
                 // 不需要session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint());
+
+
 
 
     }
