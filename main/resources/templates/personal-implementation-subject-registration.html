@@ -41,60 +41,60 @@
                     </div>
 
                     <div class="box-body">
-                        <form role="form">
+                        <form role="form" th:action="@{/registerPersonal}" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label >登录名</label>
-                                    <input type="text" class="form-control"  placeholder="可使用身份证做登录名">
+                                    <input type="text" class="form-control"  placeholder="可使用身份证做登录名" th:name="username">
                                 </div>
                                 <div class="form-group">
                                     <label >登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="password">
                                 </div>
                                 <div class="form-group">
                                     <label >确认登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" >
                                 </div>
                                 <div class="form-group">
                                     <label >姓名</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="name">
                                 </div>
                                 <div class="form-group">
                                     <label >身份证</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="identityCard">
                                 </div>
                                 <div class="form-group">
                                     <label >联系电话</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone">
                                 </div>
                                 <div class="form-group">
                                     <label >社区</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="community">
                                 </div>
                                 <div class="form-group">
                                     <label >银行账户</label>
-                                    <select class="form-control">
+                                    <select class="form-control" th:name="bankName">
                                         <option>中国工商银行</option>
                                         <option>中国建设银行</option>
                                         <option>中国农业银行</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" >
                                     <label >银行账户</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount">
                                 </div>
                                 <div class="form-group">
                                     <label >单位详细地址</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="address">
                                 </div>
                                 <div class="form-group">
                                     <label >身份证</label>
-                                    <input type="file" class="form-control"  placeholder="">
+                                    <input type="file" class="form-control"  placeholder="" th:name="identityCardImg">
                                 </div>
 
                                 <div class="col-md-10 data rowHeight2x">
                                     <label >个人简介</label>
-                                    <textarea class="form-control" rows="3" placeholder="请输入..."></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="请输入..." th:name="individualResume"></textarea>
                                 </div>
 
 

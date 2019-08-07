@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <title sec:authentication="name"></title>
+
+    <style type="text/css">
+        body {
+            padding-top: 50px;
+        }
+        .starter-template {
+            padding: 40px 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav >
+    <div >
+        <div >
+            <a  href="#">Spring Security演示</a>
+        </div>
+        <div >
+            <ul class=>
+                <li><a th:href="@{/}"> 首页 </a></li>
+                <li><a th:href="@{/admin}"> admin </a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+
+<div class=>
+
+    <div class=>
+        <h1 th:text="${msg}"></h1>
+
+
+
+        <div sec:authorize="hasRole('ROLE_HOME')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')"> <!-- 用户类型为ROLE_ADMIN 显示 -->
+            <p>恭喜您,您有 ROLE_ADMIN 权限 </p>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>

@@ -41,63 +41,63 @@
                     </div>
 
                     <div class="box-body">
-                        <form role="form">
+                        <form role="form" th:action="@{/registerEnterprise}" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label >登录名</label>
-                                    <input type="text" class="form-control"  placeholder="请输入公司名称">
+                                    <input type="text" class="form-control"  placeholder="请输入公司名称" th:name="username">
                                 </div>
                                 <div class="form-group">
                                     <label >登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="password">
                                 </div>
                                 <div class="form-group">
                                     <label >确认登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" >
                                 </div>
                                 <div class="form-group">
                                     <label >单位名称</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyName">
                                 </div>
                                 <div class="form-group">
                                     <label >组织机构代码</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="organizingInstitutionNumber">
                                 </div>
                                 <div class="form-group">
                                     <label >营业执照注册号</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="businessLicenseRegistrationNumber">
                                 </div>
                                 <div class="form-group">
                                     <label >营业执照照片</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="file" class="form-control"  placeholder="" th:name="businessLicenseImg">
                                 </div>
                                 <div class="form-group">
                                     <label >注册日期</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="date" class="form-control"  placeholder="" th:name="registrationDate">
                                 </div>
                                 <div class="form-group">
                                     <label >法人代表</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateRepresentative">
                                 </div>
                                 <div class="form-group">
                                     <label >法人身份证</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateIdentityCard">
                                 </div>
                                 <div class="form-group">
                                     <label >法人身份证照</label>
-                                    <input type="file" class="form-control"  placeholder="">
+                                    <input type="file" class="form-control"  placeholder="" th:name="corporateIdentityCardImg">
                                 </div>
                                 <div class="form-group">
                                     <label >单位联系人</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyContact">
                                 </div>
                                 <div class="form-group">
                                     <label >联系电话</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone">
                                 </div>
                                 <div class="form-group">
                                     <label >所属行业</label>
-                                    <select class="form-control">
+                                    <select class="form-control" onchange="industry(this.value)" th:name="industry">
                                         <option>渔业</option>
                                         <option>林业</option>
                                         <option>农业</option>
@@ -105,14 +105,17 @@
                                         <option>其他</option>
 
                                     </select>
+                                    <input type="text" class="form-control" style="display:none" id="rest" th:name="">
                                 </div>
+
+
                                 <div class="form-group">
                                     <label >注册资金(万元)</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="registeredCaptial">
                                 </div>
                                 <div class="form-group">
                                     <label >银行账户</label>
-                                    <select class="form-control">
+                                    <select class="form-control" th:name="bankName">
                                         <option>中国工商银行</option>
                                         <option>中国建设银行</option>
                                         <option>中国农业银行</option>
@@ -120,32 +123,38 @@
                                 </div>
                                 <div class="form-group">
                                     <label >银行账户</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount">
                                 </div>
                                 <div class="form-group">
                                     <label >财政人员(会计人员)</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="financer">
                                 </div>
                                 <div class="form-group">
                                     <label >会计证号码</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="AccountingCertificate">
                                 </div>
                                 <div class="form-group">
                                     <label >纳税地</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="agerVectigalis">
                                 </div>
                                 <div class="form-group">
                                     <label >税务登记证</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="taxRegistrationCertificate">
                                 </div>
                                 <div class="form-group">
                                     <label >单位详细地址</label>
-                                    <input type="text" class="form-control"  placeholder="">
+                                    <input type="text" class="form-control"  placeholder="" th:name="address">
                                 </div>
 
                                 <div class="col-md-10 data rowHeight2x">
                                     <label >单位简介</label>
-                                    <textarea class="form-control" rows="3" placeholder="请输入..."></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="请输入..." th:name="individualResume"></textarea>
+                                </div>
+                                <div>
+                                    <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+                                    <!--@thymesVar id="type" type="String"-->
+                                    <!--*/-->
+                                    <td th:text="${type}" th:name="type" style="display: none"></td>
                                 </div>
 
 
@@ -211,6 +220,16 @@
     </div>
 
     <div th:replace="main :: script"></div>
+    <script>
+
+        function industry(val) {
+            if(val=="其他"){
+                document.getElementById("rest").style.display = "block";
+            }else {
+                document.getElementById("rest").style.display = "none";
+            }
+        }
+    </script>
 </body>
 
 </html>

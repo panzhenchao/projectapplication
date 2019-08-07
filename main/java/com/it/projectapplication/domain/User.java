@@ -21,8 +21,10 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private Set<Role> roles=new HashSet<Role>(0);
-
-
+    @Column(name = "user_state")
+    private String state;
+    @Column(name = "user_category")
+    private String category;
 
     public Long getId() {
         return id;
@@ -56,6 +58,22 @@ public class User {
         this.roles = roles;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -63,6 +81,8 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
+                ", state='" + state + '\'' +
+                ", category='" + category + '\'' +
                 '}';
     }
 }
