@@ -1,5 +1,7 @@
 package com.it.projectapplication.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class EnterpriseInformation {
     @Column(name = "enterprise_business_license_img")
     private String businessLicenseImg;
     @Column(name = "enterprise_registration_date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date registrationDate;
     @Column(name = "enterprise_corporate_representative")
     private String corporateRepresentative;
@@ -54,7 +57,7 @@ public class EnterpriseInformation {
     @Column(name = "enterprise_individual_resume")
     private String individualResume;
     @Column(name = "enterprise_type")
-    private String stype;
+    private String type;
 
     public Long getId() {
         return id;
@@ -232,11 +235,11 @@ public class EnterpriseInformation {
         this.individualResume = individualResume;
     }
 
-    public String getStype() {
-        return stype;
+    public String getType() {
+        return type;
     }
 
-    public void setStype(String stype) {
-        this.stype = stype;
+    public void setType(String type) {
+        this.type = type;
     }
 }

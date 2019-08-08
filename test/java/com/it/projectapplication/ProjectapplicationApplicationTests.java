@@ -59,5 +59,13 @@ public class ProjectapplicationApplicationTests {
 
         System.out.println(list);
     }
+    @Test
+    public void testRandom(){
+        User user=new User();
+        user.setUsername("1231");
+        user.setPassword("123");
+        User user1= userDao.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
+        System.out.println(user1);
+    }
 
 }

@@ -69,11 +69,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label >营业执照照片</label>
-                                    <input type="file" class="form-control"  placeholder="" th:name="businessLicenseImg">
+                                    <input type="file" class="form-control"  placeholder="" th:name="businessLicenseImgFile">
                                 </div>
                                 <div class="form-group">
                                     <label >注册日期</label>
-                                    <input type="date" class="form-control"  placeholder="" th:name="registrationDate">
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="registrationDate">
                                 </div>
                                 <div class="form-group">
                                     <label >法人代表</label>
@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label >法人身份证照</label>
-                                    <input type="file" class="form-control"  placeholder="" th:name="corporateIdentityCardImg">
+                                    <input type="file" class="form-control"  placeholder="" th:name="corporateIdentityCardImgFile">
                                 </div>
                                 <div class="form-group">
                                     <label >单位联系人</label>
@@ -97,15 +97,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label >所属行业</label>
-                                    <select class="form-control" onchange="industry(this.value)" th:name="industry">
+                                    <select class="form-control" onchange="industryChange(this.value)" th:name="industry">
                                         <option>渔业</option>
                                         <option>林业</option>
                                         <option>农业</option>
                                         <option>牧业</option>
                                         <option>其他</option>
-
                                     </select>
-                                    <input type="text" class="form-control" style="display:none" id="rest" th:name="">
+                                    <input type="text" class="form-control" style="display:none" id="rest" th:name="industryElse">
                                 </div>
 
 
@@ -154,7 +153,7 @@
                                     <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
                                     <!--@thymesVar id="type" type="String"-->
                                     <!--*/-->
-                                    <td th:text="${type}" th:name="type" style="display: none"></td>
+                                    <td th:value="${type}" th:name="type" style="display: none" ></td>
                                 </div>
 
 
@@ -221,8 +220,7 @@
 
     <div th:replace="main :: script"></div>
     <script>
-
-        function industry(val) {
+        function industryChange(val) {
             if(val=="其他"){
                 document.getElementById("rest").style.display = "block";
             }else {
