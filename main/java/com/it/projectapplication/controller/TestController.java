@@ -7,9 +7,13 @@ import com.it.projectapplication.domain.EnterpriseInformation;
 import com.it.projectapplication.domain.PersonalInformation;
 import com.it.projectapplication.domain.User;
 import com.it.projectapplication.serivce.UserService;
+import com.it.projectapplication.utils.JwtTokenUtils;
 import com.it.projectapplication.utils.RandomUtils;
+import com.it.projectapplication.utils.RestTemplateUtils;
 import com.it.projectapplication.utils.SaveUploadUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
@@ -36,11 +42,23 @@ public class TestController {
         return "all-admin-login";
     }
     @RequestMapping("/login/form")
-    public ModelAndView login(ModelAndView model, User user){
-        System.out.println("jinxl");
+    public ModelAndView login(ModelAndView model, User user, HttpServletRequest request, HttpServletResponse response) throws JSONException {
+
+
+        model.setViewName("/all-admin-login");
         model=userService.login(model,user);
+        if("/main".equals(model.getViewName())){
+            String url="http://localhost:8080/projectapplication/login";
+            JSONObject jsonObject=new JSONObject();
+            jsonObject.putOpt("username",user.getUsername());
+            jsonObject.putOpt("password",user.getPassword());
+            String token= RestTemplateUtils.sendPostRequest(url,jsonObject.toString());
+            response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+
+        }
         return model;
     }
+
     @PostMapping("/register")
     public String register(@RequestParam  Map<String ,Object> body,Model model){
         String usertype=body.get("usertype").toString();

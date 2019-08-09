@@ -40,7 +40,7 @@
         <div class="login-box-body">
             <p class="login-box-msg">登录系统</p>
 
-            <form  method="post" th:action="@{/login/form}">
+            <form  method="post" th:action="@{/login/form}" enctype="multipart/form-data">
                 <div class="form-group has-feedback">
                     <input type="text" class="form-control" placeholder="账号" th:name="username">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -51,7 +51,10 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        
+                        <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+                        <!--@thymesVar id="msg" type="String"-->
+                        <!--*/-->
+                        <spen class="help-block" style="color:red" th:text="${msg}"></spen>
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">

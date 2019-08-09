@@ -6,10 +6,12 @@ import com.it.projectapplication.dao.UserDao;
 import com.it.projectapplication.domain.Permission;
 import com.it.projectapplication.domain.Role;
 import com.it.projectapplication.domain.User;
+import com.it.projectapplication.serivce.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +28,10 @@ public class ProjectapplicationApplicationTests {
     private RoleDao roleDao;
     @Autowired
     private PermissionDao permissionDao;
-
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    UserService service;
     @Test
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
@@ -56,7 +61,6 @@ public class ProjectapplicationApplicationTests {
     @Rollback(false)//设置为不回滚
     public void castTest(){
         List<Permission> list=permissionDao.findAll();
-
         System.out.println(list);
     }
     @Test
@@ -67,5 +71,14 @@ public class ProjectapplicationApplicationTests {
         User user1= userDao.findUserByUsernameAndPassword(user.getUsername(),user.getPassword());
         System.out.println(user1);
     }
+    @Test
+    public void testPassword(){
+        User user=userDao.findUserByUsername("admin");
+        boolean f=bCryptPasswordEncoder.matches("admin1",user.getPassword());
+        System.out.println(f);
+    }
+
+
+
 
 }

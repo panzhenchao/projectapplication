@@ -2,6 +2,7 @@ package com.it.projectapplication.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.it.projectapplication.domain.JwtUser;
+import com.it.projectapplication.domain.User;
 import com.it.projectapplication.model.LoginUser;
 import com.it.projectapplication.utils.JwtTokenUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -42,6 +43,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
 
     }
+    public    Authentication attemptAuthentication(User user){
+        return authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername() ,user.getPassword(), new ArrayList<>())
+        );
+    }
     @Override
     protected  void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException{
         JwtUser jwtUser=(JwtUser) authResult.getPrincipal();
@@ -52,7 +58,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             permissionList.add(authority.getAuthority());
         }
         String token = JwtTokenUtils.createrToken(jwtUser.getUsername(),permissionList,false);
-         response.setHeader("token",JwtTokenUtils.TOKEN_PREFIX + token);
+        response.setHeader("token",JwtTokenUtils.TOKEN_PREFIX + token);
+        response.getWriter().write(token);
 
     }
     @Override
