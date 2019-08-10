@@ -12,4 +12,5 @@ public interface UserDao extends CrudRepository<User,Long> {
     public User findUserById(Long id);
     public User findUserByUsernameAndPassword(String username,String password);
 
+
 }

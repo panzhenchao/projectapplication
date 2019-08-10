@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-public class TestController {
+public class LoginController {
     @Autowired
     UserDao userDao;
     @Autowired
@@ -53,6 +53,7 @@ public class TestController {
             jsonObject.putOpt("username",user.getUsername());
             jsonObject.putOpt("password",user.getPassword());
             String token= RestTemplateUtils.sendPostRequest(url,jsonObject.toString());
+            model.addObject("permission",JwtTokenUtils.getUserPermission(token));
             response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
 
         }

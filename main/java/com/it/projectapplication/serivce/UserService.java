@@ -32,6 +32,19 @@ public class UserService {
 
         }return model;
     }
+    public String findCategory(String username){
+        User user=userDao.findUserByUsername(username);
+        return user.getCategory();
+    }
+    public boolean validatePassword(String username,String password){
+        User user=userDao.findUserByUsername(username);
+        return bCryptPasswordEncoder.matches(password,user.getPassword());
+    }
+    public void changePassword(String username,String password){
+        User user=userDao.findUserByUsername(username);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        userDao.save(user);
+    }
 
 
 }
