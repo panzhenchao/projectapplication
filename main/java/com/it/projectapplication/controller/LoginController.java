@@ -54,7 +54,8 @@ public class LoginController {
             jsonObject.putOpt("password",user.getPassword());
             String token= RestTemplateUtils.sendPostRequest(url,jsonObject.toString());
             model.addObject("permission",JwtTokenUtils.getUserPermission(token));
-            response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+            model.addObject("token",JwtTokenUtils.TOKEN_PREFIX+token);
+            response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX+ token);
 
         }
         return model;

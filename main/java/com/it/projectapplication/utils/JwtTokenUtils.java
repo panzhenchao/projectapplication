@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +45,15 @@ public class JwtTokenUtils {
                 .setSigningKey(SECRET)
                 .parseClaimsJws(token)
                 .getBody();
+    }
+    public static String getToken (HttpServletRequest request){
+        String tokenHeader =request.getHeader(JwtTokenUtils.TOKEN_HEADER);
+        if(null!=tokenHeader){
+            String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX,"");
+            return token;
+        }else {
+            return null;
+        }
     }
 
 }
