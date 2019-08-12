@@ -13,6 +13,7 @@ import java.util.List;
 public class JwtTokenUtils {
     public static final String TOKEN_HEADER= "Authorization";
     public static final String TOKEN_PREFIX= "Bearer ";
+    public static final String TOKEN_COOKIE_PREFIX="Bearer+";
     private static final String SECRET= "jwtsecretdom";
     private static final String ISS= "echisan";
     //过期时间3600秒
@@ -51,7 +52,12 @@ public class JwtTokenUtils {
         if(null!=tokenHeader){
             String token = tokenHeader.replace(JwtTokenUtils.TOKEN_PREFIX,"");
             return token;
-        }else {
+        }String cookieTokenHeader =CookieUtils.getCookie(request,"tokenHeader");
+        if(null!=cookieTokenHeader){
+            String token = cookieTokenHeader.replace(JwtTokenUtils.TOKEN_COOKIE_PREFIX,"");
+            return token;
+        }
+        else {
             return null;
         }
     }

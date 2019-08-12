@@ -160,7 +160,9 @@
         src="../static/plugins/ionslider/ion.rangeSlider.min.js" th:src="@{/plugins/ionslider/ion.rangeSlider.min.js}"></script>
 <script type="text/javascript"
         src="../static/plugins/bootstrap-slider/bootstrap-slider.js" th:src="@{/plugins/bootstrap-slider/bootstrap-slider.js}"></script>
+
 <script>
+
     $(document).ready(function() {
         // 选择框
         $(".select2").select2();
@@ -293,40 +295,36 @@
 
     });
 
-    $.ajax({
-        type :"GET",
-        var :token = $('meta[name="_jwt"]').attr('content'),
-        //window:localStorage.setItem('token2',token),
-        //var: token2 =request.data.token,
-        headers: {'Authorization': window.localStorage.getItem('token2')}
-    });
-    $.ajax({
-        type :"POST",
-        var :token = $('meta[name="_jwt"]').attr('content'),
-        //window:localStorage.setItem('token2',token),
-        //var: token2 =request.data.token,
-        headers: {'Authorization': window.localStorage.getItem('token2')}
-    });
 
-     $.ajax({
-         type :"POST",
-         var :token = $('meta[name="_jwt"]').attr('content'),
-         //var: token2 =request.data.token,
-         window:localStorage.setItem('token2',token),
-        headers: {'Authorization':window.localStorage.getItem('token2')}
-   });
-     $.ajax({
-         type :"GET",
-         var :token = $('meta[name="_jwt"]').attr('content'),
-         //window:localStorage.setItem('token2',token),
-        //var: token2 =request.data.token,
-        headers: {'Authorization': window.localStorage.getItem('token2')}
-   });
-    $.ajaxSetup({
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', window.localStorage.getItem('token2'));
-        }
-    });
+
+   //  });
+   //  $.ajax({
+   //      type :"POST",
+   //      var :token = $('meta[name="_jwt"]').attr('content'),
+   //      //window:localStorage.setItem('token2',token),
+   //      //var: token2 =request.data.token,
+   //      headers: {'Authorization': window.localStorage.getItem('token2')}
+   //  });
+   //
+   //   $.ajax({
+   //       type :"POST",
+   //       var :token = $('meta[name="_jwt"]').attr('content'),
+   //       //var: token2 =request.data.token,
+   //       window:localStorage.setItem('token2',token),
+   //      headers: {'Authorization':window.localStorage.getItem('token2')}
+   // });
+   //   $.ajax({
+   //       type :"GET",
+   //       var :token = $('meta[name="_jwt"]').attr('content'),
+   //       //window:localStorage.setItem('token2',token),
+   //      //var: token2 =request.data.token,
+   //      headers: {'Authorization': window.localStorage.getItem('token2')}
+   // });
+   //  $.ajaxSetup({
+   //      beforeSend: function(xhr) {
+   //          xhr.setRequestHeader('Authorization', window.localStorage.getItem('token2'));
+   //      }
+   //  });
     //  $(function(){
     //      type :"POST",
     //      var _token = $('meta[name="_jwt"]').attr('content'),

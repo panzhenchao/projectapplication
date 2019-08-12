@@ -1,6 +1,7 @@
 package com.it.projectapplication.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.it.projectapplication.utils.CookieUtils;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -17,5 +18,6 @@ public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         String reason = "统一处理，原因 "+authException.getMessage();
         response.getWriter().write(new ObjectMapper().writeValueAsString(reason));
+        CookieUtils.clearCookie(request,response,"tokenHeader");
     }
 }

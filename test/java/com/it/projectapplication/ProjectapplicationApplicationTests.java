@@ -7,6 +7,7 @@ import com.it.projectapplication.domain.Permission;
 import com.it.projectapplication.domain.Role;
 import com.it.projectapplication.domain.User;
 import com.it.projectapplication.serivce.UserService;
+import com.it.projectapplication.utils.JwtTokenUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,14 @@ public class ProjectapplicationApplicationTests {
         User user=userDao.findUserByUsername("admin");
         boolean f=bCryptPasswordEncoder.matches("admin1",user.getPassword());
         System.out.println(f);
+    }
+    @Test
+    public void testCookie(){
+        String a="Bearer+aaaaa";
+        String b=a.replace(JwtTokenUtils.TOKEN_COOKIE_PREFIX,JwtTokenUtils.TOKEN_PREFIX);
+        System.out.println(b);
+        String c=b.replace(JwtTokenUtils.TOKEN_PREFIX,"");
+        System.out.println(c);
     }
 
 

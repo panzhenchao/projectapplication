@@ -7,15 +7,13 @@ import com.it.projectapplication.domain.EnterpriseInformation;
 import com.it.projectapplication.domain.PersonalInformation;
 import com.it.projectapplication.domain.User;
 import com.it.projectapplication.serivce.UserService;
-import com.it.projectapplication.utils.JwtTokenUtils;
-import com.it.projectapplication.utils.RandomUtils;
-import com.it.projectapplication.utils.RestTemplateUtils;
-import com.it.projectapplication.utils.SaveUploadUtils;
+import com.it.projectapplication.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
-
+@CrossOrigin(origins = "http://localhost:8080/projectapplication", maxAge = 3600)
 @Controller
 public class LoginController {
     @Autowired
@@ -42,7 +40,7 @@ public class LoginController {
         return "all-admin-login";
     }
     @RequestMapping("/login/form")
-    public ModelAndView login(ModelAndView model, User user, HttpServletRequest request, HttpServletResponse response) throws JSONException {
+    public ModelAndView login(ModelAndView model, User user, HttpServletRequest request, HttpServletResponse response) throws JSONException ,Exception{
 
 
         model.setViewName("/all-admin-login");
@@ -53,9 +51,11 @@ public class LoginController {
             jsonObject.putOpt("username",user.getUsername());
             jsonObject.putOpt("password",user.getPassword());
             String token= RestTemplateUtils.sendPostRequest(url,jsonObject.toString());
+            String tokenHeader=JwtTokenUtils.TOKEN_PREFIX+token;
             model.addObject("permission",JwtTokenUtils.getUserPermission(token));
-            model.addObject("token",JwtTokenUtils.TOKEN_PREFIX+token);
-            response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX+ token);
+            model.addObject("token",tokenHeader);
+            response.setHeader("token", token);
+            CookieUtils.setCookie(response,"tokenHeader",tokenHeader);
 
         }
         return model;
