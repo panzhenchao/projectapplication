@@ -4,8 +4,10 @@ import com.it.projectapplication.dao.PermissionDao;
 import com.it.projectapplication.dao.RoleDao;
 import com.it.projectapplication.dao.UserDao;
 import com.it.projectapplication.domain.Permission;
+import com.it.projectapplication.domain.PersonalInformation;
 import com.it.projectapplication.domain.Role;
 import com.it.projectapplication.domain.User;
+import com.it.projectapplication.serivce.PersonalInformationService;
 import com.it.projectapplication.serivce.UserService;
 import com.it.projectapplication.utils.JwtTokenUtils;
 import org.junit.Test;
@@ -33,6 +35,8 @@ public class ProjectapplicationApplicationTests {
     BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     UserService service;
+    @Autowired
+    PersonalInformationService personalInformationService;
     @Test
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
@@ -85,6 +89,11 @@ public class ProjectapplicationApplicationTests {
         System.out.println(b);
         String c=b.replace(JwtTokenUtils.TOKEN_PREFIX,"");
         System.out.println(c);
+    }
+    @Test
+    public void testFindINformation(){
+        PersonalInformation personalInformation=personalInformationService.findPersonalInformationByUsername("admin");
+        System.out.println(personalInformation);
     }
 
 

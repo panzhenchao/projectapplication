@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>
+                    企业实施主体信息修改
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active"></li>
+                </ol>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <!-- .box-body -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">列表</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form role="form" th:action="@{/registerEnterprise}" method="post" enctype="multipart/form-data">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label >登录名</label>
+                                    <input type="text" class="form-control"  placeholder="请输入公司名称" th:name="username">
+                                </div>
+                                <div class="form-group">
+                                    <label >登录密码</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="password">
+                                </div>
+                                <div class="form-group">
+                                    <label >确认登录密码</label>
+                                    <input type="text" class="form-control"  placeholder="" >
+                                </div>
+                                <div class="form-group">
+                                    <label >单位名称</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyName">
+                                </div>
+                                <div class="form-group">
+                                    <label >组织机构代码</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="organizingInstitutionNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label >营业执照注册号</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="businessLicenseRegistrationNumber">
+                                </div>
+                                <div class="form-group">
+                                    <label >营业执照照片</label>
+                                    <input type="file" class="form-control"  placeholder="" th:name="businessLicenseImgFile">
+                                </div>
+                                <div class="form-group">
+                                    <label >注册日期</label>
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="registrationDate">
+                                </div>
+                                <div class="form-group">
+                                    <label >法人代表</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateRepresentative">
+                                </div>
+                                <div class="form-group">
+                                    <label >法人身份证</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateIdentityCard">
+                                </div>
+                                <div class="form-group">
+                                    <label >法人身份证照</label>
+                                    <input type="file" class="form-control"  placeholder="" th:name="corporateIdentityCardImgFile">
+                                </div>
+                                <div class="form-group">
+                                    <label >单位联系人</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyContact">
+                                </div>
+                                <div class="form-group">
+                                    <label >联系电话</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label >所属行业</label>
+                                    <select class="form-control" onchange="industryChange(this.value)" th:name="industry">
+                                        <option>渔业</option>
+                                        <option>林业</option>
+                                        <option>农业</option>
+                                        <option>牧业</option>
+                                        <option>其他</option>
+                                    </select>
+                                    <input type="text" class="form-control" style="display:none" id="rest" th:name="industryElse">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label >注册资金(万元)</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="registeredCaptial">
+                                </div>
+                                <div class="form-group">
+                                    <label >银行账户</label>
+                                    <select class="form-control" th:name="bankName">
+                                        <option>中国工商银行</option>
+                                        <option>中国建设银行</option>
+                                        <option>中国农业银行</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label >银行账户</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount">
+                                </div>
+                                <div class="form-group">
+                                    <label >财政人员(会计人员)</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="financer">
+                                </div>
+                                <div class="form-group">
+                                    <label >会计证号码</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="AccountingCertificate">
+                                </div>
+                                <div class="form-group">
+                                    <label >纳税地</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="agerVectigalis">
+                                </div>
+                                <div class="form-group">
+                                    <label >税务登记证</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="taxRegistrationCertificate">
+                                </div>
+                                <div class="form-group">
+                                    <label >单位详细地址</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="address">
+                                </div>
+
+                                <div class="col-md-10 data rowHeight2x">
+                                    <label >单位简介</label>
+                                    <textarea class="form-control" rows="3" placeholder="请输入..." th:name="individualResume"></textarea>
+                                </div>
+                                <div>
+                                    <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+                                    <!--@thymesVar id="type" type="String"-->
+                                    <!--*/-->
+                                    <td th:value="${type}" th:name="type" style="display: none" ></td>
+                                </div>
+
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <center><button type="submit" class="btn btn-primary">提交</button>
+                                <button type="button" class="btn btn-primary">重置</button></center>
+                            </div>
+
+
+                        </form>
+
+
+
+
+
+                                </tbody>
+                                <!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+                            </table>
+                            <!--数据列表/-->
+
+                            <!--工具栏-->
+
+                            <!--工具栏/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- .box-footer-->
+
+                    <!-- /.box-footer-->
+
+
+                </div>
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+    <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+    <div th:replace="main :: script"></div>
+    <script>
+        function industryChange(val) {
+            if(val=="其他"){
+                document.getElementById("rest").style.display = "block";
+            }else {
+                document.getElementById("rest").style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

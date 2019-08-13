@@ -28,16 +28,20 @@ public class MaintenanceInformationController {
     EnterpriseInformationService enterpriseInformationService;
     @Autowired
     PersonalInformationService personalInformationService;
-
-    public ModelAndView changeInformation(ModelAndView model ,String token){
+    @GetMapping("/changeInformation")
+    public ModelAndView changeInformation(ModelAndView model, HttpServletResponse response,HttpServletRequest request){
+        String token=JwtTokenUtils.getToken(request);
         String username= JwtTokenUtils.getUsername(token);
         String category=userService.findCategory(username);
+        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         if("企业".equals(category)){
             EnterpriseInformation enterpriseInformation=enterpriseInformationService.findInformationByUsername(username);
             model.addObject("enterpriseInformation",enterpriseInformation);
+            model.setViewName("/enterprise-implementation-subject-information-change");
         }else if("个人".equals(category)){
             PersonalInformation personalInformation=personalInformationService.findPersonalInformationByUsername(username);
             model.addObject("personalInformation",personalInformation);
+            model.setViewName("/personal-implementation-subject-information-change");
 
         }
         return model;

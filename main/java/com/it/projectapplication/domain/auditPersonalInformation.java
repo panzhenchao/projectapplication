@@ -3,11 +3,10 @@ package com.it.projectapplication.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "personal_information")
-public class PersonalInformation implements java.io.Serializable{
+@Table(name = "audit_personal_information")
+public class auditPersonalInformation implements java.io.Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String username;
@@ -29,6 +28,8 @@ public class PersonalInformation implements java.io.Serializable{
     private String identityCardImg;
 
     private String individualResume;
+
+    private Integer auditType;
 
     public Long getId() {
         return id;
@@ -118,9 +119,17 @@ public class PersonalInformation implements java.io.Serializable{
         this.individualResume = individualResume;
     }
 
+    public Integer getAuditType() {
+        return auditType;
+    }
+
+    public void setAuditType(Integer auditType) {
+        this.auditType = auditType;
+    }
+
     @Override
     public String toString() {
-        return "PersonalInformation{" +
+        return "auditPersonalInformation{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
@@ -132,6 +141,8 @@ public class PersonalInformation implements java.io.Serializable{
                 ", address='" + address + '\'' +
                 ", identityCardImg='" + identityCardImg + '\'' +
                 ", individualResume='" + individualResume + '\'' +
+                ", auditype=" + auditType +
                 '}';
     }
+
 }
