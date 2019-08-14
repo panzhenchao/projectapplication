@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 public class EnterpriseInformationService {
     @Autowired
     EnterpriseInformationDao enterpriseInformationDao;
-    public EnterpriseInformation findInformationByUsername(String username){
+    public EnterpriseInformation findEnterpriseInformationByUsername(String username){
         EnterpriseInformation enterpriseInformation=enterpriseInformationDao.findEnterpriseInformationByUsername(username);
         return enterpriseInformation;
+    }
+    public void saveEnterpriseInformation(EnterpriseInformation enterpriseInformation){
+        enterpriseInformationDao.save(enterpriseInformation);
     }
 }

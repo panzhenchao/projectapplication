@@ -45,6 +45,10 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(password));
         userDao.save(user);
     }
+    public void saveUser(User user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDao.save(user);
+    }
 
 
 }

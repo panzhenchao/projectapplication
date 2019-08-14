@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "audit_personal_information")
-public class auditPersonalInformation implements java.io.Serializable{
+public class AuditPersonalInformation implements java.io.Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -129,7 +129,7 @@ public class auditPersonalInformation implements java.io.Serializable{
 
     @Override
     public String toString() {
-        return "auditPersonalInformation{" +
+        return "AuditPersonalInformation{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +

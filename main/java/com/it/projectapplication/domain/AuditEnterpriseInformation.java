@@ -5,13 +5,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-
 @Entity
-@Table(name = "enterprise_information")
-public class EnterpriseInformation implements java.io.Serializable{
+@Table(name = "audit_enterprise_information")
+public class AuditEnterpriseInformation implements java.io.Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
 
     private String username;
@@ -58,6 +56,8 @@ public class EnterpriseInformation implements java.io.Serializable{
     private String individualResume;
 
     private String type;
+
+    private Integer auditType;
 
     public Long getId() {
         return id;
@@ -241,5 +241,43 @@ public class EnterpriseInformation implements java.io.Serializable{
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Integer getAuditType() {
+        return auditType;
+    }
+
+    public void setAuditType(Integer auditType) {
+        this.auditType = auditType;
+    }
+
+    @Override
+    public String toString() {
+        return "AuditEnterpriseInformation{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", organizingInstitutionNumber='" + organizingInstitutionNumber + '\'' +
+                ", businessLicenseRegistrationNumber='" + businessLicenseRegistrationNumber + '\'' +
+                ", businessLicenseImg='" + businessLicenseImg + '\'' +
+                ", registrationDate=" + registrationDate +
+                ", corporateRepresentative='" + corporateRepresentative + '\'' +
+                ", corporateIdentityCard='" + corporateIdentityCard + '\'' +
+                ", corporateIdentityCardImg='" + corporateIdentityCardImg + '\'' +
+                ", companyContact='" + companyContact + '\'' +
+                ", phone='" + phone + '\'' +
+                ", industry='" + industry + '\'' +
+                ", registeredCaptial=" + registeredCaptial +
+                ", bankName='" + bankName + '\'' +
+                ", bankAccount='" + bankAccount + '\'' +
+                ", financer='" + financer + '\'' +
+                ", AccountingCertificate='" + AccountingCertificate + '\'' +
+                ", agerVectigalis='" + agerVectigalis + '\'' +
+                ", taxRegistrationCertificate='" + taxRegistrationCertificate + '\'' +
+                ", address='" + address + '\'' +
+                ", individualResume='" + individualResume + '\'' +
+                ", type='" + type + '\'' +
+                ", auditType=" + auditType +
+                '}';
     }
 }

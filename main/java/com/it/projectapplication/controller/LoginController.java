@@ -1,11 +1,10 @@
 package com.it.projectapplication.controller;
 
-import com.it.projectapplication.dao.EnterpriseInformationDao;
-import com.it.projectapplication.dao.PersonalInformationDao;
-import com.it.projectapplication.dao.UserDao;
 import com.it.projectapplication.domain.EnterpriseInformation;
 import com.it.projectapplication.domain.PersonalInformation;
 import com.it.projectapplication.domain.User;
+import com.it.projectapplication.serivce.EnterpriseInformationService;
+import com.it.projectapplication.serivce.PersonalInformationService;
 import com.it.projectapplication.serivce.UserService;
 import com.it.projectapplication.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,13 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:8080/projectapplication", maxAge = 3600)
 @Controller
 public class LoginController {
+
     @Autowired
-    UserDao userDao;
-    @Autowired
-    PersonalInformationDao personalInformationDao;
-    @Autowired
-    EnterpriseInformationDao enterpriseInformationDao;
+    EnterpriseInformationService enterpriseInformationService;
     @Autowired
     UserService userService;
+    @Autowired
+    PersonalInformationService personalInformationService;
     @RequestMapping("/index")
     public String index(Model model){
         return "all-admin-login";
@@ -74,35 +72,39 @@ public class LoginController {
         }
     }
     @PostMapping("/registerPersonal")
-    public String registerPersonal(User user, PersonalInformation personalInformation, @RequestParam("identityCardImgFile")MultipartFile file) throws IOException {
+    public ModelAndView registerPersonal(ModelAndView moldel,User user, PersonalInformation personalInformation, @RequestParam("identityCardImgFile")MultipartFile file) throws IOException {
         user.setState("0");
         user.setCategory("个人");
 
         personalInformation.setUsername(user.getUsername());
         personalInformation.setIdentityCardImg(RandomUtils.getRandomString()+file.getOriginalFilename());
         if(null!=file) {
-            personalInformation.setIdentityCardImg(SaveUploadUtils.getIdentityCardImgDirFile(file, SaveUploadUtils.IDENTITY_CARD));
+            personalInformation.setIdentityCardImg(SaveUploadUtils.getSaveDirFile(file, SaveUploadUtils.IDENTITY_CARD));
         }
-        userDao.save(user);
-        personalInformationDao.save(personalInformation);
-        return "all-admin-login";
+        userService.saveUser(user);
+        personalInformationService.savePersonalInformation(personalInformation);
+        moldel.setViewName("/all-admin-login");
+        moldel.addObject("msg","注册成功!审核通过后方可登录");
+        return moldel;
     }
     @PostMapping("/registerEnterprise")
-    public String registerEnterprise(User user, EnterpriseInformation enterpriseInformation,@RequestParam("businessLicenseImgFile")MultipartFile bLFile ,@RequestParam("corporateIdentityCardImgFile")MultipartFile cIFile ,@RequestParam("industryElse") String industryElse)throws IOException{
+    public ModelAndView registerEnterprise(ModelAndView moldel,User user, EnterpriseInformation enterpriseInformation,@RequestParam("businessLicenseImgFile")MultipartFile bLFile ,@RequestParam("corporateIdentityCardImgFile")MultipartFile cIFile ,@RequestParam("industryElse") String industryElse)throws IOException{
         user.setState("0");
         user.setCategory("企业");
-        userDao.save(user);
+        userService.saveUser(user);
         enterpriseInformation.setUsername(user.getUsername());
         if(null!=industryElse){
             enterpriseInformation.setIndustry(industryElse);
         }
         if(null!=bLFile && null!=cIFile) {
-            enterpriseInformation.setBusinessLicenseImg(SaveUploadUtils.getIdentityCardImgDirFile(bLFile, SaveUploadUtils.BUSINESS_LICENSE));
-            enterpriseInformation.setCorporateIdentityCardImg(SaveUploadUtils.getIdentityCardImgDirFile(cIFile, SaveUploadUtils.IDENTITY_CARD));
+            enterpriseInformation.setBusinessLicenseImg(SaveUploadUtils.getSaveDirFile(bLFile, SaveUploadUtils.BUSINESS_LICENSE));
+            enterpriseInformation.setCorporateIdentityCardImg(SaveUploadUtils.getSaveDirFile(cIFile, SaveUploadUtils.IDENTITY_CARD));
         }
-        userDao.save(user);
-        enterpriseInformationDao.save(enterpriseInformation);
-        return "all-admin-login";
+        enterpriseInformationService.saveEnterpriseInformation(enterpriseInformation);
+        enterpriseInformation.setType("企业");
+        moldel.setViewName("/all-admin-login");
+        moldel.addObject("msg","注册成功!审核通过后方可登录");
+        return moldel;
 
     }
 

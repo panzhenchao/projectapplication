@@ -37,10 +37,12 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">列表</h3>
+                        <!--@thymesVar id="msg" type="String"-->
+                        <spen class="help-block" style="color:red" th:text="${msg}"></spen>
                     </div>
 
                     <div class="box-body">
-                        <form role="form" th:action="@{/changePersonal}" method="post" enctype="multipart/form-data">
+                        <form role="form" th:action="@{/changePersonalInformation}" method="post" enctype="multipart/form-data">
                             <!--@thymesVar id="personalInformation" type="com.it.projectapplication.domain.PersonalInformation"-->
                             <div class="box-body" th:object="${personalInformation}">
                                 <div class="form-group">
@@ -76,9 +78,9 @@
                                     <!--@thymesVar id="bankName" type="String"-->
                                     <input id="codeBankName" type="hidden" class="span2"  th:value="*{bankName}" >
                                     <select class="form-control" th:name="bankName" id="bankName" th:value="*{bankName}">
-                                        <option value="中国工商银行">中国工商银行</option>
-                                        <option value="中国建设银行">中国建设银行</option>
-                                        <option value="中国农业银行">中国农业银行</option>
+                                        <option value="中国工商银行" th:if="*{bankName=='中国工商银行'}" selected>中国工商银行</option>
+                                        <option value="中国建设银行" th:if="*{bankName=='中国建设银行'}" selected>中国建设银行</option>
+                                        <option value="中国农业银行" th:if="*{bankName=='中国农业银行'}" selected>中国农业银行</option>
                                     </select>
                                 </div>
                                 <div class="form-group" >
@@ -92,14 +94,16 @@
                                 </div>
                                 <div class="form-group">
                                     <label >身份证</label>
+                                    <input th:name="identityCardImg" type="hidden"  th:value="*{identityCardImg}">
+                                    <!--@thymesVar id="identityCardImg" type="String"-->
 
-                                    <input type="file" class="form-control"  placeholder="" th:name="identityCardImgFile">
+                                    <input  id="identity_card_file" type="file" class="form-control"  placeholder="" th:name="identityCardImgFile" >
+                                    <img th:src="@{${personalInformation.identityCardImg}}" id="identity_card_image"/>
                                 </div>
-
                                 <div class="col-md-10 data rowHeight2x">
                                     <label >个人简介</label>
                                     <!--@thymesVar id="individualResume" type="String"-->
-                                    <textarea class="form-control" rows="3" placeholder="请输入..." th:name="individualResume" th:value="*{individualResume}"></textarea>
+                                    <textarea class="form-control" rows="3"  th:name="individualResume" th:text="*{individualResume}"></textarea>
                                 </div>
 
 
@@ -179,6 +183,14 @@
             $("#bankName option[value='" + Flag + "']").attr("selected", "selected");
         }
     });
+    document.getElementById('identity_card_file').onchange = function() {
+        var imgFile = this.files[0];
+        var fr = new FileReader();
+        fr.onload = function() {
+            document.getElementById('identity_card_image').src = fr.result;
+        };
+        fr.readAsDataURL(imgFile);
+    };
 </script>
 </body>
 

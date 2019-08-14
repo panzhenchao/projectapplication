@@ -13,4 +13,7 @@ public class PersonalInformationService {
         PersonalInformation personalInformation=personalInformationDao.findPersonalInformationByUsername(username);
         return personalInformation;
     }
+    public void savePersonalInformation(PersonalInformation personalInformation){
+        personalInformationDao.save(personalInformation);
+    }
 }

@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class SaveUploadUtils {
     // 项目根路径下的目录  -- SpringBoot static 目录相当于是根路径下（SpringBoot 默认）
-    public final static String IDENTITY_CARD = "static/img/identityCardImg"+RandomUtils.getRandomString();
-    public final static String BUSINESS_LICENSE = "static/img/businessLicenseImg"+RandomUtils.getRandomString();
+    public final static String IDENTITY_CARD = "/img/identityCardImg"+RandomUtils.getRandomString();
+    public final static String BUSINESS_LICENSE = "/img/businessLicenseImg"+RandomUtils.getRandomString();
     
-    public static String  getIdentityCardImgDirFile(MultipartFile file,String path){
+    public static String  getSaveDirFile(MultipartFile file,String path){
 
         // 构建上传文件的存放 "文件夹" 路径
-        String fileDirPath = new String("src/main/resources/" + path);
+        String fileDirPath = new String("src/main/resources/static" + path);
 
         File fileDir = new File(fileDirPath);
         if(!fileDir.exists()){
@@ -30,7 +30,7 @@ public class SaveUploadUtils {
         }catch (IOException e){
             e.printStackTrace();
         }
-        return newFilePath;
+        return path+"/"+filename;
     }
 }
 
