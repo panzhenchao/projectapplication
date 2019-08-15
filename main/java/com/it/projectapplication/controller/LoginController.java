@@ -78,6 +78,7 @@ public class LoginController {
 
         personalInformation.setUsername(user.getUsername());
         personalInformation.setIdentityCardImg(RandomUtils.getRandomString()+file.getOriginalFilename());
+        personalInformation.setState("0");
         if(null!=file) {
             personalInformation.setIdentityCardImg(SaveUploadUtils.getSaveDirFile(file, SaveUploadUtils.IDENTITY_CARD));
         }
@@ -93,6 +94,7 @@ public class LoginController {
         user.setCategory("企业");
         userService.saveUser(user);
         enterpriseInformation.setUsername(user.getUsername());
+        enterpriseInformation.setState("0");
         if(null!=industryElse){
             enterpriseInformation.setIndustry(industryElse);
         }

@@ -14,6 +14,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -95,7 +98,13 @@ public class ProjectapplicationApplicationTests {
         PersonalInformation personalInformation=personalInformationService.findPersonalInformationByUsername("admin");
         System.out.println(personalInformation);
     }
-
+    @Test
+    public void testFindPersonalPage(){
+        Pageable pageable=new PageRequest(0,5);
+        Page<PersonalInformation> page=personalInformationService.findPersonalInformationByaddressAndPageble("%灵安镇%",pageable);
+        System.out.println(page.getTotalElements());
+        System.out.println(page.getContent());
+    }
 
 
 

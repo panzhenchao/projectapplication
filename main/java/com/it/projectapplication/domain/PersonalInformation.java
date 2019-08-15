@@ -30,6 +30,9 @@ public class PersonalInformation implements java.io.Serializable{
 
     private String individualResume;
 
+    private String state;
+
+
     public Long getId() {
         return id;
     }
@@ -118,6 +121,14 @@ public class PersonalInformation implements java.io.Serializable{
         this.individualResume = individualResume;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "PersonalInformation{" +
@@ -132,6 +143,7 @@ public class PersonalInformation implements java.io.Serializable{
                 ", address='" + address + '\'' +
                 ", identityCardImg='" + identityCardImg + '\'' +
                 ", individualResume='" + individualResume + '\'' +
+                ", state='" + state + '\'' +
                 '}';
     }
 }

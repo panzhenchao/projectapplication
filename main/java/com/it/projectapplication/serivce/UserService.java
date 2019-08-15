@@ -49,6 +49,10 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.save(user);
     }
+    public String findStateByUsername(String username){
+        User user=userDao.findUserByUsername(username);
+        return user.getState();
+    }
 
 
 }

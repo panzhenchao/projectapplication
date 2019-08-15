@@ -77,10 +77,10 @@
                                     <label >银行账户</label>
                                     <!--@thymesVar id="bankName" type="String"-->
                                     <input id="codeBankName" type="hidden" class="span2"  th:value="*{bankName}" >
-                                    <select class="form-control" th:name="bankName" id="bankName" th:value="*{bankName}">
-                                        <option value="中国工商银行" th:if="*{bankName=='中国工商银行'}" selected>中国工商银行</option>
-                                        <option value="中国建设银行" th:if="*{bankName=='中国建设银行'}" selected>中国建设银行</option>
-                                        <option value="中国农业银行" th:if="*{bankName=='中国农业银行'}" selected>中国农业银行</option>
+                                    <select class="form-control" th:name="bankName" id="bankName">
+                                        <option value="中国工商银行"  th:selected="*{bankName=='中国工商银行'}" >中国工商银行</option>
+                                        <option value="中国建设银行"  th:selected="*{bankName=='中国建设银行'}">中国建设银行</option>
+                                        <option value="中国农业银行"  th:selected="*{bankName=='中国农业银行'}">中国农业银行</option>
                                     </select>
                                 </div>
                                 <div class="form-group" >
@@ -171,18 +171,6 @@
 
     <div th:replace="main :: script"></div>
 <script>
-    $(document).ready(function(){
-        var Flag=$("#codeBankName").val();
-        //alert(Flag);
-        //根据值让option选中
-        if(Flag=="中国工商银行"){
-            $("#bankName option[value='"+Flag+"']").attr("selected","selected");
-        }else if(Flag=="中国建设银行"){
-            $("#bankName option[value='"+Flag+"']").attr("selected","selected");
-        }else if(Flag=="中国农业银行") {
-            $("#bankName option[value='" + Flag + "']").attr("selected", "selected");
-        }
-    });
     document.getElementById('identity_card_file').onchange = function() {
         var imgFile = this.files[0];
         var fr = new FileReader();
