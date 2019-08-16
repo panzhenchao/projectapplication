@@ -1,9 +1,6 @@
 package com.it.projectapplication.controller;
 
-import com.it.projectapplication.domain.AuditEnterpriseInformation;
-import com.it.projectapplication.domain.AuditPersonalInformation;
-import com.it.projectapplication.domain.EnterpriseInformation;
-import com.it.projectapplication.domain.PersonalInformation;
+import com.it.projectapplication.domain.*;
 import com.it.projectapplication.serivce.*;
 import com.it.projectapplication.utils.CookieUtils;
 import com.it.projectapplication.utils.JwtTokenUtils;
@@ -137,4 +134,23 @@ public class MaintenanceInformationController {
         return model;
 
     }
+    @GetMapping("/checkInformation")
+    public ModelAndView checkPersonalInformation(ModelAndView model, HttpServletResponse response, HttpServletRequest request,@RequestParam("username") String username){
+        String token=JwtTokenUtils.getToken(request);
+        String category=userService.findCategory(username);
+        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
+        if("企业".equals(category)){
+            EnterpriseInformation enterpriseInformation=enterpriseInformationService.findEnterpriseInformationByUsername(username);
+            model.addObject("enterpriseInformation",enterpriseInformation);
+            model.setViewName("/enterprise-implementation-subject-information-check");
+        }else if("个人".equals(category)){
+            PersonalInformation personalInformation=personalInformationService.findPersonalInformationByUsername(username);
+            model.addObject("personalInformation",personalInformation);
+            model.setViewName("/personal-implementation-subject-information-check");
+
+        }
+        return model;
+    }
+
+
 }

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>个人信息修改
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active"></li>
+                </ol>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <!-- .box-body -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">列表</h3>
+                        <!--@thymesVar id="msg" type="String"-->
+                        <spen class="help-block" style="color:red" th:text="${msg}"></spen>
+                    </div>
+
+                    <div class="box-body">
+                        <form role="form"  method="post" enctype="multipart/form-data">
+                            <!--@thymesVar id="personalInformation" type="com.it.projectapplication.domain.PersonalInformation"-->
+                            <div class="box-body" th:object="${personalInformation}">
+                                <div class="form-group">
+                                    <label >登录名</label>
+                                    <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+                                    <!--@thymesVar id="username" type="String"-->
+                                    <!--@thymesVar id="personalInformation.username" type="String"-->
+                                    <!--@thymesVar id="personalInformation" type="com.it.projectapplication.domain.PersonalInformation"-->
+                                    <!--*/-->
+                                    <input type="text" class="form-control"   th:name="username" readonly="readonly" th:value="*{username}">
+                                </div>
+                                <div class="form-group">
+                                    <label >姓名</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="name" th:value="*{name}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >身份证</label>
+                                    <!--@thymesVar id="identityCard" type="String"-->
+                                    <input type="text" class="form-control"  placeholder="" th:name="identityCard" th:value="*{identityCard}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >联系电话</label>
+                                    <!--@thymesVar id="phone" type="String"-->
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone" th:value="*{phone}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >社区</label>
+                                    <!--@thymesVar id="community" type="String"-->
+                                    <input type="text" class="form-control"  placeholder="" th:name="community" th:value="*{community}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >银行账户</label>
+                                    <!--@thymesVar id="bankName" type="String"-->
+
+                                    <input type="text" class="form-control"  placeholder="" th:name="community" th:value="*{bankName}" readonly="readonly">
+                                </div>
+                                <div class="form-group" >
+                                    <label >银行账户</label>
+                                    <!--@thymesVar id="bankAccount" type="String"-->
+                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount" th:value="*{bankAccount}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >单位详细地址</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="address" th:value="*{address}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >身份证</label>
+                                    <input th:name="identityCardImg" type="hidden"  th:value="*{identityCardImg}" readonly="readonly">
+                                    <!--@thymesVar id="identityCardImg" type="String"-->
+
+
+                                    <img th:src="@{${personalInformation.identityCardImg}}" id="identity_card_image"/>
+                                </div>
+                                <div class="col-md-10 data rowHeight2x">
+                                    <label >个人简介</label>
+                                    <!--@thymesVar id="individualResume" type="String"-->
+                                    <textarea class="form-control" rows="3"  th:name="individualResume" th:text="*{individualResume}" readonly="readonly"></textarea>
+                                </div>
+
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <center><button type="submit" class="btn btn-primary"></button>
+                                </center>
+                            </div>
+
+
+                        </form>
+
+
+
+
+
+                                </tbody>
+                                <!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+                            </table>
+                            <!--数据列表/-->
+
+                            <!--工具栏-->
+
+                            <!--工具栏/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- .box-footer-->
+
+                    <!-- /.box-footer-->
+
+
+
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+    <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+
+    <div th:replace="main :: script"></div>
+<script>
+    document.getElementById('identity_card_file').onchange = function() {
+        var imgFile = this.files[0];
+        var fr = new FileReader();
+        fr.onload = function() {
+            document.getElementById('identity_card_image').src = fr.result;
+        };
+        fr.readAsDataURL(imgFile);
+    };
+</script>
+</body>
+
+</html>

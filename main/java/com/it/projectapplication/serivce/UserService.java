@@ -53,6 +53,10 @@ public class UserService {
         User user=userDao.findUserByUsername(username);
         return user.getState();
     }
+    public User findUserByUsername(String username){
+        User user=userDao.findUserByUsername(username);
+        return user;
+    }
 
 
 }

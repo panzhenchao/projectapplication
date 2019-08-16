@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>
+                    企业实施主体信息修改
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active"></li>
+                </ol>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <!-- .box-body -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">列表</h3>
+                        <!--@thymesVar id="msg" type="String"-->
+                        <spen class="help-block" style="color:red" th:text="${msg}"></spen>
+                    </div>
+
+                    <div class="box-body">
+                        <form role="form" th:action="@{/registerEnterprise}" method="post" enctype="multipart/form-data">
+                            <!--@thymesVar id="enterpriseInformation" type="com.it.projectapplication.domain.EnterpriseInformation"-->
+                            <div class="box-body" th:object="${enterpriseInformation}">
+                                <div class="form-group">
+                                    <label >登录名</label>
+                                    <input type="text" class="form-control"  placeholder="请输入公司名称" readonly="readonly" th:name="username" th:value="*{username}">
+                                </div>
+
+                                <div class="form-group">
+                                    <label >单位名称</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyName" th:value="*{companyName}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >组织机构代码</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="organizingInstitutionNumber" th:value="*{organizingInstitutionNumber}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >营业执照注册号</label>
+
+                                    <input type="text" class="form-control"  placeholder="" th:name="businessLicenseRegistrationNumber" th:value="*{businessLicenseRegistrationNumber}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >营业执照照片</label>
+                                    <input type="hidden" th:value="*{businessLicenseImg}" th:name="businessLicenseImg">
+
+                                    <img th:src="@{${enterpriseInformation.businessLicenseImg}}" id="business_license_image"/>
+                                </div>
+                                <div class="form-group">
+                                    <label >注册日期</label>
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="registrationDate" th:value="${#dates.format(enterpriseInformation.registrationDate, 'yyyy-MM-dd')}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >法人代表</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateRepresentative" th:value="*{corporateRepresentative}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >法人身份证</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateIdentityCard" th:value="*{corporateIdentityCard}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >法人身份证照</label>
+                                    <input type="hidden" th:value="*{corporateIdentityCardImg}" th:name="corporateIdentityCardImg">
+
+                                    <img th:src="@{${enterpriseInformation.corporateIdentityCardImg}}" id="corporate_identity_card_image"/>
+                                </div>
+                                <div class="form-group">
+                                    <label >单位联系人</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyContact" th:value="*{companyContact}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >联系电话</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone" th:value="*{phone}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >所属行业</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone" th:value="*{industry}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >注册资金(万元)</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="registeredCaptial" th:value="*{registeredCaptial}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >银行账户</label>
+                                    <input id="codeBankName" type="hidden" class="span2"  th:value="*{bankName}" >
+                                    <select class="form-control" th:name="bankName" th:value="*{bankName}" id="bankName" readonly="readonly">
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label >银行账户</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount" th:value="*{bankAccount}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >财政人员(会计人员)</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="financer" th:value="*{financer}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >会计证号码</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="accountingCertificate" th:value="*{accountingCertificate}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >纳税地</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="agerVectigalis" th:value="*{agerVectigalis}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >税务登记证</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="taxRegistrationCertificate" th:value="*{taxRegistrationCertificate}" readonly="readonly">
+                                </div>
+                                <div class="form-group">
+                                    <label >单位详细地址</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="address" th:value="*{address}" readonly="readonly">
+                                </div>
+
+                                <div class="col-md-10 data rowHeight2x">
+                                    <label >单位简介</label>
+                                    <textarea class="form-control" rows="3" placeholder="请输入..." th:name="individualResume" th:text="*{individualResume}" readonly="readonly"></textarea>
+                                </div>
+                                <div>
+                                    <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
+                                    <!--@thymesVar id="type" type="String"-->
+                                    <!--*/-->
+                                    <td th:value="${type}" th:name="type" style="display: none" ></td>
+                                </div>
+
+
+
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <center><button type="submit" class="btn btn-primary"></button>
+                                </center>
+                            </div>
+
+
+                        </form>
+
+
+
+
+
+                                </tbody>
+                                <!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+                            </table>
+                            <!--数据列表/-->
+
+                            <!--工具栏-->
+
+                            <!--工具栏/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- .box-footer-->
+
+                    <!-- /.box-footer-->
+
+
+
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+    <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+    <div th:replace="main :: script"></div>
+    <script>
+        function industryChange(val) {
+            if(val=="其他"){
+                document.getElementById("rest").style.display = "block";
+            }else {
+                document.getElementById("rest").style.display = "none";
+            }
+        }
+        document.getElementById('corporate_identity_card_file').onchange = function() {
+            var imgFile = this.files[0];
+            var fr = new FileReader();
+            fr.onload = function() {
+                document.getElementById('corporate_identity_card_image').src = fr.result;
+            };
+            fr.readAsDataURL(imgFile);
+        };
+        document.getElementById('business_license_file').onchange = function() {
+            var imgFile = this.files[0];
+            var fr = new FileReader();
+            fr.onload = function() {
+                document.getElementById('business_license_image').src = fr.result;
+            };
+            fr.readAsDataURL(imgFile);
+        };
+        $(document).ready(function(){
+            var Flag=$("#codeBankName").val();
+            //alert(Flag);
+            //根据值让option选中
+            if(Flag=="中国工商银行"){
+                $("#bankName option[value='"+Flag+"']").attr("selected","selected");
+            }else if(Flag=="中国建设银行"){
+                $("#bankName option[value='"+Flag+"']").attr("selected","selected");
+            }else if(Flag=="中国农业银行") {
+                $("#bankName option[value='" + Flag + "']").attr("selected", "selected");
+            }
+        });
+    </script>
+</body>
+
+</html>
