@@ -80,7 +80,6 @@ public class RegisterController {
             enterpriseInformation.setCorporateIdentityCardImg(SaveUploadUtils.getSaveDirFile(cIFile, SaveUploadUtils.IDENTITY_CARD));
         }
         enterpriseInformationService.saveEnterpriseInformation(enterpriseInformation);
-        enterpriseInformation.setType("企业");
         moldel.setViewName("/all-admin-login");
         moldel.addObject("msg","注册成功!审核通过后方可登录");
         return moldel;

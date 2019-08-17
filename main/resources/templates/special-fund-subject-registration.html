@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>
+                    新增专项资金
+                    <small></small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active"></li>
+                </ol>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <!-- .box-body -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">列表</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form role="form" th:action="@{/registerPersonal}" method="post" enctype="multipart/form-data">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label >专项资金名称</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label >专项资金代码</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="number">
+                                </div>
+                                <div class="form-group">
+                                    <label >业务咨询</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="consultPersonalName">
+                                </div>
+                                <div class="form-group">
+                                    <label >开始时间</label>
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="startDate">
+                                </div>
+                                <div class="form-group">
+                                    <label >结束时间</label>
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="endDate">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <center><button type="submit" class="btn btn-primary">提交</button>
+                                <button type="button" class="btn btn-primary">重置</button></center>
+                            </div>
+
+
+                        </form>
+
+
+
+
+
+                                </tbody>
+                                <!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+                            </table>
+                            <!--数据列表/-->
+
+                            <!--工具栏-->
+
+                            <!--工具栏/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- .box-footer-->
+
+                    <!-- /.box-footer-->
+
+
+                </div>
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+    <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+
+    <div th:replace="main :: script"></div>
+</body>
+
+</html>
