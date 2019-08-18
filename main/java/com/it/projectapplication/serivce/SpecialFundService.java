@@ -12,10 +12,14 @@ public class SpecialFundService {
     @Autowired
     SpecialFundDao specialFundDao;
     public Page<SpecialFund> findSpecialFunds(Pageable pageable){
-        SpecialFund specialFund=specialFundDao.findAll(pageable);
+        Page<SpecialFund> page=specialFundDao.findAll(pageable);
         return page;
     }
     public void save(SpecialFund specialFund){
         specialFundDao.save(specialFund);
+    }
+    public SpecialFund findSpecialFundByName(String name){
+        SpecialFund specialFund=specialFundDao.findSpecialFundByName(name);
+        return specialFund;
     }
 }

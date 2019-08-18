@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "special_project")
-public class SpecialProject implements java.io.Serializable{
+public class SpecialProject implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,21 +17,23 @@ public class SpecialProject implements java.io.Serializable{
     private String batch;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date startTime;
+    private Date startDate;
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date stopTime;
+    private Date stopDate;
 
     @ManyToOne
-    @JoinColumn(name = "project_fund_id",referencedColumnName = "id")
-    private SpecialProject specialProject;
+    @JoinColumn(name = "project_fund_id", referencedColumnName = "id")
+    private SpecialFund specialFund;
 
-    private Integer typeNumber;
+    private Integer declareSubject;
 
     private String undertakLetterFile;
 
-    private Integer type;
+    private String state;
+
+    private String declareExplain;
 
     public Long getId() {
         return id;
@@ -57,24 +59,36 @@ public class SpecialProject implements java.io.Serializable{
         this.batch = batch;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public SpecialProject getSpecialProject() {
-        return specialProject;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public void setSpecialProject(SpecialProject specialProject) {
-        this.specialProject = specialProject;
+    public Date getStopDate() {
+        return stopDate;
     }
 
-    public Integer getTypeNumber() {
-        return typeNumber;
+    public void setStopDate(Date stopDate) {
+        this.stopDate = stopDate;
     }
 
-    public void setTypeNumber(Integer typeNumber) {
-        this.typeNumber = typeNumber;
+    public SpecialFund getSpecialFund() {
+        return specialFund;
+    }
+
+    public void setSpecialFund(SpecialFund specialFund) {
+        this.specialFund = specialFund;
+    }
+
+    public Integer getDeclareSubject() {
+        return declareSubject;
+    }
+
+    public void setDeclareSubject(Integer declareSubject) {
+        this.declareSubject = declareSubject;
     }
 
     public String getUndertakLetterFile() {
@@ -85,23 +99,19 @@ public class SpecialProject implements java.io.Serializable{
         this.undertakLetterFile = undertakLetterFile;
     }
 
-    public Integer getType() {
-        return type;
+    public String getState() {
+        return state;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setState(String state) {
+        this.state = state;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
+    public String getDeclareExplain() {
+        return declareExplain;
     }
 
-    public Date getStopTime() {
-        return stopTime;
-    }
-
-    public void setStopTime(Date stopTime) {
-        this.stopTime = stopTime;
+    public void setDeclareExplain(String declareExplain) {
+        this.declareExplain = declareExplain;
     }
 }

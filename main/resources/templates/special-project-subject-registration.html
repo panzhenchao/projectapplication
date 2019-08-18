@@ -21,7 +21,7 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    新增专项资金
+                    新增专项项目
                     <small></small>
                 </h1>
                 <ol class="breadcrumb">
@@ -41,34 +41,62 @@
                     </div>
 
                     <div class="box-body">
-                        <form role="form" th:action="@{/successAddFund}" method="post" enctype="multipart/form-data">
+                        <form role="form" th:action="@{/successAddSpecialProject}" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label >专项资金名称</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="name">
+                                    <label >所属行业</label>
+                                    <select class="form-control" th:name="year">
+                                        <option>2019</option>
+                                        <option>2020</option>
+                                        <option>2021</option>
+                                        <option>2022</option>
+                                        <option>2023</option>
+                                        <option>2024</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label >专项资金代码</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="number">
-                                </div>
-                                <div class="form-group">
-                                    <label >业务咨询</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="consultPersonalName">
+                                    <label >任务批次</label>
+                                    <input type="text" class="form-control"  placeholder="" th:name="batch">
                                 </div>
                                 <div class="form-group">
                                     <label >开始时间</label>
-                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="startDate">
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="startTime">
                                 </div>
                                 <div class="form-group">
                                     <label >结束时间</label>
-                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="stopDate">
+                                    <input type="date" th:data="date" class="form-control"  placeholder="" th:name="stopTime">
                                 </div>
                             </div>
+                            <div class="col-md-2 title">申报主体</div>
+                            <div class="col-md-10 data line-height36">
+                                <div class="form-group form-inline">
+                                    <div class="checkbox"><label><input type="checkbox" th:value="1" name="checkBox"> 企业</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="2" name="checkBox">农业专业合作社</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="4" name="checkBox"> 家庭农场</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="8" name="checkBox"> 行政村</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="16" name="checkBox"> 乡镇部门</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="32" name="checkBox"> 主管部门</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="64" name="checkBox"> 个人</label></div>
+                                    <div class="checkbox"><label><input type="checkbox" th:value="128" name="checkBox"> 其他</label></div>
+                                    <input type="hidden" name="checkBox">
+                                </div>
+                            </div>
+                            <div class="col-md-12 data rowHeight2x">
+                                <label >申报说明</label>
+                                <textarea class="form-control" rows="3" placeholder="请输入..." th:name="declareExplain"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label >承诺书</label>
+                                <input type="file" class="form-control"  placeholder="" th:name="undertakLetterDateFile">
+                                <input type="text" class="form-control" style="display:none"  th:name="fundName" th:value="${fundName}">
+                            </div>
+
                             <!-- /.box-body -->
 
                             <div class="box-footer">
                                 <center><button type="submit" class="btn btn-primary">提交</button>
                                 <button type="button" class="btn btn-primary">重置</button></center>
+
                             </div>
 
 

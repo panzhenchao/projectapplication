@@ -1,15 +1,17 @@
 package com.it.projectapplication.controller;
 
 import com.it.projectapplication.domain.SpecialFund;
+import com.it.projectapplication.domain.SpecialProject;
 import com.it.projectapplication.serivce.SpecialFundService;
+import com.it.projectapplication.serivce.SpecialProjectService;
 import com.it.projectapplication.utils.JwtTokenUtils;
+import com.it.projectapplication.utils.SaveUploadUtils;
+import com.it.projectapplication.utils.StringSplit;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,35 +19,32 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class SpecialManageController {
     @Autowired
+    SpecialFundController specialFundController;
+    @Autowired
+    SpecialProjectService specialProjectService;
+    @Autowired
     SpecialFundService specialFundService;
-    @RequestMapping(value = "/specialFundMange")
-    public ModelAndView specialFundMange(ModelAndView model, HttpServletRequest request, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size){
+    @RequestMapping(value = "/addSpecialProject")
+    public ModelAndView addSpecialProject(ModelAndView model, HttpServletRequest request, @RequestParam("fundName") String fundName){
         String token= JwtTokenUtils.getToken(request);
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
-        Pageable pageable=new PageRequest(page-1,size);
-        Page<SpecialFund> sPage=specialFundService.findSpecialFunds(pageable);
-        model.addObject("totalElements",sPage.getTotalElements());
-        model.addObject("list",sPage.getContent());
-
-        model.addObject("totalPages",sPage.getTotalPages());
-        model.addObject("size",size);
-        model.addObject("currentPage",sPage.getNumber()+1);
-        model.setViewName("department-of-manger-special-fund-mange");
+        model.addObject("fundName",fundName);
+        model.setViewName("special-project-subject-registration");
         return model;
     }
-    @RequestMapping(value = "addSpecialFund")
-    public ModelAndView addSpecialFund(ModelAndView model,HttpServletRequest request){
-        String token= JwtTokenUtils.getToken(request);
-        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
-        model.setViewName("special-fund-subject-registration.html");
-        return model;
-    }
-    @RequestMapping(value = "addSpecialFund")
-    public ModelAndView addSpecialFundProject(ModelAndView model, HttpServletRequest request, SpecialFund specialFund){
-        String token= JwtTokenUtils.getToken(request);
-        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
-        specialFundMange(model,request, 1,5);
-        model.setViewName("department-of-manger-special-fund-mange");
+    @RequestMapping(value ="/successAddSpecialProject")
+    public ModelAndView successSpecialProject(ModelAndView model, HttpServletRequest request, SpecialProject specialProject,@RequestParam("undertakLetterDateFile") MultipartFile file,@RequestParam("checkBox") String checkBox,@RequestParam("fundName") String fundName){
+       if(null==checkBox){
+           specialProject.setDeclareSubject(0);
+       }else {
+           specialProject.setDeclareSubject(StringSplit.stringSplit(checkBox));
+       }
+        SpecialFund specialFund=specialFundService.findSpecialFundByName(fundName);
+        specialProject.setUndertakLetterFile(SaveUploadUtils.getSaveDirFile(file,SaveUploadUtils.SPECIAL_PROJECT_PAPER));
+        specialProject.setSpecialFund(specialFund);
+        specialProject.setState("0");
+        specialProjectService.saveSpecialProject(specialProject);
+        specialFundController.specialManage(model,request,1,5);
         return model;
     }
 

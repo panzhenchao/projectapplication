@@ -28,14 +28,12 @@ public class SpecialFund implements java.io.Serializable{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date stopDate;
 
-    private int declareSubject;
 
-    private String declareExplain;
 
-    @OneToMany(mappedBy = "specialProject")
+    @OneToMany(mappedBy = "specialFund" )
     private Set<SpecialProject> specialProjects=new HashSet<SpecialProject>(0);
 
-    private Integer type;
+
 
     public Long getId() {
         return id;
@@ -79,22 +77,7 @@ public class SpecialFund implements java.io.Serializable{
 
 
 
-
-    public int getDeclareSubject() {
-        return declareSubject;
-    }
-
-    public void setDeclareSubject(int declareSubject) {
-        this.declareSubject = declareSubject;
-    }
-
-    public String getDeclareExplain() {
-        return declareExplain;
-    }
-
-    public void setDeclareExplain(String declareExplain) {
-        this.declareExplain = declareExplain;
-    }
+    
 
     public Set<SpecialProject> getSpecialProjects() {
         return specialProjects;
@@ -104,13 +87,7 @@ public class SpecialFund implements java.io.Serializable{
         this.specialProjects = specialProjects;
     }
 
-    public Integer getType() {
-        return type;
-    }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
 
     public Date getStartDate() {
         return startDate;

@@ -23,11 +23,11 @@
             <section class="content-header">
                 <h1>
                     主管部门
-                    <small>专项资金管理</small>
+                    <small>专项项目管理</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                    <li class="active">专项资金管理</li>
+                    <li class="active">专项项目管理</li>
                 </ol>
             </section>
             <!-- 内容头部 /-->
@@ -50,9 +50,8 @@
                             <div class="pull-left">
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
-
-                                        <a th:href="addSpecialFund"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 新增竞争性专项项目</button></a>
-                                        <button type="button" class="btn btn-default" title="删除"><i class="fa fa-check"></i> 删除</button>
+                                        <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 新增</button>
+                                        <button type="button" class="btn btn-default" title="导入" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 导入</button>
 
 
                                     </div>
@@ -65,50 +64,67 @@
                                 </div>
                             </div>
 
-
                             <!--工具栏/-->
 
                             <!--数据列表-->
-                            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-                                <thead>
+                            <div>
+                                <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                                    <thead>
                                     <tr>
-                                        <th class="" style="padding-right:0px;">
-                                            <input id="selall" type="checkbox" class="icheckbox_square-blue">
-                                        </th>
-                                        <th class="sorting_asc">ID</th>
                                         <th class="sorting">专项资金名称</th>
-                                        <th class="sorting">专项资金代号</th>
-                                        <th class="sorting">申报情况</th>
-                                        <th class="sorting">业务咨询</th>
+                                        <th class="sorting">专项项目名称</th>
+                                        <th class="sorting">状态</th>
                                         <th class="sorting">开始时间</th>
                                         <th class="sorting">结束时间</th>
-
                                         <th class="text-center">操作</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <!--@thymesVar id="list" type="List<com.it.projectapplication.domain.SpecialFund>"-->
+                                    <tbody th:each="specialFund,iterStat : ${list}">
+                                    <tr>
 
-                                <!--@thymesVar id="list" type="List<com.it.projectapplication.domain.SpecialFund>"-->
-                                    <tr th:each="specialFund,iterStat : ${list}">
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td th:text="${iterStat.count}">
-
-                                        </td>
                                         <!--@thymesVar id="name" type="String"-->
                                         <td th:text="${specialFund.name}">农业设施建设</td>
-                                        <td th:text="${specialFund.number}">0000001</td>
+                                        <td ></td>
                                         <td th:if="${specialFund.state=='0'}">以结束</td>
                                         <td th:if="${specialFund.state=='1'}">进行中</td>
-                                        <td th:text="${specialFund.consultPersonalName}">xxxx</td>
                                         <td th:value="${#dates.format(specialFund.startDate, 'yyyy-MM-dd')}">2019/10/2</td>
                                         <td th:value="${#dates.format(specialFund.stopDate, 'yyyy-MM-dd')}">2019/12/10</td>
 
+                                        <td class="text-center">
+
+                                            <a th:href="@{/addSpecialProject(fundName=${specialFund.name})}"><button type="button" class="btn bg-olive btn-xs">新增项目</button></a>
+                                        </td>
+                                        </tr>
+                                    </tr>
+
+                                    <tr th:each="specialProject,iterStat : ${specialFund.specialProjects}">
+                                        <!--@thymesVar id="name" type="String"-->
+                                        <td ></td>
+                                        <td th:text="|${specialProject.year}${specialProject.batch}|">2015第一批</td>
+                                        <td th:if="${specialProject.state=='0'}">以结束</td>
+                                        <td th:if="${specialProject.state=='1'}">进行中</td>
+                                        <td th:value="${#dates.format(specialProject.startDate, 'yyyy-MM-dd')}">2019/10/2</td>
+                                        <td th:value="${#dates.format(specialProject.stopDate, 'yyyy-MM-dd')}">2019/12/10</td>
                                         <td class="text-center">
                                             <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>编辑</button>
                                             <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>删除</button>
 
                                         </td>
                                     </tr>
+                                    </tbody>
+                                    <!--
+                                <tfoot>
+                                <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                                </tr>
+                                </tfoot>-->
+                                </table>
+                            </div>
                                 </tbody>
                                 <!--
                             <tfoot>
@@ -129,19 +145,18 @@
 
                         </div>
                         <!-- 数据表格 /-->
+                        <div th:replace="enterprise-order-manage-list :: page"><div>
 
 
                     </div>
                     <!-- /.box-body -->
 
                     <!-- .box-footer-->
-             <div th:replace="enterprise-order-manage-list :: page">
 
-                   </div>
                     <!-- /.box-footer-->
 
 
-
+                </div>
 
             </section>
             <!-- 正文区域 /-->
@@ -155,8 +170,9 @@
 
     </div>
 
-
     <div th:replace="main :: script"></div>
+
+
 </body>
 
 </html>
