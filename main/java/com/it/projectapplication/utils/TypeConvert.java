@@ -2,7 +2,7 @@ package com.it.projectapplication.utils;
 
 import java.util.List;
 
-public class TypeConvert {
+public class  TypeConvert {
     public final static Integer ENTERPRISE_NUMBER=1;
     public final static Integer COOPERATION_NUMBER=2;
     public final static Integer HOME_FARM_NUMBER=4;

@@ -1,6 +1,7 @@
 package com.it.projectapplication.controller;
 
 import com.it.projectapplication.domain.SpecialFund;
+import com.it.projectapplication.serivce.ManagerInformationService;
 import com.it.projectapplication.serivce.SpecialFundService;
 import com.it.projectapplication.utils.JwtTokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 public class SpecialFundController {
     @Autowired
     SpecialFundService specialFundService;
+    @Autowired
+    ManagerInformationService managerInformationService;
     @RequestMapping(value = "/specialFundMange")
     public ModelAndView specialFundMange(ModelAndView model, HttpServletRequest request, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size){
         String token= JwtTokenUtils.getToken(request);
@@ -26,7 +29,6 @@ public class SpecialFundController {
         Page<SpecialFund> sPage=specialFundService.findSpecialFunds(pageable);
         model.addObject("totalElements",sPage.getTotalElements());
         model.addObject("list",sPage.getContent());
-
         model.addObject("totalPages",sPage.getTotalPages());
         model.addObject("size",size);
         model.addObject("currentPage",sPage.getNumber()+1);
@@ -45,6 +47,7 @@ public class SpecialFundController {
         String token= JwtTokenUtils.getToken(request);
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         specialFund.setState("0");
+        specialFund.setDepartmentName(managerInformationService.findManagerInformationByUserName(JwtTokenUtils.getUsername(token)).getDepartment());
         specialFundService.save(specialFund);
         specialFundMange(model,request, 1,5);
         model.setViewName("department-of-manger-special-fund-mange");

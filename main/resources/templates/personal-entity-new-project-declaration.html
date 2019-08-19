@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="main :: head"></div>
@@ -78,32 +79,32 @@
 
                         <div class="tab-content">
                             <!--label显示的内容-->
-
+                            <!--@thymesVar id="user" type="com.it.projectapplication.domain.PersonalInformation"-->
                             <div class="tab-pane" id="tab-declaration-form">
                                 <div class="row data-type">
                                     <div class="col-md-2 title">实施主主体</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="实施主主体可以修改" value="">
+                                        <input type="text" class="form-control" placeholder="实施主主体可以修改"  th:text="${user.name}">
                                     </div>
                                     <div class="col-md-2 title">联系人</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取可以修改" value="">
+                                        <input type="text" class="form-control" placeholder="自动获取可以修改" value=""  th:text="${user.username}" th:if="${user.username!=null}">
                                     </div>
                                     <div class="col-md-2 title">联系方式</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="可以修改" value="">
+                                        <input type="text" class="form-control" placeholder="可以修改" value=""  th:text="${user.phone}">
                                     </div>
                                     <div class="col-md-2 title">项目主管部门</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="专项中获取" value="">
+                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:text="${specialProject.specilafund.department}">
                                     </div>
                                     <div class="col-md-2 title">项目名称</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="污染防治项目" value="">
+                                        <input type="text" class="form-control" placeholder="污染防治项目" value="" th:text="${specialProject.specilafund.name}">
                                     </div>
                                     <div class="col-md-2 title">项目编码</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动生成（年月日）" value="">
+                                        <input type="text" class="form-control" placeholder="自动生成（年月日）" value="" >
                                     </div>
 
 
@@ -115,7 +116,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="dateTimePicker">
+                                            <input type="text" class="form-control pull-right"  th:value="${#dates.format(specialProject.startDate, 'yyyy-MM-dd')}">
                                         </div>
                                     </div>
                                     <div class="col-md-2 title">结束时间</div>
@@ -124,7 +125,8 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input type="text" class="form-control pull-right" id="dateTimePicker1">
+                                            <input type="text" class="form-control pull-right"  th:value="${#dates.format(specialProject.stopDate, 'yyyy-MM-dd')}">
+
                                         </div>
                                     </div>
                                     <div class="col-md-2 title">项目级次</div>

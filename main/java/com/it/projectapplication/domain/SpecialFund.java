@@ -33,6 +33,8 @@ public class SpecialFund implements java.io.Serializable{
     @OneToMany(mappedBy = "specialFund" )
     private Set<SpecialProject> specialProjects=new HashSet<SpecialProject>(0);
 
+    private String departmentName;
+
 
 
     public Long getId() {
@@ -103,5 +105,13 @@ public class SpecialFund implements java.io.Serializable{
 
     public void setStopDate(Date stopDate) {
         this.stopDate = stopDate;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 }

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <!-- @@master = admin-layout.html-->
+        <!-- @@block = content -->
+
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>
+                    实施主体
+                    <small>新增项目申报</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li><a href="#"></a></li>
+                    <li class="active">新增项目申报</li>
+                </ol>
+                <div class="pull-right-container">
+                    <div class="form-group form-inline">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 保存到草稿</button>
+                            <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 申报</button>
+                            <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 返回</button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+
+                <div class="box-body">
+
+
+                    <!--tab页-->
+                    <div class="nav-tabs-custom">
+
+                        <!--tab头-->
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab-declaration-form" data-toggle="tab">项目主信息</a>
+                            </li>
+                            <li>
+                                <a href="#tab-exploiting-entity" data-toggle="tab">实施单位信息</a>
+                            </li>
+                            <li>
+                                <a href="#tab-fund-information" data-toggle="tab">资金信息</a>
+                            </li>
+                            <li>
+                                <a href="#tab-material-attachment" data-toggle="tab">材料附件</a>
+                            </li>
+
+                        </ul>
+                        <!--tab头/-->
+
+                        <!--tab内容-->
+
+                        <div class="tab-content">
+                            <!--label显示的内容-->
+                            <!--@thymesVar id="user" type="com.it.projectapplication.domain.EnterpriseInformation"-->
+                            <div class="tab-pane" id="tab-declaration-form">
+                                <div class="row data-type">
+                                    <div class="col-md-2 title">实施主主体</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="实施主主体可以修改"  th:text="${user.username}">
+                                    </div>
+                                    <div class="col-md-2 title">联系人</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取可以修改" value=""  th:text="${user.companyContact}">
+
+                                    </div>
+                                    <div class="col-md-2 title">联系方式</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="可以修改" value=""  th:text="${user.phone}">
+                                    </div>
+                                    <!--@thymesVar id="specialProject" type="com.it.projectapplication.domain.SpecialProject"-->
+                                    <!--@thymesVar id="specialFund" type="com.it.projectapplication.domain.SpecialFund"-->
+                                    <div class="col-md-2 title">项目主管部门</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:text="${specialProject.specialFund.departmentName}">
+                                    </div>
+                                    <div class="col-md-2 title">项目名称</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="污染防治项目" value="" th:text="${specialProject.specialFund.name}">
+                                    </div>
+                                    <div class="col-md-2 title">项目编码</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动生成（年月日）" value="" >
+                                    </div>
+
+
+
+
+                                    <div class="col-md-2 title">开始时间</div>
+                                    <div class="col-md-4 data">
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right"  th:value="${#dates.format(specialProject.startDate, 'yyyy-MM-dd')}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 title">结束时间</div>
+                                    <div class="col-md-4 data">
+                                        <div class="input-group date">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-calendar"></i>
+                                            </div>
+                                            <input type="text" class="form-control pull-right"  th:value="${#dates.format(specialProject.stopDate, 'yyyy-MM-dd')}">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 title">项目级次</div>
+                                    <div class="col-md-4 data">
+                                        <select class="form-control">
+                                            <option>中央</option>
+                                            <option>省</option>
+                                            <option>市</option>
+                                            <option>县</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 title">项目属性</div>
+                                    <div class="col-md-4 data">
+                                        <select class="form-control">
+                                            <option>扩建</option>
+                                            <option>新建</option>
+                                            <option>改造</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 title">补贴方式</div>
+                                    <div class="col-md-10 data">
+                                        <div class="form-group form-inline">
+                                            <div class="radio"><label><input type="radio" name="optionsRadios" value="1"> 补助</label></div>
+                                            <div class="radio"><label><input type="radio" name="optionsRadios" value="2"> 贴息</label></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 title">项目地点</div>
+                                    <div class="col-md-2 data">
+                                        <input type="text" class="form-control" placeholder="桐乡" value="">
+                                    </div>
+                                    <div class="col-md-3 data">
+                                        <select class="form-control">
+                                            <option>中央</option>
+                                            <option>省</option>
+                                            <option>市</option>
+                                            <option>县</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 title">乡镇</div>
+
+                                    <div class="col-md-3 data">
+                                        <select class="form-control">
+                                            <option>中央</option>
+                                            <option>省</option>
+                                            <option>市</option>
+                                            <option>县</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-1 title">村</div>
+
+
+                                    <div class="col-md-2 title rowHeight2x">项目基本情况简介</div>
+                                    <div class="col-md-10 data rowHeight2x">
+                                        <textarea class="form-control" rows="3" placeholder="请输入..."></textarea>
+                                    </div>
+                                    <div class="col-md-2 title rowHeight2x">建设方案</div>
+                                    <div class="col-md-10 data rowHeight2x">
+                                        <textarea class="form-control" rows="3" placeholder=""></textarea>
+                                    </div>
+
+
+
+                        </div>
+                            </div>
+
+                            <!--label显示的内容/-->
+
+                            <!--实施单位信息-->
+                                <div class="tab-pane" id="tab-exploiting-entity">
+                                    <div class="row data-type">
+                                        <div class="col-md-2 title">实施主主体</div>
+                                        <div class="col-md-4 data">
+                                            <input type="text" class="form-control" placeholder="实施主主体可以修改" value="">
+                                        </div>
+                                        <div class="col-md-2 title">联系人</div>
+                                        <div class="col-md-4 data">
+                                            <input type="text" class="form-control" placeholder="自动获取可以修改" value="">
+                                        </div>
+                                        <div class="col-md-2 title">联系方式</div>
+                                        <div class="col-md-4 data">
+                                            <input type="text" class="form-control" placeholder="可以修改" value="">
+                                        </div>
+                                        <div class="col-md-2 title">项目主管部门</div>
+                                        <div class="col-md-4 data">
+                                            <input type="text" class="form-control" placeholder="专项中获取" value="">
+                                        </div>
+                                        <div class="col-md-2 title">项目名称</div>
+                                        <div class="col-md-4 data">
+                                            <input type="text" class="form-control" placeholder="污染防治项目" value="">
+                                        </div>
+                                        <div class="col-md-2 title">项目编码</div>
+                                        <div class="col-md-4 data">
+                                            <input type="text" class="form-control" placeholder="自动生成（年月日）" value="">
+                                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <div class="col-md-2 title"></div>
+
+                                    </div>
+                                </div>
+
+                            <!--实施单位信息/-->
+
+                            <!--资金信息-->
+                                <div class="tab-pane" id="tab-fund-information">
+                                <div class="row data-type">
+                                    <div class="col-md-2 title">中央财政</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">省级财政</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">市级财政</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">县级财政</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">项目单位投入</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">银行贷款</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">其他投入</div>
+                                    <div class="col-md-4 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title"></div>
+                                    <div class="col-md-4 title">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+
+                                    </div>
+                                    <div class="col-md-2 title">总投资</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-2 title">申请财政补助</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                    </div>
+                                    <div class="col-md-10 data text">
+
+                                        <button type="button" class="btn bg-default" onclick="">新增资金支持环节</button>
+                                        <button type="button" class="btn bg-default" onclick="">删除</button>
+                                    </div>
+
+                                    <table id="dataList1" class="table table-bordered table-striped table-hover dataTable">
+
+                                        <thead>
+                                        <tr>
+                                            <th class="" style="padding-right:0px;">
+                                                <input id="selall1" type="checkbox" class="icheckbox_square-blue">
+                                            </th>
+                                            <th class="sorting">序列号</th>
+                                            <th class="sorting_asc">建设内容名称</th>
+                                            <th class="sorting">单价</th>
+                                            <th class="sorting">数量</th>
+                                            <th class="sorting">投资额</th>
+
+
+
+                                            <th class="sorting">申请金额</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+
+
+                                        <tr>
+                                            <td><input name="ids" type="checkbox"></td>
+                                            <td>
+                                                1
+                                            </td>
+                                            <td>建设内容1</td>
+
+                                            <td>100</td>
+                                            <td>20</td>
+                                            <td>2000</td>
+                                            <td>100</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><input name="ids" type="checkbox"></td>
+                                            <td>
+                                                2
+                                            </td>
+                                            <td>建设内容2</td>
+
+                                            <td>100</td>
+                                            <td>20</td>
+                                            <td>2000</td>
+                                            <td>100</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+
+                                            </td>
+                                            <td>合计</td>
+
+                                            <td>200</td>
+                                            <td>40</td>
+                                            <td>4000</td>
+                                            <td>200</td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+                            <!--资金信息/-->
+
+                            <!--材料附件-->
+
+
+                            <div class="tab-pane" id="tab-material-attachment">
+                                <div class="col-md-10 data text">
+
+                                    <button type="button" class="btn bg-default" onclick="">新增</button>
+                                    <button type="button" class="btn bg-default" onclick="">删除</button>
+                                </div>
+                                <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+
+                                <thead>
+                                <tr>
+                                    <th class="" style="padding-right:0px;">
+                                        <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                                    </th>
+                                    <th class="sorting">材料名称</th>
+                                    <th class="sorting_asc">是否已上传</th>
+                                    <th class="sorting">附件大小</th>
+                                    <th class="text-center">附件操作</th>
+
+
+
+                                    <th class="text-center">模板操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+
+
+                                <tr>
+                                    <td><input name="ids" type="checkbox"></td>
+                                    <td>
+                                       附件
+                                    </td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td class="text-center">
+
+                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>上传</button>
+                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>删除</button>
+
+
+
+                                    </td>
+
+                                    <td class="text-center">
+
+                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>查看</button>
+                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>下载</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                </table>
+
+                            </div>
+
+                            <!--材料附件/-->
+
+                            <!--意见-->
+
+                            <!--意见/-->
+
+
+
+                        </div>
+                        <!--tab内容/-->
+
+                    </div>
+                    <!--tab页/-->
+
+
+                    <!-- .box-footer
+        <div class="box-footer"></div>
+        -->
+                    <!-- /.box-footer-->
+
+                </div>
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- @@close -->
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+        <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+
+    <div th:replace="main :: script"></div>
+</body>
+
+</html>

@@ -2,12 +2,11 @@ package com.it.projectapplication;
 
 import com.it.projectapplication.dao.PermissionDao;
 import com.it.projectapplication.dao.RoleDao;
+import com.it.projectapplication.dao.SpecialProjectDao;
 import com.it.projectapplication.dao.UserDao;
-import com.it.projectapplication.domain.Permission;
-import com.it.projectapplication.domain.PersonalInformation;
-import com.it.projectapplication.domain.Role;
-import com.it.projectapplication.domain.User;
+import com.it.projectapplication.domain.*;
 import com.it.projectapplication.serivce.PersonalInformationService;
+import com.it.projectapplication.serivce.SpecialProjectService;
 import com.it.projectapplication.serivce.UserService;
 import com.it.projectapplication.utils.JwtTokenUtils;
 import org.junit.Test;
@@ -40,6 +39,10 @@ public class ProjectapplicationApplicationTests {
     UserService service;
     @Autowired
     PersonalInformationService personalInformationService;
+    @Autowired
+    SpecialProjectDao specialProjectDao;
+    @Autowired
+    SpecialProjectService specialProjectService;
     @Test
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
@@ -104,6 +107,14 @@ public class ProjectapplicationApplicationTests {
         Page<PersonalInformation> page=personalInformationService.findPersonalInformationByaddressAndPageble("%灵安镇%",pageable);
         System.out.println(page.getTotalElements());
         System.out.println(page.getContent());
+    }
+    @Test
+    public  void testTypeNumber(){
+        List<SpecialProject> specialProjects=specialProjectService.findListByDeclareSubject(1);
+        System.out.println(specialProjects.size());
+        for (SpecialProject specialProject:specialProjects){
+            System.out.println(specialProject.getYear());
+        }
     }
 
 

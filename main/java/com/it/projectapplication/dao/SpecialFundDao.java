@@ -12,4 +12,5 @@ public interface  SpecialFundDao extends PagingAndSortingRepository<SpecialFund,
     public SpecialFund findSpecialFundByName(String name);
 
 
+
 }

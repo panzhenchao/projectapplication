@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="main :: head"></div>
@@ -69,71 +70,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
-
-
-                                    <tr>
+                                <!--@thymesVar id="specialProjects" type="List<com.it.projectapplication.domain.SpecialProject>"-->
+                                <!--@thymesVar id="specialProject" type="com.it.projectapplication.domain.SpecialProject"-->
+                                <tr th:each="specialProject,iterStat : ${specialProjects}">
                                         <td><input name="ids" type="checkbox"></td>
-                                        <td>
+                                        <td th:text="${iterStat.count}">
                                             1
                                         </td>
-                                        <td>农业设施建设</td>
-                                        <td>0000001</td>
-                                        <td>进行中</td>
-                                        <td>182xxxxxx</td>
-                                        <td>2019/10/2</td>
-                                        <td>2019/12/10</td>
+                                        <td th:text="${specialProject.specialFund.name}" >农业设施建设</td>
+                                        <td th:text="${specialProject.specialFund.number}">0000001</td>
+                                        <td >进行中</td>
+                                        <td th:text="${specialProject.specialFund.departmentName}" ></td>
+                                        <td th:value="${#dates.format(specialProject.specialFund.startDate, 'yyyy-MM-dd')}">2019/10/2</td>
+                                        <td th:value="${#dates.format(specialProject.specialFund.stopDate, 'yyyy-MM-dd')}">2019/12/10</td>
 
+                                        <td></td>
                                         <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>申报</button>
+                                            <a th:href="@{/addProjectDeclare(specialProjectId=${specialProject.id})}"><button type="button" class="btn bg-olive btn-xs">申报</button></a>
                                             <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看附件</button>
 
                                         </td>
                                     </tr>
-
-
-                                    <tr>
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>农业设施建设</td>
-                                        <td>0000001</td>
-                                        <td>进行中</td>
-                                        <td>182xxxxxx</td>
-                                        <td>2019/10/2</td>
-                                        <td>2019/12/10</td>
-
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>申报</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看附件</button>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                 </tbody>
                                 <!--
