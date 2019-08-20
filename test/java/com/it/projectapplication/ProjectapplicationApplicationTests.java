@@ -9,6 +9,7 @@ import com.it.projectapplication.serivce.PersonalInformationService;
 import com.it.projectapplication.serivce.SpecialProjectService;
 import com.it.projectapplication.serivce.UserService;
 import com.it.projectapplication.utils.JwtTokenUtils;
+import com.it.projectapplication.utils.ProjectNumberUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,6 +116,16 @@ public class ProjectapplicationApplicationTests {
         for (SpecialProject specialProject:specialProjects){
             System.out.println(specialProject.getYear());
         }
+    }
+    @Test
+    public void testProjectNumber(){
+       Long a= ProjectNumberUtils.getProjectNumber(null);
+       System.out.println(a);
+    }
+    @Test
+    public  void testfindMaxId(){
+        Long id =userDao.findMaxId();
+        System.out.println(id);
     }
 
 

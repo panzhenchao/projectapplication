@@ -36,8 +36,8 @@
                 <div class="pull-right-container">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 保存到草稿</button>
-                            <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 申报</button>
+                            <button type="button" class="btn btn-default" title="新增" onclick="submit();"><i class="fa fa-check"></i> 保存到草稿</button>
+                            <button type="button" class="btn btn-default" title="删除" onclick="submit();"><i class="fa fa-check"></i> 申报</button>
                             <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 返回</button>
 
 
@@ -76,38 +76,39 @@
                         <!--tab头/-->
 
                         <!--tab内容-->
-
-                        <div class="tab-content">
+                        <form th:action="@{/saveProjectDeclare}" method="post" enctype="multipart/form-data" id="form">
+                        <div class="tab-content" >
                             <!--label显示的内容-->
                             <!--@thymesVar id="user" type="com.it.projectapplication.domain.EnterpriseInformation"-->
                             <div class="tab-pane" id="tab-declaration-form">
                                 <div class="row data-type">
                                     <div class="col-md-2 title">实施主主体</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="实施主主体可以修改"  th:text="${user.username}">
+                                        <input type="text" class="form-control" placeholder="实施主主体可以修改"  th:value="${user.username}">
                                     </div>
                                     <div class="col-md-2 title">联系人</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取可以修改" value=""  th:text="${user.companyContact}">
+                                        <input type="text" class="form-control" placeholder="自动获取可以修改" value=""  th:value="${user.companyContact}">
 
                                     </div>
                                     <div class="col-md-2 title">联系方式</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="可以修改" value=""  th:text="${user.phone}">
+                                        <input type="text" class="form-control" placeholder="可以修改" value=""  th:value="${user.phone}">
                                     </div>
                                     <!--@thymesVar id="specialProject" type="com.it.projectapplication.domain.SpecialProject"-->
                                     <!--@thymesVar id="specialFund" type="com.it.projectapplication.domain.SpecialFund"-->
                                     <div class="col-md-2 title">项目主管部门</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:text="${specialProject.specialFund.departmentName}">
+                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:value="${specialProject.specialFund.departmentName}">
                                     </div>
                                     <div class="col-md-2 title">项目名称</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="污染防治项目" value="" th:text="${specialProject.specialFund.name}">
+                                        <input type="text" class="form-control" placeholder="污染防治项目" value="" th:value="${specialProject.specialFund.name}">
                                     </div>
+                                    <!--@thymesVar id="project" type="com.it.projectapplication.domain.Project"-->
                                     <div class="col-md-2 title">项目编码</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动生成（年月日）" value="" >
+                                        <input type="text" class="form-control"  value="" th:value="${project.number}">
                                     </div>
 
 
@@ -115,22 +116,14 @@
 
                                     <div class="col-md-2 title">开始时间</div>
                                     <div class="col-md-4 data">
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right"  th:value="${#dates.format(specialProject.startDate, 'yyyy-MM-dd')}">
-                                        </div>
+
+
+                                            <input type="date" th:data="date" class="form-control pull-right"  th:value="${#dates.format(specialProject.startDate, 'yyyy-MM-dd')}">
+
                                     </div>
                                     <div class="col-md-2 title">结束时间</div>
                                     <div class="col-md-4 data">
-                                        <div class="input-group date">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right"  th:value="${#dates.format(specialProject.stopDate, 'yyyy-MM-dd')}">
-
-                                        </div>
+                                            <input type="date" th:data="date" class="form-control pull-right"  th:value="${#dates.format(specialProject.stopDate, 'yyyy-MM-dd')}">
                                     </div>
                                     <div class="col-md-2 title">项目级次</div>
                                     <div class="col-md-4 data">
@@ -158,28 +151,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2 title">项目地点</div>
-                                    <div class="col-md-2 data">
-                                        <input type="text" class="form-control" placeholder="桐乡" value="">
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="详细到村" value="">
                                     </div>
-                                    <div class="col-md-3 data">
-                                        <select class="form-control">
-                                            <option>中央</option>
-                                            <option>省</option>
-                                            <option>市</option>
-                                            <option>县</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1 title">乡镇</div>
 
-                                    <div class="col-md-3 data">
-                                        <select class="form-control">
-                                            <option>中央</option>
-                                            <option>省</option>
-                                            <option>市</option>
-                                            <option>县</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-1 title">村</div>
 
 
                                     <div class="col-md-2 title rowHeight2x">项目基本情况简介</div>
@@ -225,19 +200,6 @@
                                         <div class="col-md-4 data">
                                             <input type="text" class="form-control" placeholder="自动生成（年月日）" value="">
                                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
                                         <div class="col-md-2 title"></div>
 
                                     </div>
@@ -250,44 +212,41 @@
                                 <div class="row data-type">
                                     <div class="col-md-2 title">中央财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="stateSubsidy">
                                     </div>
                                     <div class="col-md-2 title">省级财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="provinceSubsidy">
                                     </div>
                                     <div class="col-md-2 title">市级财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="citySubsidy">
                                     </div>
                                     <div class="col-md-2 title">县级财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="countySubsidy">
                                     </div>
                                     <div class="col-md-2 title">项目单位投入</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="unitSubsidy">
                                     </div>
                                     <div class="col-md-2 title">银行贷款</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="bankLoan">
                                     </div>
                                     <div class="col-md-2 title">其他投入</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="otherSubsidy">
                                     </div>
-                                    <div class="col-md-2 title"></div>
-                                    <div class="col-md-4 title">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
-
-                                    </div>
+                                    <div class="col-md-6 title"></div>
+                                   
                                     <div class="col-md-2 title">总投资</div>
                                     <div class="col-md-10 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="totalINvestment">
                                     </div>
                                     <div class="col-md-2 title">申请财政补助</div>
                                     <div class="col-md-10 data">
-                                        <input type="text" class="form-control" placeholder="自动获取" value="">
+                                        <input type="text" class="form-control" placeholder="0" value="" th:name="totalSubsidy">
                                     </div>
                                     <div class="col-md-10 data text">
 
@@ -307,9 +266,6 @@
                                             <th class="sorting">单价</th>
                                             <th class="sorting">数量</th>
                                             <th class="sorting">投资额</th>
-
-
-
                                             <th class="sorting">申请金额</th>
                                         </tr>
                                         </thead>
@@ -437,7 +393,7 @@
 
                         </div>
                         <!--tab内容/-->
-
+                        </form>
                     </div>
                     <!--tab页/-->
 
@@ -464,6 +420,11 @@
 
 
     <div th:replace="main :: script"></div>
+<script>
+    function submit(){
+        $("#form").onsubmit;
+    }
+</script>
 </body>
 
 </html>

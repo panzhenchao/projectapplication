@@ -1,11 +1,9 @@
 package com.it.projectapplication.controller;
 
-import com.it.projectapplication.domain.EnterpriseInformation;
-import com.it.projectapplication.domain.PersonalInformation;
-import com.it.projectapplication.domain.SpecialProject;
-import com.it.projectapplication.domain.User;
+import com.it.projectapplication.domain.*;
 import com.it.projectapplication.serivce.*;
 import com.it.projectapplication.utils.JwtTokenUtils;
+import com.it.projectapplication.utils.ProjectNumberUtils;
 import com.it.projectapplication.utils.TypeConvert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +27,9 @@ public class ProjectDeclareController {
 
     @Autowired
     PersonalInformationService personalInformationService;
+    @Autowired
+    ProjectService projectService;
+
     @RequestMapping(value = "/projectDeclare")
     public ModelAndView projectDeclare(ModelAndView model, HttpServletRequest request){
         String token= JwtTokenUtils.getToken(request);
@@ -64,6 +65,18 @@ public class ProjectDeclareController {
             model.setViewName("personal-entity-new-project-declaration");
 
         }
+        Project project=new Project();
+        project.setSpecialProject(specialProject);
+        Long maxNumber=projectService.findMaxNumber();
+        project.setNumber(ProjectNumberUtils.getProjectNumber(maxNumber));
+        project.setUser(user);
+        projectService.save(project);
+        model.addObject("project",project);
+        return model;
+    }
+    @RequestMapping(value = "/saveProjectDeclare")
+    public ModelAndView savePorjectDeclare(ModelAndView model,HttpServletRequest request,Project project){
+        System.out.println(project.getNumber());
         return model;
     }
 }

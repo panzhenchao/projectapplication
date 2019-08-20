@@ -4,6 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "special_project")
@@ -34,6 +36,9 @@ public class SpecialProject implements java.io.Serializable {
     private String state;
 
     private String declareExplain;
+
+    @OneToMany(mappedBy = "specialProject")
+    private Set<Project> projects=new HashSet<>(0);
 
     public Long getId() {
         return id;

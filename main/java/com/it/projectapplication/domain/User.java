@@ -26,6 +26,10 @@ public class User {
     @Column(name = "user_category")
     private String category;
 
+
+    @OneToMany(mappedBy = "user")
+    private  Set<Project> projects =new HashSet<>(0);
+
     public Long getId() {
         return id;
     }
@@ -74,15 +78,11 @@ public class User {
         this.category = category;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", roles=" + roles +
-                ", state='" + state + '\'' +
-                ", category='" + category + '\'' +
-                '}';
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
     }
 }
