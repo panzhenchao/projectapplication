@@ -119,4 +119,12 @@ public class SpecialProject implements java.io.Serializable {
     public void setDeclareExplain(String declareExplain) {
         this.declareExplain = declareExplain;
     }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -29,7 +30,8 @@ public class ProjectDeclareController {
     PersonalInformationService personalInformationService;
     @Autowired
     ProjectService projectService;
-
+    @Autowired
+    ProjectLibraryController projectLibraryController;
     @RequestMapping(value = "/projectDeclare")
     public ModelAndView projectDeclare(ModelAndView model, HttpServletRequest request){
         String token= JwtTokenUtils.getToken(request);
@@ -77,6 +79,14 @@ public class ProjectDeclareController {
     @RequestMapping(value = "/saveProjectDeclare")
     public ModelAndView savePorjectDeclare(ModelAndView model,HttpServletRequest request,Project project){
         System.out.println(project.getNumber());
+        model.setViewName("all-project-application-list");
+        Project oldProject=projectService.findProjectById(project.getId());
+        project.setUser(oldProject.getUser());
+        project.setSpecialProject(oldProject.getSpecialProject());
+        Date date=new Date(System.currentTimeMillis());
+        project.setSubmitDate(date);
+        projectService.save(project);
+        projectLibraryController.projectLibrary(model,request);
         return model;
     }
 }

@@ -15,6 +15,8 @@ public class Project implements java.io.Serializable{
 
     private Long number;
 
+    private String name;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
@@ -28,7 +30,8 @@ public class Project implements java.io.Serializable{
 
     private Integer grade;
 
-    private String property;
+    private Integer property;
+
 
     private String address;
 
@@ -97,6 +100,10 @@ public class Project implements java.io.Serializable{
     @JoinColumn(name = "project_user_id", referencedColumnName = "user_id")
     private User user;
 
+    private String companyContact;
+
+    private String phone;
+
 
 
     public Long getId() {
@@ -155,11 +162,11 @@ public class Project implements java.io.Serializable{
         this.grade = grade;
     }
 
-    public String getProperty() {
+    public Integer getProperty() {
         return property;
     }
 
-    public void setProperty(String property) {
+    public void setProperty(Integer property) {
         this.property = property;
     }
 
@@ -417,5 +424,29 @@ public class Project implements java.io.Serializable{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCompanyContact() {
+        return companyContact;
+    }
+
+    public void setCompanyContact(String companyContact) {
+        this.companyContact = companyContact;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

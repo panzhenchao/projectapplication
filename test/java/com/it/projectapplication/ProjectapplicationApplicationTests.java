@@ -1,9 +1,6 @@
 package com.it.projectapplication;
 
-import com.it.projectapplication.dao.PermissionDao;
-import com.it.projectapplication.dao.RoleDao;
-import com.it.projectapplication.dao.SpecialProjectDao;
-import com.it.projectapplication.dao.UserDao;
+import com.it.projectapplication.dao.*;
 import com.it.projectapplication.domain.*;
 import com.it.projectapplication.serivce.PersonalInformationService;
 import com.it.projectapplication.serivce.SpecialProjectService;
@@ -22,6 +19,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -44,6 +42,10 @@ public class ProjectapplicationApplicationTests {
     SpecialProjectDao specialProjectDao;
     @Autowired
     SpecialProjectService specialProjectService;
+    @Autowired
+    ProjectDao projectDao;
+
+
     @Test
     @Transactional  //开启事务
     @Rollback(false)//设置为不回滚
@@ -124,8 +126,13 @@ public class ProjectapplicationApplicationTests {
     }
     @Test
     public  void testfindMaxId(){
-        Long id =userDao.findMaxId();
-        System.out.println(id);
+        Date date=new Date(System.currentTimeMillis());
+        System.out.println(date);
+    }
+    @Test
+    public  void testfindss(){
+        User user=userDao.findUserByUsername("admin");
+        List<Project> list=projectDao.findProjectsByUser(user);
     }
 
 
