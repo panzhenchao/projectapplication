@@ -1,6 +1,7 @@
 package com.it.projectapplication.dao;
 
 import com.it.projectapplication.domain.Project;
+import com.it.projectapplication.domain.SpecialProject;
 import com.it.projectapplication.domain.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -15,5 +16,9 @@ public interface ProjectDao extends PagingAndSortingRepository<Project,Long> {
 
     public List<Project> findProjectsByUser(User user);
 
-    public List<Project> findProjectsByAddressIsLike(String address);
+    public List<Project> findProjectsByAddressIsLikeAndSpecialProjectAndState(String address, SpecialProject specialProject,Integer state);
+
+    public  List<Project> findProjectsByVillageDepartmentStateAndSpecialProject(Integer VillageDepartmentState,SpecialProject specialProject);
+
+
 }

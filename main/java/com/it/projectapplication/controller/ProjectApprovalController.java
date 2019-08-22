@@ -46,7 +46,7 @@ public class ProjectApprovalController {
             List<SpecialFund> specialFundList=sPage.getContent();
             for(SpecialFund specialFund:specialFundList){
                 for(SpecialProject specialProject:specialFund.getSpecialProjects()){
-                    List list=projectService.findProjectsByAddressIsLike("%"+managerInformation.getDepartment()+"%");
+                    List list=projectService.findProjectsByAddressIsLikeAndSpecialProjectAndState("%"+managerInformation.getDepartment()+"%",specialProject,1);
                     Set<Project> projects=new HashSet<>(list);
                     specialProject.setProjects(projects);
                 }
@@ -56,18 +56,96 @@ public class ProjectApprovalController {
             model.addObject("totalPages",sPage.getTotalPages());
             model.addObject("size",size);
             model.addObject("currentPage",sPage.getNumber()+1);
+            model.addObject("villageUsername",usernmae);
             model.setViewName("department-of-village-project-manage");
+        }else if("主管部门".equals(user.getCategory())){
+            ManagerInformation managerInformation =managerInformationService.findManagerInformationByUserName(usernmae);
+            Pageable pageable=new PageRequest(page-1,size);
+            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartment(),pageable);
+            List<SpecialFund> specialFundList=ePage.getContent();
+            for(SpecialFund specialFund:specialFundList){
+                for(SpecialProject specialProject:specialFund.getSpecialProjects()){
+                    List list=projectService.findProjectsByVillageDepartmentStateAndSpecialProject(1,specialProject);
+                    Set<Project> projects=new HashSet<>(list);
+                    specialProject.setProjects(projects);
+                }
+            }
+            model.addObject("totalElements",ePage.getTotalElements());
+            model.addObject("list",ePage.getContent());
+            model.addObject("totalPages",ePage.getTotalPages());
+            model.addObject("size",size);
+            model.addObject("currentPage",ePage.getNumber()+1);
+            model.addObject("manageName",usernmae);
+            model.setViewName("department-of-manage-project-manage");
+
+
         }
         return model;
     }
-    public ModelAndView villageProjectApproval(ModelAndView model, HttpServletRequest request,@RequestParam("projectId") Long projectId){
+    @RequestMapping(value = "/departmentProjectApproval")
+    public ModelAndView departmentProjectApproval(ModelAndView model, HttpServletRequest request,@RequestParam("projectId") Long projectId,@RequestParam("method") String method){
         String token= JwtTokenUtils.getToken(request);
         String usernmae=JwtTokenUtils.getUsername(token);
+        User user=userService.findUserByUsername(usernmae);
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         Project project=projectService.findProjectById(projectId);
         model.addObject("project",project);
-        model.setViewName("department-of-village-exaim-enterprise-declaration");
+        if("乡镇部门".equals(user.getCategory())) {
+            if ("edit".equals(method)) {
+                model.setViewName("department-of-village-exaim-enterprise-declaration");
+            } else if ("check".equals(method)) {
+                model.setViewName("department-of-village-check-enterprise-declaration");
+            }
+        }else if("主管部门".equals(user.getCategory())){
+            if ("edit".equals(method)) {
+                model.setViewName("department-of-manage-exaim-enterprise-declaration");
+            } else if ("check".equals(method)) {
+                model.setViewName("department-of-village-check-enterprise-declaration");
+            }
+        }
+
+
         return model;
 
     }
+    @RequestMapping(value = "/changeVillageState")
+    public ModelAndView villageStateChange(ModelAndView model,HttpServletRequest request,@RequestParam("projectId") Long projectId,@RequestParam("villageDepartmentState") Integer villageDepartmentState){
+        Project project=projectService.findProjectById(projectId);
+        String token= JwtTokenUtils.getToken(request);
+        String username=JwtTokenUtils.getUsername(token);
+        project.setVillageName(username);
+        project.setVillageDepartmentState(villageDepartmentState);
+        projectService.save(project);
+        if(1==villageDepartmentState){
+            model.addObject("msg","推荐成功");
+        }
+        else if(2==villageDepartmentState){
+            model.addObject("msg","备选成功");
+        }
+        departmentProjectApproval(model,request,projectId,"edit");
+        return model;
+    }
+    @RequestMapping(value = "/changeManageState")
+    public ModelAndView manageStateChange(ModelAndView model,HttpServletRequest request,@RequestParam("projectId") Long projectId,@RequestParam("manageDepartmentState") Integer manageDepartmentState){
+        Project project=projectService.findProjectById(projectId);
+        String token= JwtTokenUtils.getToken(request);
+        String username=JwtTokenUtils.getUsername(token);
+        project.setManageName(username);
+        project.setManageDepartmentState(manageDepartmentState);
+        projectService.save(project);
+        if(1==manageDepartmentState){
+            model.addObject("msg","通过");
+        }
+        else if(2==manageDepartmentState){
+            model.addObject("msg","备选成功");
+        }else if(3==manageDepartmentState){
+            model.addObject("msg","不受理");
+        }else if(4==manageDepartmentState){
+            model.addObject("msg","退回修改");
+        }
+
+        departmentProjectApproval(model,request,projectId,"edit");
+        return model;
+    }
+
 }

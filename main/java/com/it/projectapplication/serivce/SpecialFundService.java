@@ -22,4 +22,9 @@ public class SpecialFundService {
         SpecialFund specialFund=specialFundDao.findSpecialFundByName(name);
         return specialFund;
     }
+
+    public Page<SpecialFund> findSpecialFundsByDepartment(String depatment,Pageable pageable){
+        Page<SpecialFund> page=specialFundDao.findSpecialFundsByDepartmentNameIsLike(depatment,pageable);
+        return page;
+    }
 }

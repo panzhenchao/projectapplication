@@ -2,6 +2,7 @@ package com.it.projectapplication.serivce;
 
 import com.it.projectapplication.dao.ProjectDao;
 import com.it.projectapplication.domain.Project;
+import com.it.projectapplication.domain.SpecialProject;
 import com.it.projectapplication.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,13 @@ public class ProjectService {
         List<Project> list=projectDao.findProjectsByUser(user);
         return list;
     }
-    public List<Project> findProjectsByAddressIsLike(String address){
-        List<Project> list=projectDao.findProjectsByAddressIsLike(address);
+    public List<Project> findProjectsByAddressIsLikeAndSpecialProjectAndState(String address, SpecialProject specialProject,Integer state){
+        List<Project> list=projectDao.findProjectsByAddressIsLikeAndSpecialProjectAndState(address,specialProject,state);
+        return list;
+    }
+
+    public  List<Project> findProjectsByVillageDepartmentStateAndSpecialProject(Integer villageDepartmentState,SpecialProject specialProject){
+        List<Project> list=projectDao.findProjectsByVillageDepartmentStateAndSpecialProject(villageDepartmentState,specialProject);
         return list;
     }
 

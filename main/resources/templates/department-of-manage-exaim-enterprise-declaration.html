@@ -25,7 +25,7 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    乡镇部门
+                    主管部门
                     <small>项目审核</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -41,8 +41,10 @@
                             <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
                             <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
                             <a ><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 编辑</button></a>
-                            <a th:href="@{/changeVillageState(villageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 推荐</button></a>
-                            <a th:href="@{/changeVillageState(villageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 备选</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 通过</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=2,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 备选</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=3,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 不受理</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=4,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 退回修改</button></a>
                             <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
 
 

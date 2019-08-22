@@ -36,15 +36,6 @@
                 <div class="pull-right-container">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 上一项</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
-                            <a ><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 编辑</button></a>
-                            <a th:href="@{/changeVillageState(villageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 推荐</button></a>
-                            <a th:href="@{/changeVillageState(villageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 备选</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
-
 
                         </div>
                         <spen class="help-block" style="color:red" th:text="${msg}"></spen>
@@ -74,11 +65,12 @@
                             <li>
                                 <a href="#tab-material-attachment" data-toggle="tab">材料附件</a>
                             </li>
+
                         </ul>
                         <!--tab头/-->
 
                         <!--tab内容-->
-                        <form th:action="@{/saveProjectDeclare}" method="post" enctype="multipart/form-data" id="form">
+
                         <div class="tab-content" >
                             <!--label显示的内容-->
                             <!--@thymesVar id="project" type="com.it.projectapplication.domain.EnterpriseInformation"-->
@@ -86,32 +78,32 @@
                                 <div class="row data-type">
                                     <div class="col-md-2 title">实施主主体</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="实施主主体可以修改"  th:value="${project.user.username}" th:name="username">
+                                        <input type="text" class="form-control" placeholder="实施主主体可以修改"  th:value="${project.user.username}" th:name="username" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">联系人</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="自动获取不可修改" value=""  th:value="${project.companyContact}" th:name="companyContact">
+                                        <input type="text" class="form-control" placeholder="自动获取不可修改" value=""  th:value="${project.companyContact}" th:name="companyContact" readonly="readonly">
 
                                     </div>
                                     <div class="col-md-2 title">联系方式</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="可以修改" value=""  th:value="${project.phone}" th:name="phone">
+                                        <input type="text" class="form-control" placeholder="可以修改" value=""  th:value="${project.phone}" th:name="phone" readonly="readonly">
                                     </div>
                                     <!--@thymesVar id="specialProject" type="com.it.projectapplication.domain.SpecialProject"-->
                                     <!--@thymesVar id="specialFund" type="com.it.projectapplication.domain.SpecialFund"-->
                                     <div class="col-md-2 title">项目主管部门</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:valuet="${project.specialProject.specialFund.departmentName}" th:name="departmentName">
+                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:valuet="${project.specialProject.specialFund.departmentName}" th:name="departmentName" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">项目名称</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="污染防治项目"  th:name="name" th:value="${project.name}">
+                                        <input type="text" class="form-control" placeholder="污染防治项目"  th:name="name" th:value="${project.name}" readonly="readonly">
                                     </div>
                                     <!--@thymesVar id="project" type="com.it.projectapplication.domain.Project"-->
                                     <div class="col-md-2 title">项目编码</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control"  value="" th:value="${project.number}" th:name="number">
-                                        <input type="hidden" th:name="id" th:value="${project.id}">
+                                        <input type="text" class="form-control"  value="" th:value="${project.number}" th:name="number" readonly="readonly">
+                                        <input type="hidden" th:name="id" th:value="${project.id}" readonly="readonly">
                                     </div>
 
 
@@ -121,16 +113,16 @@
                                     <div class="col-md-4 data">
 
 
-                                            <input type="date" th:data="date" class="form-control pull-right"   th:name="startDate" th:text="${#dates.format(project.startDate, 'yyyy-MM-dd')}">
+                                            <input type="date" th:data="date" class="form-control pull-right"   th:name="startDate" th:text="${#dates.format(project.startDate, 'yyyy-MM-dd')}" readonly="readonly">
 
                                     </div>
                                     <div class="col-md-2 title">结束时间</div>
                                     <div class="col-md-4 data">
-                                            <input type="date" th:data="date" class="form-control pull-right" th:name="stopDate" th:text="${#dates.format(project.stopDate, 'yyyy-MM-dd')}">
+                                            <input type="date" th:data="date" class="form-control pull-right" th:name="stopDate" th:text="${#dates.format(project.stopDate, 'yyyy-MM-dd')}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">项目级次</div>
                                     <div class="col-md-4 data">
-                                        <select class="form-control" th:name="grade">
+                                        <select class="form-control" th:name="grade" readonly="readonly">
                                             <option value="1"  th:selected="${project.grade==1}">中央</option>
                                             <option value="2" th:selected="${project.grade==2}">省</option>
                                             <option value="3" th:selected="${project.grade==3}">市</option>
@@ -140,7 +132,7 @@
                                     </div>
                                     <div class="col-md-2 title">项目属性</div>
                                     <div class="col-md-4 data">
-                                        <select class="form-control" th:name="property">
+                                        <select class="form-control" th:name="property" readonly="readonly">
                                             <option value="1" th:selected="${project.grade==1}">扩建</option>
                                             <option value="2" th:selected="${project.grade==2}">新建</option>
                                             <option value="3" th:selected="${project.grade==3}">改造</option>
@@ -148,25 +140,25 @@
                                     </div>
                                     <div class="col-md-2 title">补贴方式</div>
                                     <div class="col-md-10 data">
-                                        <div class="form-group form-inline" th:name="subsidyMethod">
+                                        <div class="form-group form-inline" th:name="subsidyMethod" readonly="readonly">
                                             <div class="radio"><label><input type="radio" name="optionsRadios" value="1" th:selected="${project.subsidyMethod==1}"> 补助</label></div>
                                             <div class="radio"><label><input type="radio" name="optionsRadios" value="2" th:selected="${project.subsidyMethod==2}"> 贴息</label></div>
                                         </div>
                                     </div>
                                     <div class="col-md-2 title">项目地点</div>
                                     <div class="col-md-10 data">
-                                        <input type="text" class="form-control" placeholder="详细到村" value="" th:name="address" th:value="${project.address}">
+                                        <input type="text" class="form-control" placeholder="详细到村" value="" th:name="address" th:value="${project.address}" readonly="readonly">
                                     </div>
 
 
 
                                     <div class="col-md-2 title rowHeight2x">项目基本情况简介</div>
                                     <div class="col-md-10 data rowHeight2x">
-                                        <textarea class="form-control" rows="3" placeholder="请输入..." th:name="introduction" th:text="${project.introduction}"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="请输入..." th:name="introduction" th:text="${project.introduction}" readonly="readonly"></textarea>
                                     </div>
                                     <div class="col-md-2 title rowHeight2x">建设方案</div>
                                     <div class="col-md-10 data rowHeight2x">
-                                        <textarea class="form-control" rows="3" placeholder="" th:name="scheme" th:text="${project.scheme}"></textarea>
+                                        <textarea class="form-control" rows="3" placeholder="" th:name="scheme" th:text="${project.scheme}" readonly="readonly"></textarea>
                                     </div>
 
 
@@ -215,41 +207,41 @@
                                 <div class="row data-type">
                                     <div class="col-md-2 title">中央财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="stateSubsidy" th:value="${project.stateSubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="stateSubsidy" th:value="${project.stateSubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">省级财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="provinceSubsidy" th:value="${project.provinceSubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="provinceSubsidy" th:value="${project.provinceSubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">市级财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="citySubsidy" th:value="${project.citySubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="citySubsidy" th:value="${project.citySubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">县级财政</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="countySubsidy" th:value="${project.countySubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="countySubsidy" th:value="${project.countySubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">项目单位投入</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="unitSubsidy" th:value="${project.unitSubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="unitSubsidy" th:value="${project.unitSubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">银行贷款</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="bankLoan" th:value="${project.bankLoan}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="bankLoan" th:value="${project.bankLoan}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">其他投入</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="otherSubsidy" th:value="${project.otherSubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="otherSubsidy" th:value="${project.otherSubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-6 title"></div>
                                    
                                     <div class="col-md-2 title">总投资</div>
                                     <div class="col-md-10 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="totalINvestment" th:value="${project.totalINvestment}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="totalINvestment" th:value="${project.totalINvestment}" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">申请财政补助</div>
                                     <div class="col-md-10 data">
-                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="totalSubsidy" th:value="${project.totalSubsidy}">
+                                        <input type="text" class="form-control" placeholder="0" value="0" th:name="totalSubsidy" th:value="${project.totalSubsidy}" readonly="readonly">
                                     </div>
                                     <div class="col-md-10 data text">
 
@@ -396,7 +388,7 @@
 
                         </div>
                         <!--tab内容/-->
-                        </form>
+
                     </div>
                     <!--tab页/-->
 
