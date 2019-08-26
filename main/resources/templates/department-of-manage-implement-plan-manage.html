@@ -23,11 +23,11 @@
             <section class="content-header">
                 <h1>
                     主管部门
-                    <small>项目审核</small>
+                    <small>实施计划管理</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                    <li class="active">项目审核</li>
+                    <li class="active">实施计划管理</li>
                 </ol>
             </section>
             <!-- 内容头部 /-->
@@ -128,9 +128,8 @@
 
                                         <td class="text-center">
                                             <a th:href="@{/departmentProjectApproval(projectId=${project.id},method='check')}"><button type="button" class="btn bg-olive btn-xs">查看</button></a>
-                                            <a th:href="@{/departmentProjectApproval(projectId=${project.id},method='edit')}" th:if="${project.manageName}==${manageName}"><button type="button" class="btn bg-olive btn-xs">审批</button></a>
-                                            <a th:href="@{/departmentProjectApproval(projectId=${project.id},method='edit')}" th:if="${project.manageName==null}"><button type="button" class="btn bg-olive btn-xs">审批</button></a>
-                                            <a th:href="@{/departmentProjectApproval(projectId=${project.id},method='edit')}" th:if="${project.manageName==''}"><button type="button" class="btn bg-olive btn-xs">审批</button></a>
+                                            <a><button type="button" class="btn bg-olive btn-xs">提交</button></a>
+
                                         </td>
 
                                     </tr>
