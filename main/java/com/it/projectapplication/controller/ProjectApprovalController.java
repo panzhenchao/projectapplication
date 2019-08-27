@@ -138,6 +138,7 @@ public class ProjectApprovalController {
         projectService.save(project);
         if(1==manageDepartmentState){
             model.addObject("msg","通过");
+            project.setManageDepartmentPlanState(0);
         }
         else if(2==manageDepartmentState){
             model.addObject("msg","备选成功");
@@ -186,8 +187,9 @@ public class ProjectApprovalController {
         String token= JwtTokenUtils.getToken(request);
         String username=JwtTokenUtils.getUsername(token);
         Project project=projectService.findProjectById(projectId);
-        project.setFundDepartmentState(1);
+        project.setManageDepartmentPlanState(1);
         projectService.save(project);
+        planManager(model,request,page,size);
         return model;
     }
 

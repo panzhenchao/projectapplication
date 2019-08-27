@@ -63,6 +63,8 @@ public class Project implements java.io.Serializable{
 
     private Integer manageDepartmentState;
 
+    private Integer manageDepartmentPlanState;
+
     private  Integer fundDepartmentState;
 
     private  String villageName;
@@ -448,5 +450,13 @@ public class Project implements java.io.Serializable{
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public Integer getManageDepartmentPlanState() {
+        return manageDepartmentPlanState;
+    }
+
+    public void setManageDepartmentPlanState(Integer manageDepartmentPlanState) {
+        this.manageDepartmentPlanState = manageDepartmentPlanState;
     }
 }
