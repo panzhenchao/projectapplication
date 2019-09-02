@@ -22,5 +22,7 @@ public interface ProjectDao extends PagingAndSortingRepository<Project,Long> {
 
     public List<Project> findProjectsByManageDepartmentStateAndSpecialProject(Integer manageDepartmentState,SpecialProject specialProject);
 
+    public List<Project> findProjectsByManageDepartmentPlanStateAndSpecialProject(Integer manageDepartmentPlanState,SpecialProject specialProject);
+
 
 }

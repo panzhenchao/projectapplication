@@ -157,9 +157,11 @@ public class ProjectApprovalController {
         String username=JwtTokenUtils.getUsername(token);
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         User user=userService.findUserByUsername(username);
+        ManagerInformation managerInformation =managerInformationService.findManagerInformationByUserName(username);
+        Pageable pageable=new PageRequest(page-1,size);
+
         if("主管部门".equals(user.getCategory())){
-            ManagerInformation managerInformation =managerInformationService.findManagerInformationByUserName(username);
-            Pageable pageable=new PageRequest(page-1,size);
+
             Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartment(),pageable);
             List<SpecialFund> specialFundList=ePage.getContent();
             for(SpecialFund specialFund:specialFundList){
@@ -170,19 +172,37 @@ public class ProjectApprovalController {
                     specialProject.setProjects(projects);
                 }
             }
+            model.setViewName("department-of-manage-implement-plan-manage");
+            model.addObject("totalElements",ePage.getTotalElements());
+            model.addObject("list",ePage.getContent());
+            model.addObject("totalPages",ePage.getTotalPages());
+            model.addObject("size",size);
+            model.addObject("currentPage",ePage.getNumber()+1);
+
+        }
+        else if("财政部门".equals(user.getCategory())){
+            Page<SpecialFund> ePage=specialFundService.findSpecialFunds(pageable);
+            List<SpecialFund> specialFundList=ePage.getContent();
+            for(SpecialFund specialFund:specialFundList){
+                for(SpecialProject specialProject:specialFund.getSpecialProjects()){
+                    List list=projectService.findProjectsByManageDepartmentPlanStateAndSpecialProject(1,specialProject);
+                    Set<Project> projects=new TreeSet<>(new MyCompartor());
+                    projects.addAll(list);
+                    specialProject.setProjects(projects);
+                }
+            }
+            model.setViewName("department-of-finance-implement-plan-manage");
             model.addObject("totalElements",ePage.getTotalElements());
             model.addObject("list",ePage.getContent());
             model.addObject("totalPages",ePage.getTotalPages());
             model.addObject("size",size);
             model.addObject("currentPage",ePage.getNumber()+1);
             model.addObject("manageName",username);
-            model.setViewName("department-of-manage-implement-plan-manage");
-
         }
         return model;
 
     }
-    @RequestMapping(value = "/changeFundState")
+    @RequestMapping(value = "/changeManagePlanState")
     public ModelAndView fundStateChange(ModelAndView model ,HttpServletRequest request, @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5" )Integer size,@RequestParam("projectId") Long projectId){
         String token= JwtTokenUtils.getToken(request);
         String username=JwtTokenUtils.getUsername(token);
@@ -192,6 +212,7 @@ public class ProjectApprovalController {
         planManager(model,request,page,size);
         return model;
     }
+
 
 
 }

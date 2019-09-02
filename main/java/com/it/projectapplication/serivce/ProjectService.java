@@ -44,5 +44,9 @@ public class ProjectService {
         return list;
 
     }
+    public List<Project> findProjectsByManageDepartmentPlanStateAndSpecialProject(Integer managePlanState,SpecialProject specialProject){
+        List<Project> list=projectDao.findProjectsByManageDepartmentPlanStateAndSpecialProject(managePlanState,specialProject);
+        return list;
+    }
 
 }

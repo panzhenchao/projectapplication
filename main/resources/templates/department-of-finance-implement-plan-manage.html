@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <div th:replace="main :: head"></div>
@@ -21,12 +22,12 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    财政人员
-                    <small>实施计划管理</small>
+                    主管部门
+                    <small>项目审核</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                    <li class="active">实施计划管理</li>
+                    <li class="active">项目审核</li>
                 </ol>
             </section>
             <!-- 内容头部 /-->
@@ -50,8 +51,9 @@
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 新增</button>
+                                        <button type="button" class="btn btn-default" title="导入" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 导入</button>
 
-                                        <button type="button" class="btn btn-default" title="移除" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 移除</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -65,211 +67,89 @@
                             <!--工具栏/-->
 
                             <!--数据列表-->
-                            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-                                <thead>
+                            <div>
+                                <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                                    <thead>
                                     <tr>
-                                        <th class="" style="padding-right:0px;">
-                                            <input id="selall" type="checkbox" class="icheckbox_square-blue">
-                                        </th>
-                                        <th class="sorting_asc">ID</th>
                                         <th class="sorting">项目名称</th>
                                         <th class="sorting">实施单位</th>
                                         <th class="sorting">乡镇</th>
                                         <th class="sorting">主管部门</th>
                                         <th class="sorting">提交时间</th>
-                                        <th class="sorting">截止时间</th>
+                                        <th class="sorting">申请截止时间</th>
                                         <th class="sorting">状态</th>
                                         <th class="text-center">操作</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <!--@thymesVar id="list" type="List<com.it.projectapplication.domain.SpecialFund>"-->
+                                    <tbody>
+                                    <span th:each="specialFund,iterStat : ${list}">
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>农业污染</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+
+                                        <!--@thymesVar id="name" type="String"-->
+                                        <td th:text="${specialFund.name}">农业设施建设</td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
 
                                         <td class="text-center">
                                         </td>
                                     </tr>
+                                    <!--@thymesVar id="specialProject" type="com.it.projectapplication.domain.SpecialProject"-->
+                                    <span th:each="specialProject,iterStat : ${specialFund.specialProjects}">
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>--2005年第1批</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <!--@thymesVar id="name" type="String"-->
+                                        <td  th:text="|${specialProject.year}${specialProject.batch}|">2019第一批</td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
+                                        <td ></td>
                                         <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>重传会议记录</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>公布</button>
+                                            <a><button type="button" class="btn bg-olive btn-xs">重传会议记录</button></a>
+                                            <a><button type="button" class="btn bg-olive btn-xs">公布</button></a>
                                         </td>
                                     </tr>
-
-
-
-                                    <tr>
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td>
-                                            1
+                                    <!--@thymesVar id="project" type="com.it.projectapplication.domain.Project"-->
+                                    <tr  th:each="project,iterStat : ${specialProject.projects}">
+                                        <td th:text="${project.name}"></td>
+                                        <td th:text="${project.user.username}"></td>
+                                        <td th:text="${project.villageName}"></td>
+                                        <td th:text="${project.manageName}"></td>
+                                        <td th:text="${#dates.format(project.submitDate, 'yyyy-MM-dd')}"></td>
+                                        <td th:text="${#dates.format(specialProject.stopDate, 'yyyy-MM-dd')}"></td>
+                                        <td >
+                                            <a th:if="${project.fundDepartmentState==0}">待审核</a>
+                                            <a th:if="${project.fundDepartmentState==1}">已公布</a>
+                                            <a th:if="${project.fundDepartmentState==2}">备选</a>
+                                            <a th:if="${project.fundDepartmentState==3}">预选</a>
+                                            <a th:if="${project.fundDepartmentState==4}">退回修改</a>
                                         </td>
-                                        <td>污染防治项目1</td>
-                                        <td>公司1</td>
-                                        <td>乡镇1</td>
-                                        <td>农业局部门1</td>
-                                        <td>2019/09/02</td>
-                                        <td>2019/09/10</td>
-                                        <td>备选</td>
-
 
                                         <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看详情</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>操作记录</button>
-
+                                            <a th:href="@{/departmentProjectApproval(projectId=${project.id},method='check')}"><button type="button" class="btn bg-olive btn-xs">查看详情</button></a>
+                                            <a><button type="button" class="btn bg-olive btn-xs">操作记录</button></a>
                                         </td>
+
                                     </tr>
 
-
-                                    <tr>
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>污染防治项目2</td>
-                                        <td>公司2</td>
-                                        <td>乡镇1</td>
-                                        <td>农业局部门1</td>
-                                        <td>2019/09/02</td>
-                                        <td>2019/09/10</td>
-                                        <td>待审核</td>
-
-
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看详情</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>操作记录</button>
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>污染防治项目3</td>
-                                        <td>公司1</td>
-                                        <td>乡镇1</td>
-                                        <td>农业局部门1</td>
-                                        <td>2019/09/02</td>
-                                        <td>2019/09/10</td>
-                                        <td>以公布</td>
-
-
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看详情</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>操作记录</button>
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>菜篮子工程</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-
-                                        <td class="text-center">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td>--2005年第1批</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>重传会议记录</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>公布</button>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>污染防治项目5</td>
-                                        <td>公司3</td>
-                                        <td>乡镇1</td>
-                                        <td>农业局部门1</td>
-                                        <td>2019/09/02</td>
-                                        <td>2019/09/10</td>
-                                        <td>预选</td>
-
-
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看详情</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>操作记录</button>
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><input name="ids" type="checkbox"></td>
-                                        <td>
-                                            1
-                                        </td>
-                                        <td>污染防治项目3</td>
-                                        <td>公司1</td>
-                                        <td>乡镇1</td>
-                                        <td>农业局部门1</td>
-                                        <td>2019/09/02</td>
-                                        <td>2019/09/10</td>
-                                        <td>以修改</td>
-
-
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>查看详情</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>操作记录</button>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                    </tbody>
+                                    <!--
+                                <tfoot>
+                                <tr>
+                                <th>Rendering engine</th>
+                                <th>Browser</th>
+                                <th>Platform(s)</th>
+                                <th>Engine version</th>
+                                <th>CSS grade</th>
+                                </tr>
+                                </tfoot>-->
+                                </table>
+                            </div>
                                 </tbody>
                                 <!--
                             <tfoot>
@@ -290,45 +170,14 @@
 
                         </div>
                         <!-- 数据表格 /-->
+                        <div th:replace="enterprise-order-manage-list :: page"><div>
 
 
                     </div>
                     <!-- /.box-body -->
 
                     <!-- .box-footer-->
-                    <div class="box-footer">
-                        <div class="pull-left">
-                            <div class="form-group form-inline">
-                                总共2 页，共14 条数据。 每页
-                                <select class="form-control">
-                            <option>10</option>
-                            <option>15</option>
-                            <option>20</option>
-                            <option>50</option>
-                            <option>80</option>
-                        </select> 条
-                            </div>
-                        </div>
 
-                        <div class="box-tools pull-right">
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">首页</a>
-                                </li>
-                                <li><a href="#">上一页</a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">下一页</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">尾页</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
                     <!-- /.box-footer-->
 
 
@@ -347,6 +196,8 @@
     </div>
 
     <div th:replace="main :: script"></div>
+
+
 </body>
 
 </html>
