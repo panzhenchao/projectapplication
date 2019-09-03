@@ -57,6 +57,10 @@ public class Project implements java.io.Serializable{
 
     private BigDecimal totalSubsidy;
 
+    private BigDecimal totalHypothesisSubsidy;
+
+    private BigDecimal totalFactSubsidy;
+
     private Integer state;
 
     private Integer villageDepartmentState;
@@ -458,5 +462,21 @@ public class Project implements java.io.Serializable{
 
     public void setManageDepartmentPlanState(Integer manageDepartmentPlanState) {
         this.manageDepartmentPlanState = manageDepartmentPlanState;
+    }
+
+    public BigDecimal getTotalHypothesisSubsidy() {
+        return totalHypothesisSubsidy;
+    }
+
+    public void setTotalHypothesisSubsidy(BigDecimal totalHypothesisSubsidy) {
+        this.totalHypothesisSubsidy = totalHypothesisSubsidy;
+    }
+
+    public BigDecimal getTotalFactSubsidy() {
+        return totalFactSubsidy;
+    }
+
+    public void setTotalFactSubsidy(BigDecimal totalFactSubsidy) {
+        this.totalFactSubsidy = totalFactSubsidy;
     }
 }
