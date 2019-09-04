@@ -48,5 +48,13 @@ public class ProjectService {
         List<Project> list=projectDao.findProjectsByManageDepartmentPlanStateAndSpecialProject(managePlanState,specialProject);
         return list;
     }
+    public List<Project> findProjectsByManageDepartmentFundPlanStateAndSpecialProject(Integer manageFundPlanState,SpecialProject specialProject){
+        List<Project>list=projectDao.findProjectsByManageDepartmentFundPlanStateAndSpecialProject(manageFundPlanState, specialProject);
+        return list;
+    }
+    public List<Project> findProjectsByCheckStateAndSpecialProject(Integer checkState,SpecialProject specialProject){
+        List<Project> list=projectDao.findProjectsByCheckStateAndSpecialProject(checkState,specialProject);
+        return list;
+    }
 
 }

@@ -212,6 +212,71 @@ public class ProjectApprovalController {
         planManager(model,request,page,size);
         return model;
     }
+    @RequestMapping(value = "/fundPlanChange")
+    public ModelAndView changePlanProjectFund(ModelAndView model,HttpServletRequest request,@RequestParam("projectId") Long projectId){
+        String token= JwtTokenUtils.getToken(request);
+        String username=JwtTokenUtils.getUsername(token);
+        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
+        Project project=projectService.findProjectById(projectId);
+        User user=userService.findUserByUsername(username);
+        model.addObject("project",project);
+        if("财政部门".equals(user.getCategory())){
+            model.setViewName("department-of-finance-fund-plan-fund-change");
+        }
+        else if("主管部门".equals(user.getCategory())){
+        }
+
+        return model;
+    }
+    @RequestMapping(value = "/fundPlanManage")
+    public ModelAndView fundPlanManage(ModelAndView model,HttpServletRequest request,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5" )Integer size){
+        String token= JwtTokenUtils.getToken(request);
+        String username=JwtTokenUtils.getUsername(token);
+        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
+        User user=userService.findUserByUsername(username);
+        Pageable pageable=new PageRequest(page-1,size);
+        ManagerInformation managerInformation =managerInformationService.findManagerInformationByUserName(username);
+        if("财政部门".equals(user.getCategory())){
+            Page<SpecialFund> ePage=specialFundService.findSpecialFunds(pageable);
+            List<SpecialFund> specialFundList=ePage.getContent();
+            for(SpecialFund specialFund:specialFundList){
+                for(SpecialProject specialProject:specialFund.getSpecialProjects()){
+                    List list=projectService.findProjectsByManageDepartmentFundPlanStateAndSpecialProject(1,specialProject);
+                    Set<Project> projects=new TreeSet<>(new MyCompartor());
+                    projects.addAll(list);
+                    specialProject.setProjects(projects);
+                }
+            }
+            model.setViewName("department-of-finance-fund-plan-manage");
+            model.addObject("totalElements",ePage.getTotalElements());
+            model.addObject("list",ePage.getContent());
+            model.addObject("totalPages",ePage.getTotalPages());
+            model.addObject("size",size);
+            model.addObject("currentPage",ePage.getNumber()+1);
+            model.addObject("manageName",username);
+        }
+        else if("主管部门".equals(user.getCategory())){
+            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartment(),pageable);
+            List<SpecialFund> specialFundList=ePage.getContent();
+            for(SpecialFund specialFund:specialFundList){
+                for(SpecialProject specialProject:specialFund.getSpecialProjects()){
+                    List list=projectService.findProjectsByCheckStateAndSpecialProject(1,specialProject);
+                    Set<Project> projects=new TreeSet<>(new MyCompartor());
+                    projects.addAll(list);
+                    specialProject.setProjects(projects);
+                }
+            }
+            model.setViewName("department-of-manager-fund-plan-fund-change");
+            model.addObject("totalElements",ePage.getTotalElements());
+            model.addObject("list",ePage.getContent());
+            model.addObject("totalPages",ePage.getTotalPages());
+            model.addObject("size",size);
+            model.addObject("currentPage",ePage.getNumber()+1);
+
+        }
+
+        return model;
+    }
 
 
 

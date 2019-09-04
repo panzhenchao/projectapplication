@@ -69,11 +69,17 @@ public class Project implements java.io.Serializable{
 
     private Integer manageDepartmentPlanState;
 
+    private Integer manageDepartmentFundPlanState;
+
     private  Integer fundDepartmentState;
+
+    private Integer fundDepartmentFundPlanState;
 
     private  String villageName;
 
     private  String manageName;
+
+    private String fundName;
 
     private  String intermExamineUsername;
 
@@ -478,5 +484,29 @@ public class Project implements java.io.Serializable{
 
     public void setTotalFactSubsidy(BigDecimal totalFactSubsidy) {
         this.totalFactSubsidy = totalFactSubsidy;
+    }
+
+    public Integer getManageDepartmentFundPlanState() {
+        return manageDepartmentFundPlanState;
+    }
+
+    public void setManageDepartmentFundPlanState(Integer manageDepartmentFundPlanState) {
+        this.manageDepartmentFundPlanState = manageDepartmentFundPlanState;
+    }
+
+    public Integer getFundDepartmentFundPlanState() {
+        return fundDepartmentFundPlanState;
+    }
+
+    public void setFundDepartmentFundPlanState(Integer fundDepartmentFundPlanState) {
+        this.fundDepartmentFundPlanState = fundDepartmentFundPlanState;
+    }
+
+    public String getFundName() {
+        return fundName;
+    }
+
+    public void setFundName(String fundName) {
+        this.fundName = fundName;
     }
 }

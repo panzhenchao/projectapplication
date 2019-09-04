@@ -110,7 +110,6 @@
                                         <td ></td>
                                         <td ></td>
                                         <td class="text-center">
-
                                         </td>
                                     </tr>
                                     <!--@thymesVar id="project" type="com.it.projectapplication.domain.Project"-->
@@ -123,7 +122,7 @@
                                         <td th:text="${project.totalHypothesisSubsidy}"></td>
                                         <td th:text="${project.totalFactSubsidy}"></td>
                                         <td class="text-center">
-                                            <a ><button type="button" class="btn bg-olive btn-xs">填写实际补助资金</button></a>
+                                            <a th:href="@{/fundPlanChange(projectId=${project.id},department=2)}"><button type="button" class="btn bg-olive btn-xs">资金设置</button></a>
                                             <a><button type="button" class="btn bg-olive btn-xs">提交</button></a>
                                         </td>
 
