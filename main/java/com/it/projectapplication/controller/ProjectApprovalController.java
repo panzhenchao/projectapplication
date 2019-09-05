@@ -224,6 +224,7 @@ public class ProjectApprovalController {
             model.setViewName("department-of-finance-fund-plan-fund-change");
         }
         else if("主管部门".equals(user.getCategory())){
+            model.setViewName("department-of-manager-fund-plan-fund-change");
         }
 
         return model;
@@ -266,13 +267,12 @@ public class ProjectApprovalController {
                     specialProject.setProjects(projects);
                 }
             }
-            model.setViewName("department-of-manager-fund-plan-fund-change");
+            model.setViewName("department-of-manager-fund-plan-manage");
             model.addObject("totalElements",ePage.getTotalElements());
             model.addObject("list",ePage.getContent());
             model.addObject("totalPages",ePage.getTotalPages());
             model.addObject("size",size);
             model.addObject("currentPage",ePage.getNumber()+1);
-
         }
 
         return model;

@@ -22,7 +22,7 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    财政部门
+                    主管部门
                     <small>资金计划管理</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -78,7 +78,7 @@
                                         <th class="sorting">总投资</th>
                                         <th class="sorting">申请拟补助金额</th>
                                         <th class="sorting">拟补助金额</th>
-                                        <th class="text-center">实际补助金额</th>
+
                                     </tr>
                                     </thead>
                                     <!--@thymesVar id="list" type="List<com.it.projectapplication.domain.SpecialFund>"-->
@@ -108,7 +108,7 @@
                                         <td ></td>
                                         <td ></td>
                                         <td ></td>
-                                        <td ></td>
+
                                         <td class="text-center">
                                         </td>
                                     </tr>
@@ -120,7 +120,6 @@
                                         <td th:text="${project.totalINvestment}"></td>
                                         <td th:text="${project.totalSubsidy}"></td>
                                         <td th:text="${project.totalHypothesisSubsidy}"></td>
-                                        <td th:text="${project.totalFactSubsidy}"></td>
                                         <td class="text-center">
                                             <a th:href="@{/fundPlanChange(projectId=${project.id})}"><button type="button" class="btn bg-olive btn-xs">资金设置</button></a>
                                             <a><button type="button" class="btn bg-olive btn-xs">提交</button></a>
