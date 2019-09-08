@@ -1,7 +1,6 @@
 package com.it.projectapplication.domain;
 
 import javax.persistence.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +21,7 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private Set<Role> roles=new HashSet<Role>(0);
     @Column(name = "user_state")
-    private String state;
+    private Integer state;
     @Column(name = "user_category")
     private String category;
 
@@ -62,11 +61,11 @@ public class User {
         this.roles = roles;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

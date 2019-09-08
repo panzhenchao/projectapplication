@@ -47,7 +47,7 @@ public class SpecialFundController {
         String token= JwtTokenUtils.getToken(request);
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         specialFund.setState("0");
-        specialFund.setDepartmentName(managerInformationService.findManagerInformationByUserName(JwtTokenUtils.getUsername(token)).getDepartment());
+        specialFund.setDepartmentName(managerInformationService.findManagerInformationByUserName(JwtTokenUtils.getUsername(token)).getDepartmentInformation().getDepartmentName());
         specialFundService.save(specialFund);
         specialFundMange(model,request, 1,5);
         model.setViewName("department-of-manger-special-fund-mange");

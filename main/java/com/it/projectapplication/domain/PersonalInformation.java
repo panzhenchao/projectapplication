@@ -30,7 +30,7 @@ public class PersonalInformation implements java.io.Serializable{
 
     private String individualResume;
 
-    private String state;
+    private Integer state;
 
 
     public Long getId() {
@@ -121,11 +121,11 @@ public class PersonalInformation implements java.io.Serializable{
         this.individualResume = individualResume;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 

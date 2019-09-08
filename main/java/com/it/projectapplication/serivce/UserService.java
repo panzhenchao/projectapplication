@@ -23,11 +23,11 @@ public class UserService {
             model.setViewName("/all-admin-login");
             return model;
         }
-        else if ("0".equals(user1.getState())){
+        else if (0==user1.getState()){
             model.addObject("msg","账号未激活");
             model.setViewName("/all-admin-login");
             return model;
-        }else if("1".equals(user1.getState())){
+        }else if(1==user1.getState()){
             model.setViewName("/main");
 
         }return model;
@@ -49,7 +49,7 @@ public class UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.save(user);
     }
-    public String findStateByUsername(String username){
+    public Integer findStateByUsername(String username){
         User user=userDao.findUserByUsername(username);
         return user.getState();
     }

@@ -47,7 +47,7 @@ public class ProjectApprovalController {
             List<SpecialFund> specialFundList=sPage.getContent();
             for(SpecialFund specialFund:specialFundList){
                 for(SpecialProject specialProject:specialFund.getSpecialProjects()){
-                    List list=projectService.findProjectsByAddressIsLikeAndSpecialProjectAndState("%"+managerInformation.getDepartment()+"%",specialProject,1);
+                    List list=projectService.findProjectsByAddressIsLikeAndSpecialProjectAndState("%"+managerInformation.getDepartmentInformation().getDepartmentName()+"%",specialProject,1);
                     Set<Project> projects=new TreeSet<>(new MyCompartor());
                     projects.addAll(list);
                     specialProject.setProjects(projects);
@@ -63,7 +63,7 @@ public class ProjectApprovalController {
         }else if("主管部门".equals(user.getCategory())){
             ManagerInformation managerInformation =managerInformationService.findManagerInformationByUserName(username);
             Pageable pageable=new PageRequest(page-1,size);
-            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartment(),pageable);
+            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartmentInformation().getDepartmentName(),pageable);
             List<SpecialFund> specialFundList=ePage.getContent();
             for(SpecialFund specialFund:specialFundList){
                 for(SpecialProject specialProject:specialFund.getSpecialProjects()){
@@ -162,7 +162,7 @@ public class ProjectApprovalController {
 
         if("主管部门".equals(user.getCategory())){
 
-            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartment(),pageable);
+            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartmentInformation().getDepartmentName(),pageable);
             List<SpecialFund> specialFundList=ePage.getContent();
             for(SpecialFund specialFund:specialFundList){
                 for(SpecialProject specialProject:specialFund.getSpecialProjects()){
@@ -257,7 +257,7 @@ public class ProjectApprovalController {
             model.addObject("manageName",username);
         }
         else if("主管部门".equals(user.getCategory())){
-            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartment(),pageable);
+            Page<SpecialFund> ePage=specialFundService.findSpecialFundsByDepartment(managerInformation.getDepartmentInformation().getDepartmentName(),pageable);
             List<SpecialFund> specialFundList=ePage.getContent();
             for(SpecialFund specialFund:specialFundList){
                 for(SpecialProject specialProject:specialFund.getSpecialProjects()){

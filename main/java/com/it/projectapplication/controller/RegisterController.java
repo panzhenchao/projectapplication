@@ -50,12 +50,12 @@ public class RegisterController {
     }
     @PostMapping("/registerPersonal")
     public ModelAndView registerPersonal(ModelAndView moldel, User user, PersonalInformation personalInformation, @RequestParam("identityCardImgFile") MultipartFile file) throws IOException {
-        user.setState("0");
+        user.setState(0);
         user.setCategory("个人");
 
         personalInformation.setUsername(user.getUsername());
         personalInformation.setIdentityCardImg(RandomUtils.getRandomString()+file.getOriginalFilename());
-        personalInformation.setState("0");
+        personalInformation.setState(0);
         if(null!=file) {
             personalInformation.setIdentityCardImg(SaveUploadUtils.getSaveDirFile(file, SaveUploadUtils.IDENTITY_CARD));
         }
@@ -67,11 +67,11 @@ public class RegisterController {
     }
     @PostMapping("/registerEnterprise")
     public ModelAndView registerEnterprise(ModelAndView moldel, User user, EnterpriseInformation enterpriseInformation, @RequestParam("businessLicenseImgFile")MultipartFile bLFile , @RequestParam("corporateIdentityCardImgFile")MultipartFile cIFile , @RequestParam("industryElse") String industryElse)throws IOException{
-        user.setState("0");
+        user.setState(0);
         user.setCategory("企业");
         userService.saveUser(user);
         enterpriseInformation.setUsername(user.getUsername());
-        enterpriseInformation.setState("0");
+        enterpriseInformation.setState(0);
         if(null!=industryElse){
             enterpriseInformation.setIndustry(industryElse);
         }

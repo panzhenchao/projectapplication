@@ -59,7 +59,7 @@ public class EnterpriseInformation implements java.io.Serializable{
 
     private String type;
 
-    private String state;
+    private Integer state;
 
     public Long getId() {
         return id;
@@ -245,11 +245,11 @@ public class EnterpriseInformation implements java.io.Serializable{
         this.type = type;
     }
 
-    public String getState() {
+    public Integer getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Integer state) {
         this.state = state;
     }
 }

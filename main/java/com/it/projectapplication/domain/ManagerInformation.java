@@ -24,15 +24,17 @@ public class ManagerInformation implements java.io.Serializable{
 
     private String InternalEmail;
 
-    private String department;
+
 
     private String administrativeOffice;
 
-    private String administrativeDivisonNumber;
 
-    private String administrativeDivisonName;
+    @ManyToOne
+    @JoinColumn(name = "manager_department_id", referencedColumnName = "id")
+    private DepartmentInformation departmentInformation;
 
     private String type;
+    private Integer state;
 
     public Long getId() {
         return id;
@@ -98,13 +100,7 @@ public class ManagerInformation implements java.io.Serializable{
         InternalEmail = internalEmail;
     }
 
-    public String getDepartment() {
-        return department;
-    }
 
-    public void setDepartment(String department) {
-        this.department = department;
-    }
 
     public String getAdministrativeOffice() {
         return administrativeOffice;
@@ -114,19 +110,29 @@ public class ManagerInformation implements java.io.Serializable{
         this.administrativeOffice = administrativeOffice;
     }
 
-    public String getAdministrativeDivisonNumber() {
-        return administrativeDivisonNumber;
+
+
+    public String getType() {
+        return type;
     }
 
-    public void setAdministrativeDivisonNumber(String administrativeDivisonNumber) {
-        this.administrativeDivisonNumber = administrativeDivisonNumber;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getAdministrativeDivisonName() {
-        return administrativeDivisonName;
+    public Integer getState() {
+        return state;
     }
 
-    public void setAdministrativeDivisonName(String administrativeDivisonName) {
-        this.administrativeDivisonName = administrativeDivisonName;
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    public DepartmentInformation getDepartmentInformation() {
+        return departmentInformation;
+    }
+
+    public void setDepartmentInformation(DepartmentInformation departmentInformation) {
+        this.departmentInformation = departmentInformation;
     }
 }

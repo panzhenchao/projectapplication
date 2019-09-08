@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 @Controller
 public class OrderManageController {
@@ -38,7 +39,7 @@ public class OrderManageController {
         String username= JwtTokenUtils.getUsername(token);
         ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
         Pageable pageable=new PageRequest(page-1,size);
-        String address="%"+managerInformation.getDepartment()+"%";
+        String address="%"+managerInformation.getDepartmentInformation().getDepartmentName()+"%";
 
         Page<PersonalInformation> pPage=personalInformationService.findPersonalInformationByaddressAndPageble(address,pageable);
         model.addObject("totalElements",pPage.getTotalElements());
@@ -56,7 +57,7 @@ public class OrderManageController {
         String username= JwtTokenUtils.getUsername(token);
         ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
         Pageable pageable=new PageRequest(page-1,size);
-        String address="%"+managerInformation.getDepartment()+"%";
+        String address="%"+managerInformation.getDepartmentInformation().getDepartmentName()+"%";
         Page<EnterpriseInformation> ePage=enterpriseInformationService.findEnterpriseInformationByaddressAndPageble(address,pageable);
         model.addObject("totalElements",ePage.getTotalElements());
         model.addObject("list",ePage.getContent());
@@ -68,7 +69,7 @@ public class OrderManageController {
         return model;
     }
     @GetMapping("/changeUserState")
-    public ModelAndView changeUserState(ModelAndView model, HttpServletResponse response, HttpServletRequest request, @RequestParam("username")String username, @RequestParam("state")String state,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size){
+    public ModelAndView changeUserState(ModelAndView model, HttpServletResponse response, HttpServletRequest request, @RequestParam("username")String username, @RequestParam("state")Integer state,@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "5") Integer size){
         String token=JwtTokenUtils.getToken(request);
         User user=userService.findUserByUsername(username);
         user.setState(state);
@@ -102,10 +103,34 @@ public class OrderManageController {
             model.setViewName("/personal-order-manage-list");
             personalOrderManger(model,request,page,size);
             return model;
-
         }
         return model;
-
     }
+    @RequestMapping("/accountManagement")
+    public ModelAndView accountManagement(ModelAndView model,HttpServletRequest request){
+        String token=JwtTokenUtils.getToken(request);
+        String username= JwtTokenUtils.getUsername(token);
+        User user=userService.findUserByUsername(username);
+        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
+        model.setViewName("department-account-management-list");
+        ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
+        List<ManagerInformation> list=managerInformationService.findManagerInformationByDepartment(managerInformation.getDepartmentInformation().getDepartmentName());
+        model.addObject("list",list);
+        return model;
+    }
+    @RequestMapping("/addManager")
+    public ModelAndView addManager(ModelAndView model,HttpServletRequest request,ManagerInformation managerInformation,User user){
+        String token=JwtTokenUtils.getToken(request);
+        model.addObject("permission",JwtTokenUtils.getUserPermission(token));
+        managerInformation.setState(1);
+        user.setPassword("123456");
+        user.setState(1);
+        String username= JwtTokenUtils.getUsername(token);
+        ManagerInformation departmentPersonal=managerInformationService.findManagerInformationByUserName(username);
+        managerInformation.setDepartmentInformation(departmentPersonal.getDepartmentInformation());
+        accountManagement(model,request);
+        return model;
+    }
+
 
 }
