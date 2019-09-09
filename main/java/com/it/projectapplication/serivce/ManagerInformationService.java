@@ -1,6 +1,7 @@
 package com.it.projectapplication.serivce;
 
 import com.it.projectapplication.dao.ManagerInformationDao;
+import com.it.projectapplication.domain.DepartmentInformation;
 import com.it.projectapplication.domain.ManagerInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,9 @@ public class ManagerInformationService {
         return managerInformation;
     }
 
-    public List<ManagerInformation> findManagerInformationByDepartment(String department){
+    public List<ManagerInformation> findManagerInformationByDepartment(DepartmentInformation departmentInformation){
 
-        List<ManagerInformation> list=managerInformationDao.findManagerInformationsByDepartment(department);
+        List<ManagerInformation> list=managerInformationDao.findManagerInformationsByDepartmentInformation(departmentInformation);
         return list;
     }
 

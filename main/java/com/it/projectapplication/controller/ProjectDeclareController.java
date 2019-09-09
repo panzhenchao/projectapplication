@@ -38,9 +38,9 @@ public class ProjectDeclareController {
         String usernmae=JwtTokenUtils.getUsername(token);
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         String category=userService.findCategory(usernmae);
-        if("企业".equals(category)){
-           category=enterpriseInformationService.findEnterpriseInformationByUsername(usernmae).getType();
-        }
+      if("企业".equals(category)){
+          category=enterpriseInformationService.findEnterpriseInformationByUsername(usernmae).getType();
+       }
         Integer typeNumber= TypeConvert.findTypeNumber(category);
         List<SpecialProject> specialProjects=specialProjectService.findListByDeclareSubject(typeNumber);
         model.addObject("specialProjects",specialProjects);

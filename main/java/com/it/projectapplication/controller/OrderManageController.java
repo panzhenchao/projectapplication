@@ -114,7 +114,7 @@ public class OrderManageController {
         model.addObject("permission",JwtTokenUtils.getUserPermission(token));
         model.setViewName("department-account-management-list");
         ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
-        List<ManagerInformation> list=managerInformationService.findManagerInformationByDepartment(managerInformation.getDepartmentInformation().getDepartmentName());
+        List<ManagerInformation> list=managerInformationService.findManagerInformationByDepartment(managerInformation.getDepartmentInformation());
         model.addObject("list",list);
         return model;
     }

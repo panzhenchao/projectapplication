@@ -96,11 +96,11 @@
                                     </div>
                                     <div class="col-md-2 title">项目主管部门</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:text="${specialProject.specilafund.department}">
+                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:text="${specialProject.specialFund.departmentName}">
                                     </div>
                                     <div class="col-md-2 title">项目名称</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="污染防治项目" value="" th:text="${specialProject.specilafund.name}">
+                                        <input type="text" class="form-control" placeholder="污染防治项目" value="" th:text="${specialProject.specialFund.name}">
                                     </div>
                                     <div class="col-md-2 title">项目编码</div>
                                     <div class="col-md-4 data">
@@ -304,9 +304,6 @@
                                             <th class="sorting">单价</th>
                                             <th class="sorting">数量</th>
                                             <th class="sorting">投资额</th>
-
-
-
                                             <th class="sorting">申请金额</th>
                                         </tr>
                                         </thead>
@@ -424,6 +421,8 @@
 
                             </div>
 
+
+
                             <!--材料附件/-->
 
                             <!--意见-->
@@ -461,6 +460,7 @@
 
 
     <div th:replace="main :: script"></div>
+
 </body>
 
 </html>

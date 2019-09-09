@@ -20,7 +20,7 @@ public class DepartmentInformation implements java.io.Serializable{
 
     private String administrativLevel;
 
-    @OneToMany(mappedBy = "managerInformation")
+    @OneToMany(mappedBy = "departmentInformation")
     private Set<ManagerInformation> managerInformations=new HashSet<ManagerInformation>(0);
 
     public Long getId() {
