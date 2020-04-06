@@ -45,27 +45,32 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label >登录名</label>
-                                    <input type="text" class="form-control"  placeholder="请输入公司名称" th:name="username">
+                                    <input type="text" class="form-control"  placeholder="请输入公司名称" th:name="username" id="username">
+                                    <span id="usernametest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="password">
+                                    <input type="text" class="form-control"  placeholder="" th:name="password" id="password1">
                                 </div>
                                 <div class="form-group">
                                     <label >确认登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="" >
+                                    <input type="text" class="form-control"  placeholder="" id="password2" onblur="checkPassword()">
+                                    <span id="passwordtest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >单位名称</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="companyName">
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyName" id="companyName">
+                                    <span id="companyNametest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >组织机构代码</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="organizingInstitutionNumber">
+                                    <input type="text" class="form-control"  placeholder="" th:name="organizingInstitutionNumber" id="organizingInstitutionNumber" onblur="checkOrganizingInstitutionNumber()">
+                                    <span id="organizingInstitutionNumbertest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >营业执照注册号</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="businessLicenseRegistrationNumber">
+                                    <input type="text" class="form-control"  placeholder="" th:name="businessLicenseRegistrationNumber" id="businessLicenseRegistrationNumber" onblur="checkBusinessLicenseRegistrationNumber()">
+                                    <span id="businessLicenseRegistrationNumbertest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >营业执照照片</label>
@@ -77,11 +82,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label >法人代表</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="corporateRepresentative">
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateRepresentative" id="corporateRepresentative" onblur="checkCorporateRepresentative()">
+                                    <span id="corporateRepresentativetest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >法人身份证</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="corporateIdentityCard">
+                                    <input type="text" class="form-control"  placeholder="" th:name="corporateIdentityCard" id="orporateIdentityCard" onblur="checkOrporateIdentityCard()">
+                                    <span id="orporateIdentityCardtest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >法人身份证照</label>
@@ -89,11 +96,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label >单位联系人</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="companyContact">
+                                    <input type="text" class="form-control"  placeholder="" th:name="companyContact" id="companyContact" onblur="checkCompanyContact()">
+                                    <span id="companyContacttest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >联系电话</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="phone">
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone" id="phone" onblur="checkPhone()">
+                                    <span id="phonetest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >所属行业</label>
@@ -110,7 +119,8 @@
 
                                 <div class="form-group">
                                     <label >注册资金(万元)</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="registeredCaptial">
+                                    <input type="text" class="form-control"  placeholder="" th:name="registeredCaptial" id="registeredCaptial" onblur="checkRegisteredCaptial()">
+                                    <span id="registeredCaptialtest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >银行账户</label>
@@ -122,15 +132,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label >银行账户</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount">
+                                    <input type="text" class="form-control"  placeholder="" th:name="bankAccount" id="bankAccount" onblur="checkBankAccount()">
+                                    <span id="bankAccounttest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >财政人员(会计人员)</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="financer">
+                                    <input type="text" class="form-control"  placeholder="" th:name="financer" id="financer" onblur="checkFinancer()">
+                                    <span id="financertest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >会计证号码</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="accountingCertificate">
+                                    <input type="text" class="form-control"  placeholder="" th:name="accountingCertificate" id="accountingCertificate" onblur="checkAccountingCertificate">
+                                    <span id="accountingCertificatetest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >纳税地</label>
@@ -138,11 +151,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label >税务登记证</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="taxRegistrationCertificate">
+                                    <input type="text" class="form-control"  placeholder="" th:name="taxRegistrationCertificate" id="taxRegistrationCertificate" onblur="checkTaxRegistrationCertificate">
+                                    <span id="taxRegistrationCertificatetest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >单位详细地址</label>
                                     <input type="text" class="form-control"  placeholder="" th:name="address">
+
                                 </div>
 
                                 <div class="col-md-10 data rowHeight2x">
@@ -227,6 +242,191 @@
                 document.getElementById("rest").style.display = "none";
             }
         }
+        function checkName() {
+
+        }
+        function checkPassword() {
+            if(password1.value!=password2.value){
+                $("#password2").css('borderColor','red');
+                document.getElementById("password2test").innerHTML="2次密码不一致";
+            }else {
+                $("#password2").css('borderColor','green');
+                document.getElementById("password2test").innerHTML="";
+            }
+        }
+        function checkOrganizingInstitutionNumber() {
+            var Code=document.getElementById("organizingInstitutionNumber").value;
+            var patrn = /^[0-9A-Z]+$/;
+            if ((Code.length != 18) || (patrn.test(Code) == false)) {
+                $("#organizingInstitutionNumber").css('borderColor','red');
+                document.getElementById("organizingInstitutionNumbertest").innerHTML="不是有效的统一社会信用编码";
+
+            }
+            else {
+                var Ancode;//统一社会信用代码的每一个值
+                var Ancodevalue;//统一社会信用代码每一个值的权重
+                var total = 0;
+                var weightedfactors = [1, 3, 9, 27, 19, 26, 16, 17, 20, 29, 25, 13, 8, 24, 10, 30, 28];//加权因子
+                var str = '0123456789ABCDEFGHJKLMNPQRTUWXY';
+                //不用I、O、S、V、Z
+                for (var i = 0; i < Code.length - 1; i++) {
+                    Ancode = Code.substring(i, i + 1);
+                    Ancodevalue = str.indexOf(Ancode);
+                    total = total + Ancodevalue * weightedfactors[i];
+                    //权重与加权因子相乘之和
+                }
+                var logiccheckcode = 31 - total % 31;
+                if (logiccheckcode == 31) {
+                    logiccheckcode = 0;
+                }
+                var Str = "0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,J,K,L,M,N,P,Q,R,T,U,W,X,Y";
+                var Array_Str = Str.split(',');
+                logiccheckcode = Array_Str[logiccheckcode];
+
+
+                var checkcode = Code.substring(17, 18);
+                if (logiccheckcode != checkcode) {
+                    $("#organizingInstitutionNumber").css('borderColor','red');
+                    document.getElementById("organizingInstitutionNumbertest").innerHTML="不是有效的统一社会信用编码";
+                }else{
+                    $("#organizingInstitutionNumber").css('borderColor','green');
+                    document.getElementById("organizingInstitutionNumbertest").innerHTML="";
+                }
+                $("#organizingInstitutionNumber").css('borderColor','green');
+                document.getElementById("organizingInstitutionNumbertest").innerHTML="";
+            }
+        }
+        function checkBusinessLicenseRegistrationNumber() {
+            var reg=/^(?:(?![IOZSV])[\dA-Z]){2}\d{6}(?:(?![IOZSV])[\dA-Z]){10}$/;
+            var businessNumber=document.getElementById("businessLicenseRegistrationNumber").value;
+            if(reg.test(businessNumber)==false){
+                $("#businessLicenseRegistrationNumber").css('borderColor','red');
+                document.getElementById("organizingInstitutionNumbertest").innerHTML="不是有效的统一社会信用编码";
+            }else {
+                $("#businessLicenseRegistrationNumber").css('borderColor','green');
+                document.getElementById("organizingInstitutionNumbertest").innerHTML="";
+            }
+        }
+        function checkCorporateRepresentative(){
+            var rag=/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/;
+            var name=document.getElementById("corporateRepresentative").value;
+            if(rag.test(name)==false){
+                $("#corporateRepresentative").css('borderColor','red');
+                document.getElementById("corporateRepresentativetest").innerHTML="姓名不符合规则";
+            }else{
+                $("#corporateRepresentative").css('borderColor','green');
+                document.getElementById("corporateRepresentativetest").innerHTML="";
+
+            }
+        }
+        function checkOrporateIdentityCard() {
+            var  rag=/(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            var orporateIdentityCard=document.getElementById("oporateIdentityCard").value;
+            if(rag.test(oporateIdentityCard)==false){
+                $("#oporateIdentityCard").css('borderColor','red');
+                document.getElementById("orporateIdentityCardtest").innerHTML="身份证不符合规则";
+            }else{
+                $("#oporateIdentityCard").css('borderColor','green');
+                document.getElementById("orporateIdentityCardtest").innerHTML="";
+            }
+        }
+        function checkCompanyContact() {
+            var rag=/(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            var companyContact=document.getElementById("ompanyContact").value;
+            if (rag.test(companyContact)==false){
+                $("#ompanyContact").css('borderColor','red');
+                document.getElementById("companyContacttest").innerHTML="姓名不符合规则";
+            }else{
+                $("#ompanyContact").css('borderColor','green');
+                document.getElementById("companyContacttest").innerHTML="";
+            }
+        }
+        function checkPhone() {
+            var rag=/^1[3456789]\d{9}$/;
+            var phone=document.getElementById("phone").value;
+            if(rag.test(phone)==false){
+                $("#phone").css('borderColor','red');
+                document.getElementById("phonetest").innerHTML="手机号码不符合规则";
+            }else{
+                $("#phone").css('borderColor','green');
+                document.getElementById("phonetest").innerHTML="";
+            }
+        }
+        function checkRegisteredCaptial() {
+            var rag=/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/;;
+            var registeredCaptial=document.getElementById("registeredCaptial").value;
+            if(rag.test(registeredCaptial)){
+                $("#registeredCaptial").css('borderColor','red');
+                document.getElementById("registeredCaptialtest").innerHTML="注册金额不符合规则";
+            }else{
+                $("#phone").css('borderColor','green');
+                document.getElementById("registeredCaptialtest").innerHTML="";
+            }
+
+        }
+        function checkBankAccount() {
+            var bankno=document.getElementById("bankAccount").value;
+            if (bankno == "" || bankno.length < 16 || bankno.length > 19) {
+                $("#bankAccount").css('borderColor','red');
+                document.getElementById("bankAccounttest").innerHTML="银行账号不符合规则";
+            }
+            var lastNum = bankno.substr(bankno.length - 1, 1); //取出最后一位（与luhn进行比较）
+            var first15Num = bankno.substr(0, bankno.length - 1); //前15或18位
+            var newArr = new Array();
+            for (var i = first15Num.length - 1; i > -1; i--) { //前15或18位倒序存进数组
+                newArr.push(first15Num.substr(i, 1));
+            }
+            var arrJiShu = new Array(); //奇数位*2的积 <9
+            var arrJiShu2 = new Array(); //奇数位*2的积 >9
+            var arrOuShu = new Array(); //偶数位数组
+            for (var j = 0; j < newArr.length; j++) {
+                if ((j + 1) % 2 == 1) { //奇数位
+                    if (parseInt(newArr[j]) * 2 < 9) arrJiShu.push(parseInt(newArr[j]) * 2);
+                    else arrJiShu2.push(parseInt(newArr[j]) * 2);
+                } else //偶数位
+                    arrOuShu.push(newArr[j]);
+            }
+
+            var jishu_child1 = new Array(); //奇数位*2 >9 的分割之后的数组个位数
+            var jishu_child2 = new Array(); //奇数位*2 >9 的分割之后的数组十位数
+            for (var h = 0; h < arrJiShu2.length; h++) {
+                jishu_child1.push(parseInt(arrJiShu2[h]) % 10);
+                jishu_child2.push(parseInt(arrJiShu2[h]) / 10);
+            }
+
+            var sumJiShu = 0; //奇数位*2 < 9 的数组之和
+            var sumOuShu = 0; //偶数位数组之和
+            var sumJiShuChild1 = 0; //奇数位*2 >9 的分割之后的数组个位数之和
+            var sumJiShuChild2 = 0; //奇数位*2 >9 的分割之后的数组十位数之和
+            var sumTotal = 0;
+            for (var m = 0; m < arrJiShu.length; m++) {
+                sumJiShu = sumJiShu + parseInt(arrJiShu[m]);
+            }
+
+            for (var n = 0; n < arrOuShu.length; n++) {
+                sumOuShu = sumOuShu + parseInt(arrOuShu[n]);
+            }
+
+            for (var p = 0; p < jishu_child1.length; p++) {
+                sumJiShuChild1 = sumJiShuChild1 + parseInt(jishu_child1[p]);
+                sumJiShuChild2 = sumJiShuChild2 + parseInt(jishu_child2[p]);
+            }
+            //计算总和
+            sumTotal = parseInt(sumJiShu) + parseInt(sumOuShu) + parseInt(sumJiShuChild1) + parseInt(sumJiShuChild2);
+
+            //计算luhn值
+            var k = parseInt(sumTotal) % 10 == 0 ? 10 : parseInt(sumTotal) % 10;
+            var luhn = 10 - k;
+
+            if (lastNum == luhn) {
+                $("#bankAccount").css('borderColor','green');
+                document.getElementById("bankAccounttest").innerHTML="";
+            } else {
+                $("#bankAccount").css('borderColor','red');
+                document.getElementById("bankAccounttest").innerHTML="银行账号不符合规则";
+            }
+        }
+
     </script>
 </body>
 

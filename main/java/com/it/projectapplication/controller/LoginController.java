@@ -1,6 +1,8 @@
 package com.it.projectapplication.controller;
 
+import com.it.projectapplication.domain.AnnouncementManager;
 import com.it.projectapplication.domain.User;
+import com.it.projectapplication.serivce.AnnouncementManagerService;
 import com.it.projectapplication.serivce.EnterpriseInformationService;
 import com.it.projectapplication.serivce.PersonalInformationService;
 import com.it.projectapplication.serivce.UserService;
@@ -11,13 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 @CrossOrigin(origins = "http://localhost:8080/projectapplication", maxAge = 3600)
 @Controller
 public class LoginController {
@@ -28,10 +31,19 @@ public class LoginController {
     UserService userService;
     @Autowired
     PersonalInformationService personalInformationService;
+    @Autowired
+    AnnouncementManagerService announcementManagerService;
+
     @RequestMapping("/index")
-    public String index(Model model){
-        return "all-admin-login";
+    public ModelAndView index(ModelAndView model){
+
+        List<AnnouncementManager> list=announcementManagerService.findAll();
+
+        model.addObject("list",list);
+        model.setViewName("all-admin-login");
+        return  model;
     }
+
     @RequestMapping("/login/form")
     public ModelAndView login(ModelAndView model, User user, HttpServletRequest request, HttpServletResponse response) throws JSONException ,Exception{
 

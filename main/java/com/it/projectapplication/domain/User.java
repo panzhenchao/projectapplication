@@ -25,7 +25,6 @@ public class User {
     @Column(name = "user_category")
     private String category;
 
-
     @OneToMany(mappedBy = "user")
     private  Set<Project> projects =new HashSet<>(0);
 

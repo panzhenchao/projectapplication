@@ -22,7 +22,7 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    主管部门
+                    部门
                     <small>项目审核</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -47,22 +47,7 @@
                         <div class="table-box">
 
                             <!--工具栏-->
-                            <div class="pull-left">
-                                <div class="form-group form-inline">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 新增</button>
-                                        <button type="button" class="btn btn-default" title="导入" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 导入</button>
 
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>
 
                             <!--工具栏/-->
 
@@ -72,7 +57,7 @@
                                     <thead>
                                     <tr>
                                         <th class="sorting">项目名称</th>
-                                        <th class="sorting">实施单位</th>
+                                        <th class="sorting">实施名称</th>
                                         <th class="sorting">主管部门</th>
                                         <th class="sorting">提交时间</th>
                                         <th class="sorting">申请截止时间</th>
@@ -169,7 +154,7 @@
 
                         </div>
                         <!-- 数据表格 /-->
-                        <div th:replace="enterprise-order-manage-list :: page"><div>
+
 
 
                     </div>

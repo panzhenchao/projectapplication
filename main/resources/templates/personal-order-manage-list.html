@@ -51,19 +51,11 @@
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default" title="新建"><a th:href="@{/getRegisterPersonal}"><i class="fa fa-file-o"></i> 新建</a></button>
-                                        <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" class="btn btn-default" title="批量审核" onclick='confirm("你确认要批量审核吗？")'><i class="fa fa-check"></i> 开启</button>
-                                        <button type="button" class="btn btn-default" title="停用" onclick='confirm("你确认要停用选定的实施单位吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>
+
                             <!--工具栏/-->
 
                             <!--数据列表-->
@@ -76,6 +68,7 @@
                                         <th class="sorting_asc">ID</th>
                                         <th class="sorting">姓名</th>
                                         <th class="sorting">联系电话</th>
+                                        <th class="sorting">社区</th>
                                         <th class="sorting">状态</th>
                                         <th class="text-center">操作</th>
                                     </tr>
@@ -92,17 +85,21 @@
                                         <!--@thymesVar id="phone" type="String"-->
                                         <td th:text="*{personal.phone}">0000001</td>
                                         <!--@thymesVar id="community" type="String"-->
+                                        <!--<td th:text="${personal.community}">0003</td>-->
                                         <td th:text="${personal.community}">0003</td>
                                         <!--@thymesVar id="state" type="String"-->
-                                        <td th:if="${personal.state=='0'}">审核中</td>
-                                        <td th:if="${personal.state=='1'}">通过</td>
-                                        <td th:if="${personal.state=='-1'}">停用</td>
+                                        <td th:if="${personal.state==0}">审核中</td>
+                                        <td th:if="${personal.state==1}">通过</td>
+                                        <td th:if="${personal.state== -1}">停用</td>
+
+
 
                                         <td class="text-center">
-                                            <a th:href="@{/checkInformation(username=${personal.name})}"><button type="button" class="btn bg-olive btn-xs" >修改</button></a>
-                                            <button type="button" class="btn bg-olive btn-xs" >修改</button>
-                                            <a th:href="@{/changeUserState(username=${personal.name},state='-1')}"><button type="button" class="btn bg-olive btn-xs" >加入黑名单</button></a>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-order-manage-edit.html"'>重置密码</button>
+                                            <a th:href="@{/checkInformation(username=${personal.username})}"><button type="button" class="btn bg-olive btn-xs" >查看</button></a>
+
+                                            <a th:if="${personal.state !=-1}" th:href="@{/changeUserState(username=${personal.username},state='-1')}"><button type="button" class="btn bg-olive btn-xs" >停用</button></a>
+                                            <a th:if="${personal.state !=1}"  th:href="@{/changeUserState(username=${personal.username},state='1')}"><button type="button" class="btn bg-olive btn-xs" >通过</button></a>
+                                            <a th:href="@{/resetPassword(username=${personal.name})}"><button type="button" class="btn bg-olive btn-xs" >重置密码</button></a>
 
                                         </td>
                                 </tbody>
@@ -120,23 +117,8 @@
                             <!--数据列表/-->
 
                             <!--工具栏-->
-                            <div class="pull-left">
-                                <div class="form-group form-inline">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
-                                        <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
-                                        <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>
+
+
                             <!--工具栏/-->
 
                         </div>
@@ -155,10 +137,8 @@
                                 总共<span th:text="${totalPages}"></span>页，共<span th:text="${totalElements}"></span> 条数据。 每页
                                 <select class="form-control">
                             <option>10</option>
-                            <option>15</option>
-                            <option>20</option>
-                            <option>50</option>
-                            <option>80</option>
+
+
                         </select> 条
                             </div>
                         </div>
@@ -170,10 +150,7 @@
                                 </li>
                                 <li><a href="#">上一页</a></li>
                                 <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
+
                                 <li><a href="#">下一页</a></li>
                                 <li>
                                     <a href="#" aria-label="Next">尾页</a>

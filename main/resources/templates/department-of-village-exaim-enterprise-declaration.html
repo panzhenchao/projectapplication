@@ -25,25 +25,20 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    乡镇部门
+                    部门
                     <small>项目审核</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
                     <li><a href="#"></a></li>
-                    <li class="active">新增项目申报</li>
+                    <li class="active">项目审核</li>
                 </ol>
                 <div class="pull-right-container">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 上一项</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
-                            <a ><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 编辑</button></a>
+
                             <a th:href="@{/changeVillageState(villageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 推荐</button></a>
                             <a th:href="@{/changeVillageState(villageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 备选</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
 
 
                         </div>
@@ -71,9 +66,9 @@
                             <li>
                                 <a href="#tab-fund-information" data-toggle="tab">资金信息</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="#tab-material-attachment" data-toggle="tab">材料附件</a>
-                            </li>
+                            </li>-->
                         </ul>
                         <!--tab头/-->
 
@@ -176,7 +171,7 @@
 
                             <!--label显示的内容/-->
 
-                            <!--实施单位信息-->
+                            <!--实施单位信xi
                                 <div class="tab-pane" id="tab-exploiting-entity">
                                     <div class="row data-type">
                                         <div class="col-md-2 title">实施主主体</div>
@@ -208,7 +203,7 @@
                                     </div>
                                 </div>
 
-                            <!--实施单位信息/-->
+                            <实施单位信息/-->
 
                             <!--资金信息-->
                                 <div class="tab-pane" id="tab-fund-information">
@@ -251,72 +246,7 @@
                                     <div class="col-md-10 data">
                                         <input type="text" class="form-control" placeholder="0" value="0" th:name="totalSubsidy" th:value="${project.totalSubsidy}">
                                     </div>
-                                    <div class="col-md-10 data text">
 
-                                        <button type="button" class="btn bg-default" onclick="">新增资金支持环节</button>
-                                        <button type="button" class="btn bg-default" onclick="">删除</button>
-                                    </div>
-
-                                    <table id="dataList1" class="table table-bordered table-striped table-hover dataTable">
-
-                                        <thead>
-                                        <tr>
-                                            <th class="" style="padding-right:0px;">
-                                                <input id="selall1" type="checkbox" class="icheckbox_square-blue">
-                                            </th>
-                                            <th class="sorting">序列号</th>
-                                            <th class="sorting_asc">建设内容名称</th>
-                                            <th class="sorting">单价</th>
-                                            <th class="sorting">数量</th>
-                                            <th class="sorting">投资额</th>
-                                            <th class="sorting">申请金额</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-
-
-                                        <tr>
-                                            <td><input name="ids" type="checkbox"></td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>建设内容1</td>
-
-                                            <td>100</td>
-                                            <td>20</td>
-                                            <td>2000</td>
-                                            <td>100</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td><input name="ids" type="checkbox"></td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>建设内容2</td>
-
-                                            <td>100</td>
-                                            <td>20</td>
-                                            <td>2000</td>
-                                            <td>100</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-
-                                            </td>
-                                            <td>合计</td>
-
-                                            <td>200</td>
-                                            <td>40</td>
-                                            <td>4000</td>
-                                            <td>200</td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
 
 
 
@@ -331,60 +261,9 @@
                             <!--材料附件-->
 
 
-                            <div class="tab-pane" id="tab-material-attachment">
-                                <div class="col-md-10 data text">
-
-                                    <button type="button" class="btn bg-default" onclick="">新增</button>
-                                    <button type="button" class="btn bg-default" onclick="">删除</button>
-                                </div>
-                                <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-
-                                <thead>
-                                <tr>
-                                    <th class="" style="padding-right:0px;">
-                                        <input id="selall" type="checkbox" class="icheckbox_square-blue">
-                                    </th>
-                                    <th class="sorting">材料名称</th>
-                                    <th class="sorting_asc">是否已上传</th>
-                                    <th class="sorting">附件大小</th>
-                                    <th class="text-center">附件操作</th>
 
 
 
-                                    <th class="text-center">模板操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-
-
-
-                                <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td>
-                                       附件
-                                    </td>
-                                    <td></td>
-
-                                    <td></td>
-                                    <td class="text-center">
-
-                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>上传</button>
-                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>删除</button>
-
-
-
-                                    </td>
-
-                                    <td class="text-center">
-
-                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>查看</button>
-                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>下载</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                                </table>
-
-                            </div>
 
                             <!--材料附件/-->
 

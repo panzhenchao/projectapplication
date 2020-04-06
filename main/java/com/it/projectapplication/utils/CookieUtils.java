@@ -23,13 +23,13 @@ public class CookieUtils {
         cookie.setPath("/projectapplication");
         response.addCookie(cookie);
     }
-    public static void clearCookie(HttpServletRequest request,HttpServletResponse response,String cookieNmae){
+    public static void clearCookie(HttpServletRequest request,HttpServletResponse response,String cookieName){
         Cookie []cookies=request.getCookies();
         try {
 
            if(null!=cookies){
                 for(Cookie cookie:cookies){
-                    if(cookie.getName().equals(cookieNmae)) {
+                    if(cookie.getName().equals(cookieName)) {
                         cookie.setMaxAge(0);
                         cookie.setPath("/projectapplication");
                         response.addCookie(cookie);
@@ -38,7 +38,7 @@ public class CookieUtils {
             }
 
         }catch (Exception e){
-            System.out.println("清除cookie"+cookieNmae+"异常");
+            System.out.println("清除cookie"+cookieName+"异常");
         }
     }
 }

@@ -22,6 +22,10 @@ public class SpecialProjectService {
         SpecialProject specialProject=specialProjectDao.findSpecialProjectById(id);
         return specialProject;
     }
+    public SpecialProject findMinStopDate(){
+        SpecialProject specialProject=specialProjectDao.findMinStopDate();
+        return specialProject;
+    }
 
 
 }

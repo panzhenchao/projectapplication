@@ -25,27 +25,23 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    主管部门
+                    部门
                     <small>项目审核</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
                     <li><a href="#"></a></li>
-                    <li class="active">新增项目申报</li>
+                    <li class="active">项目审核</li>
                 </ol>
                 <div class="pull-right-container">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 上一项</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 下一项</button></a>
-                            <a ><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 编辑</button></a>
-                            <a th:href="@{/changeManageState(manageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 通过</button></a>
-                            <a th:href="@{/changeManageState(manageDepartmentState=2,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 备选</button></a>
-                            <a th:href="@{/changeManageState(manageDepartmentState=3,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 不受理</button></a>
-                            <a th:href="@{/changeManageState(manageDepartmentState=4,projectId=${project.id})}"><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 退回修改</button></a>
-                            <a><button type="button" class="btn btn-default" title="新增" ><i class="fa fa-check"></i> 返回</button></a>
+
+                            <a th:href="@{/changeManageState(manageDepartmentState=1,projectId=${project.id})}"><button type="button" class="btn btn-default" title="" ><i class="fa fa-check"></i> 通过</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=2,projectId=${project.id})}"><button type="button" class="btn btn-default" title="" ><i class="fa fa-check"></i> 备选</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=3,projectId=${project.id})}"><button type="button" class="btn btn-default" title="" ><i class="fa fa-check"></i> 不受理</button></a>
+                            <a th:href="@{/changeManageState(manageDepartmentState=4,projectId=${project.id})}"><button type="button" class="btn btn-default" title="" ><i class="fa fa-check"></i> 退回修改</button></a>
+
 
 
                         </div>
@@ -73,9 +69,7 @@
                             <li>
                                 <a href="#tab-fund-information" data-toggle="tab">资金信息</a>
                             </li>
-                            <li>
-                                <a href="#tab-material-attachment" data-toggle="tab">材料附件</a>
-                            </li>
+
                         </ul>
                         <!--tab头/-->
 
@@ -179,36 +173,7 @@
                             <!--label显示的内容/-->
 
                             <!--实施单位信息-->
-                                <div class="tab-pane" id="tab-exploiting-entity">
-                                    <div class="row data-type">
-                                        <div class="col-md-2 title">实施主主体</div>
-                                        <div class="col-md-4 data">
-                                            <input type="text" class="form-control" placeholder="实施主主体可以修改" value="">
-                                        </div>
-                                        <div class="col-md-2 title">联系人</div>
-                                        <div class="col-md-4 data">
-                                            <input type="text" class="form-control" placeholder="自动获取可以修改" value="">
-                                        </div>
-                                        <div class="col-md-2 title">联系方式</div>
-                                        <div class="col-md-4 data">
-                                            <input type="text" class="form-control" placeholder="可以修改" value="">
-                                        </div>
-                                        <div class="col-md-2 title">项目主管部门</div>
-                                        <div class="col-md-4 data">
-                                            <input type="text" class="form-control" placeholder="专项中获取" value="">
-                                        </div>
-                                        <div class="col-md-2 title">项目名称</div>
-                                        <div class="col-md-4 data">
-                                            <input type="text" class="form-control" placeholder="污染防治项目" value="">
-                                        </div>
-                                        <div class="col-md-2 title">项目编码</div>
-                                        <div class="col-md-4 data">
-                                            <input type="text" class="form-control" placeholder="自动生成（年月日）" value="">
-                                        </div>
-                                        <div class="col-md-2 title"></div>
 
-                                    </div>
-                                </div>
 
                             <!--实施单位信息/-->
 
@@ -259,66 +224,7 @@
                                         <button type="button" class="btn bg-default" onclick="">删除</button>
                                     </div>
 
-                                    <table id="dataList1" class="table table-bordered table-striped table-hover dataTable">
 
-                                        <thead>
-                                        <tr>
-                                            <th class="" style="padding-right:0px;">
-                                                <input id="selall1" type="checkbox" class="icheckbox_square-blue">
-                                            </th>
-                                            <th class="sorting">序列号</th>
-                                            <th class="sorting_asc">建设内容名称</th>
-                                            <th class="sorting">单价</th>
-                                            <th class="sorting">数量</th>
-                                            <th class="sorting">投资额</th>
-                                            <th class="sorting">申请金额</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-
-
-                                        <tr>
-                                            <td><input name="ids" type="checkbox"></td>
-                                            <td>
-                                                1
-                                            </td>
-                                            <td>建设内容1</td>
-
-                                            <td>100</td>
-                                            <td>20</td>
-                                            <td>2000</td>
-                                            <td>100</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td><input name="ids" type="checkbox"></td>
-                                            <td>
-                                                2
-                                            </td>
-                                            <td>建设内容2</td>
-
-                                            <td>100</td>
-                                            <td>20</td>
-                                            <td>2000</td>
-                                            <td>100</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-
-                                            </td>
-                                            <td>合计</td>
-
-                                            <td>200</td>
-                                            <td>40</td>
-                                            <td>4000</td>
-                                            <td>200</td>
-
-                                        </tr>
-                                        </tbody>
-                                    </table>
 
 
 

@@ -15,12 +15,17 @@ public class ManagerInformationService {
     public ManagerInformation findManagerInformationByUserName(String username){
 
         ManagerInformation managerInformation=managerInformationDao.findManagerInformationByUsername(username);
+
         return managerInformation;
     }
 
     public List<ManagerInformation> findManagerInformationByDepartment(DepartmentInformation departmentInformation){
 
         List<ManagerInformation> list=managerInformationDao.findManagerInformationsByDepartmentInformation(departmentInformation);
+        return list;
+    }
+    public List<ManagerInformation> findAll(){
+        List<ManagerInformation> list=(List<ManagerInformation>) managerInformationDao.findAll();
         return list;
     }
 

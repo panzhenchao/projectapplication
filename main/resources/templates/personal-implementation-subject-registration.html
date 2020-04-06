@@ -41,31 +41,37 @@
                     </div>
 
                     <div class="box-body">
-                        <form role="form" th:action="@{/registerPersonal}" method="post" enctype="multipart/form-data">
+                        <form role="form" name="form" th:action="@{/registerPersonal}" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <label >登录名</label>
-                                    <input type="text" class="form-control"  placeholder="可使用身份证做登录名" th:name="username">
+                                    <input type="text" class="form-control"  placeholder="可使用身份证做登录名" th:name="username" id="username" name="username" onblur="checkUsername()">
+                                    <span id="usernametest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="password">
+                                    <input type="text" class="form-control"  placeholder="" th:name="password" id="password1" onblur="checkPassword()">
+                                    <span id="passwordtest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >确认登录密码</label>
-                                    <input type="text" class="form-control"  placeholder="" >
+                                    <input type="text" class="form-control"  placeholder="" id="password2" onblur="check2pwd()">
+                                    <span id="password2test"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >姓名</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="name">
+                                    <input type="text" class="form-control"  placeholder="" th:name="name"  id="name" onblur="checkname()" >
+                                    <span id="nametest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >身份证</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="identityCard">
+                                    <input type="text" class="form-control"  placeholder="" th:name="identityCard" id="identityCard" onblur="checkIdentityCard()">
+                                    <span id="identityCardTest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >联系电话</label>
-                                    <input type="text" class="form-control"  placeholder="" th:name="phone">
+                                    <input type="text" class="form-control"  placeholder="" th:name="phone" id="phone" onblur="checkPhone()">
+                                    <span id="phoneTest"></span>
                                 </div>
                                 <div class="form-group">
                                     <label >社区</label>
@@ -104,7 +110,8 @@
                             <!-- /.box-body -->
 
                             <div class="box-footer">
-                                <center><button type="submit" class="btn btn-primary">提交</button>
+                                <center>
+                                    <input value="提交" type="submit" onclick="return checkForm();" class="btn btn-primary">
                                 <button type="button" class="btn btn-primary">重置</button></center>
                             </div>
 
@@ -161,6 +168,135 @@
 
 
     <div th:replace="main :: script"></div>
+    <script type="text/javascript">
+        var button=0;
+        function checkUsername() {
+            var username=document.getElementById("username").value;
+            if(username.length==0){
+                $("#username").css('borderColor','red');
+                document.getElementById("usernametest").innerHTML="不能为空";
+                checkButton=0;
+                return false;
+            }
+            var  rag=/(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+            if(rag.test(username) ==false){
+                $("#username").css('borderColor','red');
+
+                document.getElementById("usernametest").innerHTML="身份证格式错误";
+                checkButton=0;
+            }
+            else {
+                $("#username").css('borderColor','green');
+                checkButton=1;
+                document.getElementById("usernametest").innerHTML="";
+            }
+        }
+        function checkPassword() {
+            var password=document.getElementById("password1").value;
+            if(password.length==0){
+                $("#password").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("passwordtest").innerHTML="不能为空";
+                return ;
+            }else {
+                $("#password").css('borderColor','green');
+                checkButton=1;
+                document.getElementById("passwordtest").innerHTML="";
+            }
+
+        }
+
+
+        function check2pwd() {
+            var password2=document.getElementById("password2").value;
+            if(password2.length==0){
+                $("#password2").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("password2test").innerHTML="不能为空";
+                return ;
+            }
+
+            if(password1.value!=password2.value){
+                $("#password2").css('borderColor','red');
+                document.getElementById("password2test").innerHTML="2次密码不一致";
+                checkButton=0;
+            }else {
+                $("#password2").css('borderColor','green');
+                checkButton=1;
+                document.getElementById("password2test").innerHTML="";
+            }
+        }
+        function checkname(){
+            var name=document.getElementById("name").value;
+            if(name.length==0){
+                $("#name").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("nametest").innerHTML="不能为空";
+                return ;
+            }
+            var rag=/^[\u4E00-\u9FA5\uf900-\ufa2d]{2,4}$/;
+            if(rag.test(name)==false){
+                $("#name").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("nametest").innerHTML="姓名不符合规则";
+            }else{
+                $("#name").css('borderColor','green');
+                document.getElementById("nametest").innerHTML="";
+                checkButton=1;
+
+            }
+        }
+        function checkIdentityCard(){
+            var identityCard=document.getElementById("identityCard").value;
+            if(identityCard.length==0){
+                $("#identity").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("identityCardTest").innerHTML="不能为空";
+                return ;
+            }
+           var  rag=/(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+           if(rag.test(identityCard)==false){
+               $("#identity").css('borderColor','red');
+               checkButton=0;
+               document.getElementById("identityCardTest").innerHTML="身份证不符合规则";
+           }else{
+               $("#identity").css('borderColor','green');
+               checkButton=1;
+               document.getElementById("identityCardTest").innerHTML="";
+           }
+        }
+        function checkPhone(){
+            var rag=/^1[3456789]\d{9}$/;
+            var phone=document.getElementById("phone").value;
+            if(phone.length==0){
+                $("#phone").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("phoneTest").innerHTML="不能为空";
+                return ;
+            }
+            if(rag.test(phone)==false){
+                $("#phone").css('borderColor','red');
+                checkButton=0;
+                document.getElementById("phoneTest").innerHTML="手机号码不符合规则";
+            }else{
+                $("#phone").css('borderColor','green');
+                checkButton=1;
+                document.getElementById("phoneTest").innerHTML="";
+            }
+        }
+        function checkForm() {
+            if(button =="1"){
+
+                return true;
+            }else {
+                return false;
+            }
+        }
+
+
+
+
+    </script>
 </body>
 
 </html>

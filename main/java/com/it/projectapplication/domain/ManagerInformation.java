@@ -29,7 +29,7 @@ public class ManagerInformation implements java.io.Serializable{
     private String administrativeOffice;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "manager_department_id", referencedColumnName = "id")
     private DepartmentInformation departmentInformation;
 

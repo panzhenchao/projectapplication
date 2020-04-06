@@ -38,7 +38,6 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-default" title="新增" onclick="submit()"><i class="fa fa-check"></i> 保存到草稿</button>
                             <button type="button" class="btn btn-default" title="删除" onclick="submit2()"><i class="fa fa-check"></i> 申报</button>
-                            <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 返回</button>
 
 
                         </div>
@@ -62,15 +61,13 @@
                             <li class="active">
                                 <a href="#tab-declaration-form" data-toggle="tab">项目主信息</a>
                             </li>
-                            <li>
-                                <a href="#tab-exploiting-entity" data-toggle="tab">实施单位信息</a>
-                            </li>
+
                             <li>
                                 <a href="#tab-fund-information" data-toggle="tab">资金信息</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a href="#tab-material-attachment" data-toggle="tab">材料附件</a>
-                            </li>
+                            </li> -->
 
                         </ul>
                         <!--tab头/-->
@@ -99,16 +96,16 @@
                                     <!--@thymesVar id="specialFund" type="com.it.projectapplication.domain.SpecialFund"-->
                                     <div class="col-md-2 title">项目主管部门</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:value="${specialProject.specialFund.departmentName}" th:name="departmentName">
+                                        <input type="text" class="form-control" placeholder="专项中获取" value="" th:value="${specialProject.specialFund.departmentName}" th:name="departmentName" readonly="readonly">
                                     </div>
                                     <div class="col-md-2 title">项目名称</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control" placeholder="污染防治项目"  th:name="name">
+                                        <input type="text" class="form-control" placeholder="污染防治项目"  th:name="name" readonly="readonly">
                                     </div>
                                     <!--@thymesVar id="project" type="com.it.projectapplication.domain.Project"-->
                                     <div class="col-md-2 title">项目编码</div>
                                     <div class="col-md-4 data">
-                                        <input type="text" class="form-control"  value="" th:value="${project.number}" th:name="number">
+                                        <input type="text" class="form-control"  value="" th:value="${project.number}" th:name="number" readonly="readonly">
                                         <input type="hidden" th:name="id" th:value="${project.id}">
                                         <input type="hidden" th:value="0" th:name="state" id="state">
                                     </div>
@@ -175,7 +172,7 @@
 
                             <!--label显示的内容/-->
 
-                            <!--实施单位信息-->
+                            <!--实施单位信息
                                 <div class="tab-pane" id="tab-exploiting-entity">
                                     <div class="row data-type">
                                         <div class="col-md-2 title">实施主主体</div>
@@ -207,7 +204,7 @@
                                     </div>
                                 </div>
 
-                            <!--实施单位信息/-->
+                            实施单位信息/-->
 
                             <!--资金信息-->
                                 <div class="tab-pane" id="tab-fund-information">
@@ -250,13 +247,13 @@
                                     <div class="col-md-10 data">
                                         <input type="text" class="form-control" placeholder="0" value="0" th:name="totalSubsidy">
                                     </div>
-                                    <div class="col-md-10 data text">
+                                    <!--<div class="col-md-10 data text">
 
                                         <button type="button" class="btn bg-default" onclick="">新增资金支持环节</button>
                                         <button type="button" class="btn bg-default" onclick="">删除</button>
-                                    </div>
+                                    </div> -->
 
-                                    <table id="dataList1" class="table table-bordered table-striped table-hover dataTable">
+                                    <!--<table id="dataList1" class="table table-bordered table-striped table-hover dataTable">
 
                                         <thead>
                                         <tr>
@@ -316,6 +313,7 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    -->
 
 
 
@@ -327,7 +325,7 @@
 
                             <!--资金信息/-->
 
-                            <!--材料附件-->
+                            <!--材料附件
 
 
                             <div class="tab-pane" id="tab-material-attachment">
@@ -377,7 +375,7 @@
                                     <td class="text-center">
 
                                         <button type="button" class="btn bg-olive btn-xs" onclick=''>查看</button>
-                                        <button type="button" class="btn bg-olive btn-xs" onclick=''>下载</button>
+
                                     </td>
                                 </tr>
                                 </tbody>
@@ -385,7 +383,7 @@
 
                             </div>
 
-                            <!--材料附件/-->
+                            材料附件/-->
 
                             <!--意见-->
 

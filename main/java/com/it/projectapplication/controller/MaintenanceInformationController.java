@@ -30,6 +30,7 @@ public class MaintenanceInformationController {
     AuditEnterpriseInformationService auditEnterpriseInformationService;
     @Autowired
     ManagerInformationService managerInformationService;
+
     @GetMapping("/changeInformation")
     public ModelAndView changeInformation(ModelAndView model, HttpServletResponse response,HttpServletRequest request){
         String token=JwtTokenUtils.getToken(request);
@@ -44,7 +45,12 @@ public class MaintenanceInformationController {
             PersonalInformation personalInformation=personalInformationService.findPersonalInformationByUsername(username);
             model.addObject("personalInformation",personalInformation);
             model.setViewName("/personal-implementation-subject-information-change");
+        }
+        else {
+            ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
 
+            model.addObject("managerInformation",managerInformation);
+            model.setViewName("/department-all-information-change");
         }
         return model;
     }
@@ -78,7 +84,6 @@ public class MaintenanceInformationController {
         }else{
             model.addObject("msg","修改密码失败，登录密码错误");
         }
-
         return model;
     }
     @PostMapping("/changePersonalInformation")
@@ -146,8 +151,14 @@ public class MaintenanceInformationController {
             PersonalInformation personalInformation=personalInformationService.findPersonalInformationByUsername(username);
             model.addObject("personalInformation",personalInformation);
             model.setViewName("/personal-implementation-subject-information-check");
-
         }
+        else{
+            ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
+
+            model.addObject("managerInformation",managerInformation);
+            model.setViewName("/department-all-information-change");
+        }
+
         return model;
     }
 

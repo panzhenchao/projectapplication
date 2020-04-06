@@ -84,6 +84,11 @@ public class OrderManageController {
             personalInformation.setState(state);
             personalOrderManger(model,request,page,size);
             return model;
+        }else {
+            ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName(username);
+            managerInformation.setState(state);
+            accountManagement(model,request);
+
         }
         return model;
     }
@@ -102,6 +107,7 @@ public class OrderManageController {
         }else if("个人".equals(user.getCategory())){
             model.setViewName("/personal-order-manage-list");
             personalOrderManger(model,request,page,size);
+
             return model;
         }
         return model;

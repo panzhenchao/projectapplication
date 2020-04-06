@@ -36,9 +36,8 @@
                 <div class="pull-right-container">
                     <div class="form-group form-inline">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 保存到草稿</button>
-                            <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 申报</button>
-                            <button type="button" class="btn btn-default" title="删除" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 返回</button>
+                            <button type="button" class="btn btn-default" title="新增" onclick="submit()"><i class="fa fa-check"></i> 保存到草稿</button>
+                            <button type="button" class="btn btn-default" title="删除" onclick="submit2()"><i class="fa fa-check"></i> 申报</button>
 
 
                         </div>
@@ -68,10 +67,12 @@
                             <li>
                                 <a href="#tab-fund-information" data-toggle="tab">资金信息</a>
                             </li>
+                            <!--
                             <li>
                                 <a href="#tab-material-attachment" data-toggle="tab">材料附件</a>
                             </li>
 
+                                -->
                         </ul>
                         <!--tab头/-->
 
@@ -363,7 +364,7 @@
 
                             <!--资金信息/-->
 
-                            <!--材料附件-->
+                            <!--材料附件
 
 
                             <div class="tab-pane" id="tab-material-attachment">
@@ -423,7 +424,7 @@
 
 
 
-                            <!--材料附件/-->
+                            <材料附件/-->
 
                             <!--意见-->
 
@@ -460,7 +461,21 @@
 
 
     <div th:replace="main :: script"></div>
+    <script>
+        function submit(){
+            $("#state").val(0);
+            document.getElementById("form").submit();
 
+            $("#form").onsubmit;
+        }
+        function submit2() {
+            $("#state").val(1);
+            document.getElementById("form").submit();
+
+            $("#form").onsubmit;
+        }
+    </script>
 </body>
+
 
 </html>

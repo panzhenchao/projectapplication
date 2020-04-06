@@ -5,111 +5,43 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
-            <div class="pull-left image">
-                <img src="/img/user2-160x160.jpg"
-                     class="img-circle" alt="User Image">
-            </div>
-            <div class="pull-left info">
-                <p>
 
-                </p>
-                <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
-            </div>
-        </div>
 
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <!--/* Workaround for bug https://youtrack.jetbrains.com/issue/IDEA-132738 -->
         <!--@thymesVar id="permission" type="String"-->
         <!--*/-->
+        <li class="header">菜单</li>
         <ul class="sidebar-menu" th:each="Role : ${permission}">
-            <li class="header">菜单</li>
+
 
             <li id="admin-index" th:if="${Role == 'ROLE_HOME'}"><a href="all-admin-index.html">
                 <i class="fa fa-dashboard"></i> <span>首页</span></a></li>
 
             <!-- 菜单 -->
 
-            <li id="#"><a href="#" th:href="@{/projectDeclare}">
+            <li  th:if="${Role == 'project_application'}"><a href="#" th:href="@{/projectDeclare}">
                 <i class="fa fa-calendar-plus-o"></i> <span>项目申报</span></a></li>
 
-
-            <li id="#"><a href="#" th:href="@{/projectLibrary}">
+            <li  th:if="${Role == ' project_librarian_manager'}"><a  th:href="@{/projectLibrary}">
                 <i class="fa fa-dashboard"></i> <span>项目库管理</span></a></li>
 
+            <!--<li th:if="${Role == 'enterprese_entity_manager'}"><a >
+                <i class="fa fa-dashboard"></i> <span>实施单位管理</span></a></li> -->
 
-            <li id="#"><a href="#">
-                <i class="fa  fa-calendar-times-o"></i> <span>项目变更</span></a></li>
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-folder"></i> <span>账户管理</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-
-                    <li id="#">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> 查询
-
-                        </a>
-                    </li>
-
-                    <li id="#">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> 新增
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li id="#"><a href="#">
-                <i class="fa fa-dashboard"></i> <span>实施单位管理</span></a></li>
-            <li id="#"><a href="#"  th:href="@{/specialProjectManage}">
+            <li id="#" th:if="${Role == 'special_project_manager'}"><a  th:href="@{/specialProjectManage}">
                 <i class="fa fa-dashboard"></i> <span>专项项目管理</span></a></li>
-            <li id="#"><a href="#" th:href="@{/specialFundMange}">
+            <li id="#" th:if="${Role == 'special_fund_manager'}"><a th:href="@{/specialFundMange}">
                 <i class="fa fa-dashboard"></i> <span>专项资金管理</span></a></li>
-            <li id="#"><a href="#" th:href="@{/projectApproval}">
+            <li id="#" th:if="${Role == 'project_check'}"><a th:href="@{/projectApproval}">
                 <i class="fa fa-pencil-square-o"></i> <span>项目审批</span></a></li>
-            <li id="#"><a href="#">
+            <li id="#" th:if="${Role == 'announcement_manager'}"><a  th:href="@{/findAnnouncementList}">
                 <i class="fa  fa-calendar-minus-o"></i> <span>公告管理</span></a></li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-folder"></i> <span>项目实施管理</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
 
-                    <li id="#">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> 中期检查
-                        </a>
-                    </li>
-
-                    <li id="#">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> 项目验收
-                        </a>
-                    </li>
-                    <li id="#">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> 绩效评估
-                        </a>
-                    </li>
-                    <li id="#">
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i> 验收审核
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li id="#"><a th:href="@{/planManager}">
+            <li id="#" th:if="${Role == 'implementation_plan_manager'}"><a th:href="@{/planManager}">
                 <i class="fa fa-dashboard"></i> <span>实施计划管理</span></a></li>
 
-            <li id="#"><a th:href="@{/fundPlanManage}">
+            <li id="#" th:if="${Role == 'fund_paln_manager'}"><a th:href="@{/fundPlanManage}">
                 <i class="fa fa-cny (alias)"></i> <span>资金计划管理</span></a></li>
 
 
@@ -117,7 +49,7 @@
 
 
 
-            <li class="treeview">
+            <li class="treeview" th:if="${Role == 'account_manager'}">
                 <a href="#">
                     <i class="fa fa-folder"></i> <span>账户管理</span>
                     <span class="pull-right-container">
@@ -133,14 +65,8 @@
                     </li>
 
                     <li id="admin-register">
-                        <a href="all-admin-register.html">
+                        <a>
                             <i class="fa fa-circle-o"></i> 新增
-                        </a>
-                    </li>
-
-                    <li id="admin-404">
-                        <a href="all-admin-404.html">
-                            <i class="fa fa-circle-o"></i> 404页
                         </a>
                     </li>
 
@@ -151,7 +77,7 @@
 
 
 
-            <li class="treeview">
+            <li class="treeview" th:if="${Role == 'department_manager'}">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i> <span>部门机构管理</span>
                     <span class="pull-right-container">
@@ -161,26 +87,14 @@
                 <ul class="treeview-menu">
 
                     <li id="charts-chartjs">
-                        <a href="all-charts-chartjs.html">
-                            <i class="fa fa-circle-o"></i> ChartJS
+                        <a th:href="@{/addDepartmentUrl}">
+                            <i class="fa fa-circle-o"></i> 新增
                         </a>
                     </li>
 
                     <li id="charts-morris">
-                        <a href="all-charts-morris.html">
-                            <i class="fa fa-circle-o"></i> Morris Charts
-                        </a>
-                    </li>
-
-                    <li id="charts-flot">
-                        <a href="all-charts-flot.html">
-                            <i class="fa fa-circle-o"></i> Flot Charts
-                        </a>
-                    </li>
-
-                    <li id="charts-inline">
-                        <a href="all-charts-inline.html">
-                            <i class="fa fa-circle-o"></i> Inline Charts
+                        <a th:href="@{/findAllDepartment}">
+                            <i class="fa fa-circle-o"></i> 查询所有
                         </a>
                     </li>
 
@@ -189,9 +103,9 @@
 
 
 
-            <li class="treeview">
+            <li class="treeview" th:if="${Role == 'user_list'}">
                 <a href="#">
-                    <i class="fa fa-laptop"></i> <span>行政区管理</span>
+                    <i class="fa fa-laptop"></i> <span>用户管理</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -199,53 +113,25 @@
                 <ul class="treeview-menu">
 
                     <li id="elements-general">
-                        <a href="all-elements-general.html">
-                            <i class="fa fa-circle-o"></i> 标准 General
+                        <a >
+                            <i class="fa fa-circle-o"></i> 添加用户
                         </a>
                     </li>
 
                     <li id="elements-icons">
-                        <a href="all-elements-icons.html">
-                            <i class="fa fa-circle-o"></i> 图标 Icons
+                        <a href="all-elements-icons.html" th:href="@{/findAllManager}">
+                            <i class="fa fa-circle-o"></i> 用户列表
                         </a>
                     </li>
 
-                    <li id="elements-buttons">
-                        <a href="all-elements-buttons.html">
-                            <i class="fa fa-circle-o"></i> 按钮 Buttons
-                        </a>
-                    </li>
 
-                    <li id="elements-sliders">
-                        <a href="all-elements-sliders.html">
-                            <i class="fa fa-circle-o"></i> 滑块 Sliders
-                        </a>
-                    </li>
-
-                    <li id="elements-timeline">
-                        <a href="all-elements-timeline.html">
-                            <i class="fa fa-circle-o"></i> 时间线 Timeline
-                        </a>
-                    </li>
-
-                    <li id="elements-modals">
-                        <a href="all-elements-modals.html">
-                            <i class="fa fa-circle-o"></i> 对话框样式 Modals
-                        </a>
-                    </li>
-
-                    <li id="elements-widgets">
-                        <a href="all-elements-widgets.html">
-                            <i class="fa fa-circle-o"></i> 窗体小部件 widgets
-                        </a>
-                    </li>
 
                 </ul>
             </li>
 
 
 
-            <li class="treeview">
+            <li class="treeview" th:if="${Role == 'enterprise_subject_manager'}">
                 <a href="#">
                     <i class="fa fa-child"></i> <span>实施主体管理</span>
                     <span class="pull-right-container">
@@ -265,47 +151,18 @@
                             <i class="fa fa-circle-o"></i> 企业实施主体
                         </a>
                     </li>
-
-                    <li id="form-editors">
-                        <a href="all-form-editors.html">
-                            <i class="fa fa-circle-o"></i> 本部门实施主体
-                        </a>
-                    </li>
-
                 </ul>
             </li>
 
 
 
-            <li class="treeview">
+
+
+
+
+            <li class="treeview" th:if="${Role == 'role_manager'}">
                 <a href="#">
-                    <i class="fa fa-table"></i> <span>检查管理</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-
-                    <li id="tables-simple">
-                        <a href="all-tables-simple.html">
-                            <i class="fa fa-circle-o"></i> 简单表格
-                        </a>
-                    </li>
-
-                    <li id="tables-data">
-                        <a href="all-tables-data.html">
-                            <i class="fa fa-circle-o"></i> 数据表格
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-cube"></i> <span>权限分配</span>
+                    <i class="fa fa-cube"></i> <span>角色管理</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -313,38 +170,21 @@
                 <ul class="treeview-menu">
 
                     <li id="order-manage">
-                        <a href="personal-order-manage-list.html">
-                            <i class="fa fa-circle-o"></i> 乡镇人员
+                        <a href="personal-order-manage-list.html" th:href="@{/addRoleUrl}">
+                            <i class="fa fa-circle-o"></i> 添加角色
                         </a>
                     </li>
-
                     <li id="order-cancel1">
-                        <a href="all-order-cancel-list.html">
-                            <i class="fa fa-circle-o"></i> 主管人员
+                        <a href="all-order-cancel-list.html" th:href="@{/findAllRole}">
+                            <i class="fa fa-circle-o"></i> 管理角色
                         </a>
                     </li>
-                    <li id="order-cancel2">
-                        <a href="all-order-cancel-list.html">
-                            <i class="fa fa-circle-o"></i> 财政人员
-                        </a>
-                    </li>
-                    <li id="order-cancel3">
-                        <a href="all-order-cancel-list.html">
-                            <i class="fa fa-circle-o"></i> 全局监察人员
-                        </a>
-                    </li>
-                    <li id="order-cancel4">
-                        <a href="all-order-cancel-list.html">
-                            <i class="fa fa-circle-o"></i> 部门监察人员
-                        </a>
-                    </li>
-
                 </ul>
             </li>
 
 
 
-            <li class="treeview">
+            <li class="treeview" th:if="${Role == 'user_information'}">
                 <a href="#">
                     <i class="fa fa-book"></i> <span>个人信息</span>
                     <span class="pull-right-container">
@@ -367,32 +207,10 @@
 
                 </ul>
             </li>
-
-
-
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-cogs"></i> <span>样例-系统管理</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-
-                    <li id="system-setting">
-                        <a href="all-system-setting-edit.html">
-                            <i class="fa fa-circle-o"></i> 系统设置
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-
+            <li th:if="${Role == 'user_information'}"><a th:href="@{/logoff}">
+                <i class="fa fa-dashboard"></i> <span>退出</span></a></li>
 
             <!-- 菜单 /-->
-
-            <li id="admin-documentation"><a href="documentation.html" target="_blank"><i class="fa fa-book"></i> <span>AdminLTE汉化文档</span></a></li>
 
         </ul>
     </section>

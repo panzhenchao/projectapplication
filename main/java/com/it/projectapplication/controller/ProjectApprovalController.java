@@ -105,6 +105,12 @@ public class ProjectApprovalController {
             } else if ("check".equals(method)) {
                 model.setViewName("department-of-village-check-enterprise-declaration");
             }
+        }else if("财政部门".equals(user.getCategory())){
+            if ("edit".equals(method)) {
+                model.setViewName("department-of-manage-exaim-enterprise-declaration");
+            } else if ("check".equals(method)) {
+                model.setViewName("department-of-village-check-enterprise-declaration");
+            }
         }
 
 

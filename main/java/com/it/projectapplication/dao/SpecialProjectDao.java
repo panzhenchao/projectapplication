@@ -11,4 +11,9 @@ public interface SpecialProjectDao extends PagingAndSortingRepository<SpecialPro
     public List<SpecialProject> findListByDeclare(Integer typeNumber);
     public SpecialProject findSpecialProjectById(Long id);
 
+    @Query(value = "SELECT * FROM special_project ORDER BY special_project.stop_date  LIMIT 1",nativeQuery = true)
+    public SpecialProject findMinStopDate();
+
+
+
 }

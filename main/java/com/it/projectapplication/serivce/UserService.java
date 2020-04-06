@@ -23,11 +23,11 @@ public class UserService {
             model.setViewName("/all-admin-login");
             return model;
         }
-        else if (0==user1.getState()){
+        else if (user1.getState()==0){
             model.addObject("msg","账号未激活");
             model.setViewName("/all-admin-login");
             return model;
-        }else if(1==user1.getState()){
+        }else if(user1.getState()==1){
             model.setViewName("/main");
 
         }return model;

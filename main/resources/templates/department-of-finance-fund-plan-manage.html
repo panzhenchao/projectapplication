@@ -49,19 +49,11 @@
                             <!--工具栏-->
                             <div class="pull-left">
                                 <div class="form-group form-inline">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新增" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 新增</button>
-                                        <button type="button" class="btn btn-default" title="导入" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-check"></i> 导入</button>
 
-
-                                    </div>
                                 </div>
                             </div>
                             <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
+
                             </div>
 
                             <!--工具栏/-->
@@ -72,13 +64,14 @@
                                     <thead>
                                     <tr>
                                         <th class="sorting">项目名称</th>
-                                        <th class="sorting">实施单位</th>
+
                                         <th class="sorting">年度</th>
                                         <th class="sorting">批次</th>
                                         <th class="sorting">总投资</th>
                                         <th class="sorting">申请拟补助金额</th>
                                         <th class="sorting">拟补助金额</th>
                                         <th class="text-center">实际补助金额</th>
+                                        <th class="text-center">操作</th>
                                     </tr>
                                     </thead>
                                     <!--@thymesVar id="list" type="List<com.it.projectapplication.domain.SpecialFund>"-->
@@ -104,7 +97,7 @@
                                         <!--@thymesVar id="name" type="String"-->
                                         <td  th:text="|${specialProject.year}${specialProject.batch}|">2019第一批</td>
                                         <td ></td>
-                                        <td ></td>
+
                                         <td ></td>
                                         <td ></td>
                                         <td ></td>

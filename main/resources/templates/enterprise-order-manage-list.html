@@ -22,7 +22,7 @@
             <!-- 内容头部 -->
             <section class="content-header">
                 <h1>
-                    乡镇部门
+                    部门
                     <small>实施单位管理</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -52,19 +52,11 @@
                                 <div class="form-group form-inline">
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-default" title="新建" ><a th:href="@{/getRegisterEnterprise}"><i class="fa fa-file-o"></i> 新建</a></button>
-                                        <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" class="btn btn-default" title="批量审核" onclick='confirm("你确认要批量审核吗？")'><i class="fa fa-check"></i> 开启</button>
-                                        <button type="button" class="btn btn-default" title="停用" onclick='confirm("你确认要停用选定的实施单位吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>
+
                             <!--工具栏/-->
 
                             <!--数据列表-->
@@ -104,15 +96,17 @@
                                         <td th:text="${enterprise.phone}">联系电话</td>
 
                                         <!--@thymesVar id="state" type="String"-->
-                                        <td th:if="${enterprise.state=='0'}">审核中</td>
-                                        <td th:if="${enterprise.state=='1'}">通过</td>
-                                        <td th:if="${enterprise.state=='-1'}">停用</td>
+                                        <td th:if="${enterprise.state==0}">审核中</td>
+                                        <td th:if="${enterprise.state==1}">通过</td>
+                                        <td th:if="${enterprise.state==-1}">停用</td>
+
 
                                         <td class="text-center">
 
                                            <a th:href="@{/checkInformation(username=${enterprise.username})}"><button type="button" class="btn bg-olive btn-xs" >修改</button></a>
-                                            <button type="button" class="btn bg-olive btn-xs" >修改</button>
-                                            <a th:href="@{/changeUserState(username=${enterprise.username},state='-1')}"><button type="button" class="btn bg-olive btn-xs" >加入黑名单</button></a>
+
+                                            <a th:if="${enterprise.state !=-1}" th:href="@{/changeUserState(username=${enterprise.username},state='-1')}"><button type="button" class="btn bg-olive btn-xs" >加入黑名单</button></a>
+                                            <a th:if="${enterprise.state != 1}" th:href="@{/changeUserState(username=${enterprise.username},state='1')}"><button type="button" class="btn bg-olive btn-xs" >通过</button></a>
                                             <a th:href="@{/resetPassword(username=${enterprise.username})}"><button type="button" class="btn bg-olive btn-xs" >重置密码</button></a>
 <!--                                            th:onclick="resetPassword[[${enterprise.username}]], this)-->
                                         </td>
@@ -131,23 +125,7 @@
                             <!--数据列表/-->
 
                             <!--工具栏-->
-                            <div class="pull-left">
-                                <div class="form-group form-inline">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-order-manage-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
-                                        <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                        <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
-                                        <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-tools pull-right">
-                                <div class="has-feedback">
-                                    <input type="text" class="form-control input-sm" placeholder="搜索">
-                                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                                </div>
-                            </div>
+
                             <!--工具栏/-->
 
                         </div>

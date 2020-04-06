@@ -2,6 +2,7 @@ package com.it.projectapplication;
 
 import com.it.projectapplication.dao.*;
 import com.it.projectapplication.domain.*;
+import com.it.projectapplication.serivce.ManagerInformationService;
 import com.it.projectapplication.serivce.PersonalInformationService;
 import com.it.projectapplication.serivce.SpecialProjectService;
 import com.it.projectapplication.serivce.UserService;
@@ -19,6 +20,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -44,6 +46,8 @@ public class ProjectapplicationApplicationTests {
     SpecialProjectService specialProjectService;
     @Autowired
     ProjectDao projectDao;
+    @Autowired
+    ManagerInformationService managerInformationService;
 
 
     @Test
@@ -133,6 +137,37 @@ public class ProjectapplicationApplicationTests {
     public  void testfindss(){
         User user=userDao.findUserByUsername("admin");
         List<Project> list=projectDao.findProjectsByUser(user);
+    }
+    @Test
+    public void testfindsss(){
+        ManagerInformation managerInformation=managerInformationService.findManagerInformationByUserName("admin");
+
+    }
+    @Test
+    public  void testMinStopDate(){
+        SpecialProject s=specialProjectDao.findMinStopDate();
+        System.out.println(s.getStopDate());
+    }
+    @Test
+    public void testDate() throws Exception{
+        SpecialProject specialProject=specialProjectService.findMinStopDate();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+       Date spTime=sdf.parse(sdf.format(specialProject.getStopDate()));
+       Date tTime=sdf.parse(sdf.format(new Date()));
+        System.out.println(spTime);
+        System.out.println(tTime);
+
+
+
+
+        if(spTime.before(tTime)){
+            System.out.println(1);
+        }else if(spTime.after(tTime)){
+            System.out.println(2);
+        }else {
+            System.out.println(3);
+        }
     }
 
 
