@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <!-- .box-body -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">列表</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form role="form" th:action="" method="post" enctype="multipart/form-data">
+                            <div class="box-body">
+                                <div class="tab-pane active" id="tab-form">
+                                    <div class="row data-type">
+                                        <div class="form-group">
+                                            <label >角色名称</label>
+                                            <input type="text" class="form-control"  placeholder="" th:name="administrativeDivisonName">
+                                        </div>
+                                        <div class="col-md-2 title">申报</div>
+
+                                        <div class="col-md-10 data">
+                                            <div class="form-group form-inline">
+                                                <div class="radio"><label>可添加实施主体：</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="1"> 企业</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="2"> 农村专业合作社</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="1"> 家庭农场</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="2"> 行政村</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="1"> 乡镇部门</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="2"> 主管部门</label></div>
+                                                <div class="radio"><label><input type="checkbox" name="optionsRadios" value="1"> 个人</label></div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 title">审核</div>
+                                        <div class="col-md-10 data line-height36">
+                                            <div class="form-group form-inline">
+                                                <div class="checkbox"><label><input type="checkbox" value="1"> 实施主体注册审核</label></div>
+                                                <div class="checkbox"><label><input type="checkbox" value="2"> 项目审批</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 title">监察</div>
+                                        <div class="col-md-10 data line-height36">
+                                            <div class="form-group form-inline">
+                                                <div class="checkbox"><label><input type="checkbox" value="1"> 管辖范围监察</label></div>
+                                                <div class="checkbox"><label><input type="checkbox" value="2"> 本单位监察</label></div>
+                                                <div class="checkbox"><label><input type="checkbox" value="2"> 全局监察</label></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 title">管理</div>
+                                        <div class="col-md-10 data line-height36">
+                                            <div class="form-group form-inline">
+                                                <div class="checkbox"><label><input type="checkbox" value="1">  子账户管理-可添加角色选择</label></div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <center><button type="submit" class="btn btn-primary" >保存</button>
+                                <button type="button" class="btn btn-primary">取消</button></center>
+                            </div>
+
+
+                        </form>
+
+
+
+
+
+                                </tbody>
+                                <!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+                            </table>
+                            <!--数据列表/-->
+
+                            <!--工具栏-->
+
+                            <!--工具栏/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- .box-footer-->
+
+                    <!-- /.box-footer-->
+
+
+                </div>
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+    <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+
+    <div th:replace="main :: script"></div>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<!--suppress ThymeleafVariablesResolveInspection -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:replace="main :: head"></div>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <div th:replace="header :: header"></div>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <div th:replace="aside :: aside"></div>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+
+            <!-- 内容头部 -->
+            <section class="content-header">
+                <h1>
+                    后台
+                    <small>角色管理</small>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                    <li class="active">角色管理</li>
+                </ol>
+            </section>
+            <!-- 内容头部 /-->
+
+            <!-- 正文区域 -->
+            <section class="content">
+
+                <!-- .box-body -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">列表</h3>
+                    </div>
+
+                    <div class="box-body">
+
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+
+                            <!--工具栏-->
+
+
+                            <!--工具栏/-->
+
+                            <!--数据列表-->
+                            <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                                <thead>
+                                    <tr>
+
+                                        <th class="sorting">角色名</th>
+
+                                        <th class="text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <!--@thymesVar id="list" type="List<com.it.projectapplication.domain.Role>"-->
+                                <tbody>
+                                <!--@thymesVar id="role" type="com.it.projectapplication.domain.Role"-->
+                                    <tr th:each="role,iterStat : ${list}">
+
+                                        <td th:text="${role.name}">角色名</td>
+
+                                        <td class="text-center">
+                                            <a th:href="@{/checkRoleInformation(role=${role.id})}"><button type="button" class="btn bg-olive btn-xs" >查看</button></a>
+                                            <a ><button type="button" class="btn bg-olive btn-xs"onclick="deleteRole()" >删除</button></a>
+                                        </td>
+                                </tbody>
+                                <!--
+                            <tfoot>
+                            <tr>
+                            <th>Rendering engine</th>
+                            <th>Browser</th>
+                            <th>Platform(s)</th>
+                            <th>Engine version</th>
+                            <th>CSS grade</th>
+                            </tr>
+                            </tfoot>-->
+                            </table>
+                            <!--数据列表/-->
+
+                            <!--工具栏-->
+
+                            <!--工具栏/-->
+
+                        </div>
+                        <!-- 数据表格 /-->
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- .box-footer-->
+
+                    <!-- /.box-footer-->
+
+
+                </div>
+
+
+                <!-- /.login-box-body -->
+        </div>
+
+            </section>
+            <!-- 正文区域 /-->
+
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+        <div th:replace="footer :: footer"></div>
+        <!-- 底部导航 /-->
+
+    </div>
+
+
+    <div th:replace="main :: script"></div>
+    <script type="text/javascript">
+        function deleteRole(){
+            alert("禁止删除！");
+        }
+    </script>
+</body>
+
+</html>
